@@ -15,9 +15,9 @@ namespace lab2
 
 			if (!in.fail())
 			{
-				out << std::oct << std::setw(12) << number;
-				out << std::dec << std::setw(11) << number;
-				out << std::hex << std::setw(9) << number << std::endl;
+				out << std::uppercase << std::oct << std::setw(12) << number;
+				out << std::uppercase << std::dec << std::setw(11) << number;
+				out << std::uppercase << std::hex << std::setw(9) << number << std::endl;
 			}
 
 			if (in.eof())
@@ -51,6 +51,11 @@ namespace lab2
 				out << std::endl;
 			}
 
+			if (number > bigNumber)
+			{
+				bigNumber = number;
+			}
+
 			if (in.eof())
 			{
 				break;
@@ -61,11 +66,6 @@ namespace lab2
 				in.clear();
 				in.ignore(LLONG_MAX, ' ');
 				continue;
-			}
-
-			if (number > bigNumber)
-			{
-				bigNumber = number;
 			}
 		}
 		in.clear();

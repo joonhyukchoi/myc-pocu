@@ -49,7 +49,6 @@ namespace lab3
 	TimeSheet::~TimeSheet()
 	{
 		delete[] mName;
-		delete[] mHours;
 	}
 
 	void TimeSheet::AddTime(int timeInHours)

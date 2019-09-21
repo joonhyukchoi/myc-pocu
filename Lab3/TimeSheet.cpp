@@ -13,7 +13,7 @@ namespace lab3
 
 		mName = new char[mSize];
 		memcpy(mName, name, mSize);
-		mHours = new int[mEntries];
+		mHours = new unsigned int[mEntries + 1];
 		
 		while (i < mSize - 1)
 		{
@@ -28,15 +28,22 @@ namespace lab3
 		, mCount(sheet.mCount)
 	{
 		unsigned int i = 0;
+		unsigned int j = 0;
 
-		mName = new char[mSize];
-		memcpy(mName, sheet.mName, mSize);
-		mHours = new int[mEntries];
-
-		while (i < mSize - 1)
+		mName = new char[sheet.mSize];
+		memcpy(mName, sheet.mName, sheet.mSize);
+		mHours = new unsigned int[sheet.mEntries + 1];
+		
+		while (i < sheet.mSize - 1)
 		{
 			mName2 += mName[i];
 			i++;
+		}
+
+		while (j < mCount)
+		{
+			mHours[j] = sheet.mHours[j];
+			j++;
 		}
 	}
 
@@ -87,13 +94,16 @@ namespace lab3
 		float avr = 0;
 		unsigned int i = 0;
 
-		while (i <= mCount - 1)
+		if (mCount > 0)
 		{
-			avr += mHours[i];
-			i++;
+			while (i <= mCount - 1)
+			{
+				avr += mHours[i];
+				i++;
+			}
+
+			avr /= mCount;
 		}
-		
-		avr /= mCount;
 		
 		return avr;
 	}
@@ -105,23 +115,27 @@ namespace lab3
 		unsigned int i = 0;
 		unsigned int j = 0;
 
-		while (i <= mCount - 1)
+		if (mCount > 0)
 		{
-			avr += mHours[i];
-			i++;
+			while (i <= mCount - 1)
+			{
+				avr += mHours[i];
+				i++;
+			}
+
+			avr /= mCount;
+
+			while (j <= mCount - 1)
+			{
+				sd += (mHours[j] - avr) * (mHours[j] - avr);
+				j++;
+			}
+
+			sd /= mCount;
+			sd = sqrt(sd);
 		}
 
-		avr /= mCount;
-
-		while (j <= mCount - 1)
-		{
-			sd += (mHours[j] - avr) * (mHours[j] - avr);
-			j++;
-		}
-
-		sd /= mCount;
-
-		return sqrt(sd);
+		return sd;
 	}
 
 	const std::string& TimeSheet::GetName() const

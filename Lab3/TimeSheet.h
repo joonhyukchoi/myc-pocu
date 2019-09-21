@@ -21,7 +21,7 @@ namespace lab3
 		char* mName;
 		unsigned int mSize;
 		unsigned int mEntries;
-		int* mHours;
+		unsigned int* mHours;
 		unsigned int mCount;
 		std::string mName2;
 		std::string& mName3 = mName2;

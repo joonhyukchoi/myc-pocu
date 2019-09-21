@@ -9,7 +9,7 @@ namespace lab3
 		, mEntries(maxEntries)
 		, mCount(0)
 	{
-		int i = 0;
+		unsigned int i = 0;
 
 		mName = new char[mSize];
 		memcpy(mName, name, mSize);
@@ -20,8 +20,6 @@ namespace lab3
 			mName2 += mName[i];
 			i++;
 		}
-
-		mName3 = mName2;
 	}
 
 	TimeSheet::~TimeSheet()

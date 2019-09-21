@@ -170,5 +170,7 @@ namespace lab3
 			mHours[j] = sheet.mHours[j];
 			j++;
 		}
+
+		return *this;
 	}
 }

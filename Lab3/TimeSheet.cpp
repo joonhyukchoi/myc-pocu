@@ -19,6 +19,7 @@ namespace lab3
 			mName2 += mName[i];
 			i++;
 		}
+		
 	}
 
 	TimeSheet::TimeSheet(const TimeSheet& sheet)
@@ -48,7 +49,7 @@ namespace lab3
 
 	TimeSheet::~TimeSheet()
 	{
-	//	delete[] mName;
+		delete[] mName;
 	}
 
 	void TimeSheet::AddTime(int timeInHours)
@@ -138,6 +139,7 @@ namespace lab3
 
 	const std::string& TimeSheet::GetName() const
 	{	
-		return mName3;
+		const std::string& asd = mName2;
+		return asd;
 	}
 }

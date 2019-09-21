@@ -24,6 +24,6 @@ namespace lab3
 		unsigned int* mHours;
 		unsigned int mCount;
 		std::string mName2;
-		std::string& mName3 = mName2;
+		//std::string& mName3 = mName2;
 	};
 }

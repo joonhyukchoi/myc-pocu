@@ -22,6 +22,24 @@ namespace lab3
 		}
 	}
 
+	TimeSheet::TimeSheet(const TimeSheet& sheet)
+		: mSize(sheet.mSize)
+		, mEntries(sheet.mEntries)
+		, mCount(sheet.mCount)
+	{
+		unsigned int i = 0;
+
+		mName = new char[mSize];
+		memcpy(mName, sheet.mName, mSize);
+		mHours = new int[mEntries];
+
+		while (i < mSize - 1)
+		{
+			mName2 += mName[i];
+			i++;
+		}
+	}
+
 	TimeSheet::~TimeSheet()
 	{
 		delete[] mName;
@@ -53,7 +71,7 @@ namespace lab3
 	int TimeSheet::GetTotalTime() const
 	{
 		int sum = 0;
-		int i = 0;
+		unsigned int i = 0;
 
 		while (i <= mCount - 1)
 		{
@@ -67,7 +85,7 @@ namespace lab3
 	float TimeSheet::GetAverageTime() const
 	{
 		float avr = 0;
-		int i = 0;
+		unsigned int i = 0;
 
 		while (i <= mCount - 1)
 		{
@@ -84,8 +102,8 @@ namespace lab3
 	{
 		float avr = 0;
 		float sd = 0;
-		int i = 0;
-		int j = 0;
+		unsigned int i = 0;
+		unsigned int j = 0;
 
 		while (i <= mCount - 1)
 		{

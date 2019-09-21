@@ -7,6 +7,7 @@ namespace lab3
 	{
 	public:
 		TimeSheet(const char* name, unsigned int maxEntries);
+		TimeSheet(const TimeSheet& sheet);
 		~TimeSheet();
 
 		void AddTime(int timeInHours);

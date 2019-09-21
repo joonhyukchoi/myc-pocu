@@ -146,4 +146,29 @@ namespace lab3
 		const std::string& asd = mName2;
 		return asd;
 	}
+
+	TimeSheet& TimeSheet::operator=(const TimeSheet sheet)
+	{
+		unsigned int i = 0;
+		unsigned int j = 0;
+
+		mSize = sheet.mSize;
+		mEntries = sheet.mEntries;
+		mCount = sheet.mCount;
+		mName = new char[sheet.mSize];
+		memcpy(mName, sheet.mName, sheet.mSize);
+		mHours = new unsigned int[sheet.mEntries + 1];
+
+		while (i < sheet.mSize - 1)
+		{
+			mName2 += mName[i];
+			i++;
+		}
+
+		while (j < mCount)
+		{
+			mHours[j] = sheet.mHours[j];
+			j++;
+		}
+	}
 }

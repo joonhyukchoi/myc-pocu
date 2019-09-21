@@ -17,6 +17,8 @@ namespace lab3
 		float GetStandardDeviation() const;
 		const std::string& GetName() const;
 
+		TimeSheet& operator=(const TimeSheet sheet);
+
 	private:
 		char* mName;
 		unsigned int mSize;

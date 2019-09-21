@@ -33,18 +33,19 @@ namespace lab3
 		mName = new char[sheet.mSize];
 		memcpy(mName, sheet.mName, sheet.mSize);
 		mHours = new unsigned int[sheet.mEntries + 1];
-		
+		memcpy(mHours, sheet.mHours, sheet.mCount);
 		while (i < sheet.mSize - 1)
 		{
 			mName2 += mName[i];
 			i++;
 		}
-
+		/*
 		while (j < mCount)
 		{
 			mHours[j] = sheet.mHours[j];
 			j++;
 		}
+		*/
 	}
 
 	TimeSheet::~TimeSheet()
@@ -158,18 +159,19 @@ namespace lab3
 		mName = new char[sheet.mSize];
 		memcpy(mName, sheet.mName, sheet.mSize);
 		mHours = new unsigned int[sheet.mEntries + 1];
-
+		memcpy(mHours, sheet.mHours, sheet.mCount);
 		while (i < sheet.mSize - 1)
 		{
 			mName2 += mName[i];
 			i++;
 		}
-
+		/*
 		while (j < mCount)
 		{
 			mHours[j] = sheet.mHours[j];
 			j++;
 		}
+		*/
 
 		return *this;
 	}

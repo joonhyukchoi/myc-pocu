@@ -50,6 +50,7 @@ namespace lab3
 	TimeSheet::~TimeSheet()
 	{
 		delete[] mName;
+		delete[] mHours;
 	}
 
 	void TimeSheet::AddTime(int timeInHours)
@@ -76,7 +77,7 @@ namespace lab3
 
 	int TimeSheet::GetTotalTime() const
 	{
-		int sum = 0;
+		unsigned int sum = 0;
 		unsigned int i = 0;
 
 		while (i <= mCount - 1)

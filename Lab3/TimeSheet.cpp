@@ -1,6 +1,5 @@
 #include "TimeSheet.h"
 #include <cmath>
-#include <cstdio>
 
 namespace lab3
 {

@@ -80,10 +80,13 @@ namespace lab3
 		unsigned int sum = 0;
 		unsigned int i = 0;
 
-		while (i <= mCount - 1)
+		if (mCount > 0)
 		{
-			sum += mHours[i];
-			i++;
+			while (i <= mCount - 1)
+			{
+				sum += mHours[i];
+				i++;
+			}
 		}
 
 		return sum;

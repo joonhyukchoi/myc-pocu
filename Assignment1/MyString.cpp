@@ -136,7 +136,7 @@ namespace assignment1
 
 	int MyString::IndexOf(const char* s)
 	{
-		int i = 0;
+		unsigned int i = 0;
 		int j = 0;
 		int slen = 0;
 		int k = 0;
@@ -151,12 +151,12 @@ namespace assignment1
 			}
 		}
 		
-		if (mLen == 0 && mLen != slen || slen == 0)
+		if (mLen == 0 && mLen != slen)
 		{
 			return -1;
 		}
 
-		if (slen == 0)
+		if (mLen == 0 && mLen == slen || slen == 0)
 		{
 			return 0;
 		}
@@ -210,7 +210,7 @@ namespace assignment1
 			}
 		}
 
-		if (mLen == 0 && mLen != slen || slen == 0)
+		if (mLen == 0 && mLen != slen)
 		{
 			return -1;
 		}

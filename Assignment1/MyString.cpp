@@ -103,7 +103,6 @@ namespace assignment1
 		int len2 = 0;
 
 		MyString nstr = MyString(mStr);
-		MyString nstr2 = MyString(mStr);
 
 		while (*(other.mStr + i) != '\0')
 		{
@@ -117,7 +116,7 @@ namespace assignment1
 
 		while (i < mLen)
 		{
-			nstr.mStr[i] = nstr2.mStr[i];
+			nstr.mStr[i] = mStr[i];
 			i++;
 		}
 
@@ -313,104 +312,139 @@ namespace assignment1
 					i++;
 				}
 			}
+
+			mLen = mLen + nlen;
 		}
-
-		
-		//if (len >= nlen)
-		//{
-		//	val1 = nlen * 2;
-		//	val2 = nlen + len;
-		//}
-		//else
-		//{
-		//	val1 = len * 2;
-		//	val2 = nlen + len;
-		//}
-
-		//str = new char[len2 + 1];
-
-		//for (i = 0; i < val1; i++)
-		//{
-		//	div = i / 2;
-
-		//	if (i % 2 == 0)
-		//	{
-		//		str[i] = nstr.str[div];
-		//		
-		//	}
-		//	else
-		//	{
-		//		str[i] = s[div];
-		//	}
-		//}
-
-		//if (len > nlen)
-		//{
-		//	for (i = val1; i < val2; i++)
-		//	{
-		//		str[i] = nstr.str[i - 1];
-		//	
-		//	}
-		//}
-		//else if (len < nlen)
-		//{
-		//	for (i = val1; i < val2; i++)
-		//	{
-		//		str[i] = s[i - 1];
-		//	}
-		//}
-
-		//for (i = 0; i < len2; i++)
-		//{
-		//	std::cout << nstr[i] << std::endl;
-		//}
 	}
 
 	bool MyString::RemoveAt(unsigned int index)
 	{
-		//MyString nstr = MyString(str);
-		//delete[] str;
-		//unsigned int i = 0;
-		//unsigned int nlen = 0;
-		//unsigned int len2 = 0;
+		if (index > mLen - 1)
+		{
+			return false;
+		}
+		MyString nstr = MyString(mStr);
+		delete[] mStr;
+		unsigned int i = 0;
+		unsigned int j = 0;
+		unsigned int len2 = 0;
 
-		////unsigned int i = 0;
-		////unsigned int j = 0;
-		////unsigned int l = len;
-		////MyString nstr = MyString(str);
+		mStr = new char[mLen];
 
-		//str = new char[len + 1];
+		for (i = 0; i < mLen; i++)
+		{
+			if (i == index)
+			{
+				j++;
+				continue;
+			}
 
-		////if (index >= len || len == 0)
-		////{
-		////	return false;
-		////}
+			mStr[i - j] = nstr.mStr[i];
+		}
 
-		//for (i = 0; i < len; i++)
-		//{
-		//	str[i] = nstr.str[2];
-		//}
+		mStr[mLen - 1] = '\0';
+
+		mLen = mLen - 1;
 
 		return true;
 	}
 
 	void MyString::PadLeft(unsigned int totalLength)
 	{
-		MyString nstr = MyString(mStr);
-		delete[] mStr;
-		mStr = new char[mLen + 1];
+		if (totalLength > mLen)
+		{
+			MyString nstr = MyString(mStr);
+			delete[] mStr;
+			unsigned int i;
+
+			mStr = new char[totalLength + 1];
+
+			for (i = 0; i < totalLength - mLen; i++)
+			{
+				mStr[i] = ' ';
+			}
+
+			for (i = totalLength - mLen; i < totalLength + 1; i++)
+			{
+				mStr[i] = nstr.mStr[i - totalLength + mLen];
+			}
+		}
 	}
 
 	void MyString::PadLeft(unsigned int totalLength, const char c)
 	{
+		if (totalLength > mLen)
+		{
+			MyString nstr = MyString(mStr);
+			delete[] mStr;
+			unsigned int i;
+
+			mStr = new char[totalLength + 1];
+
+			for (i = 0; i < totalLength - mLen; i++)
+			{
+				mStr[i] = c;
+			}
+
+			for (i = totalLength - mLen; i < totalLength + 1; i++)
+			{
+				mStr[i] = nstr.mStr[i - totalLength + mLen];
+			}
+		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength)
 	{
+		if (totalLength > mLen)
+		{
+			MyString nstr = MyString(mStr);
+			delete[] mStr;
+			unsigned int i;
+
+			mStr = new char[totalLength + 1];
+
+			for (i = 0; i < mLen; i++)
+			{
+				mStr[i] = nstr.mStr[i];
+			}
+
+			for (i = mLen; i < totalLength + 1; i++)
+			{
+				if (i == totalLength)
+				{
+					mStr[i] = '\0';
+					break;
+				}
+				mStr[i] = ' ';
+			}
+		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength, const char c)
 	{
+		if (totalLength > mLen)
+		{
+			MyString nstr = MyString(mStr);
+			delete[] mStr;
+			unsigned int i;
+
+			mStr = new char[totalLength + 1];
+
+			for (i = 0; i < mLen; i++)
+			{
+				mStr[i] = nstr.mStr[i];
+			}
+
+			for (i = mLen; i < totalLength + 1; i++)
+			{
+				if (i == totalLength)
+				{
+					mStr[i] = '\0';
+					break;
+				}
+				mStr[i] = c;
+			}
+		}
 	}
 
 	void MyString::Reverse()
@@ -470,7 +504,7 @@ namespace assignment1
 		mLen = rhs.mLen;
 		mStr = new char[rhs.mLen + 1];
 
-		while (i < mLen)
+		while (i <= mLen)
 		{
 			mStr[i] = rhs.mStr[i];
 			i++;

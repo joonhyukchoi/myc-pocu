@@ -203,98 +203,122 @@ using namespace assignment1;
 
 int main()
 {
-	/* GetLength() Ex */
-	MyString s1("Hello");
-	assert(s1.GetLength() == 5);
+	//int beforeAddress1;
+	//int beforeAddress2;
 
-	/* GetCString() Ex */
-	MyString s2("Hello");
-	assert(s2 == MyString("Hello"));
+	///* GetLength() Ex */
+	//MyString s1("Hello");
+	//assert(s1.GetLength() == 5);
 
-	/* Append() Ex */
-	MyString s3("Hello");
-	s3.Append(" World");
-	std::cout << "111111111111 : " << s3.GetCString() << std::endl;
-	std::cout << "111111111111 : " << MyString("Hello World").GetCString() << std::endl;
-	assert(s3 == MyString("Hello World"));
+	///* GetCString() Ex */
+	//MyString s2("Hello");
+	//assert(s2 == MyString("Hello"));
 
-	/* operator+ Ex */
-	MyString s41("Hello");
-	MyString s42(" World");
-	MyString s43 = s41 + s42;
+	///* Append() Ex */
+	//MyString s3("Hello");
+	//s3.Append(" World");
+	//std::cout << "111111111111 : " << s3.GetCString() << std::endl;
+	//std::cout << "111111111111 : " << MyString("Hello World").GetCString() << std::endl;
+	//assert(s3 == MyString("Hello World"));
+
+	///* operator+ Ex */
+	//MyString s41("Hello");
+	//MyString s42(" World");
+	//MyString s43 = s41 + s42;
 	//s2 = s2 + s1;  ??? ??(?? ????? ???? ??)
-	assert(s43 == MyString("Hello World"));
+	//assert(s43 == MyString("Hello World"));
 
-	MyString str(nullptr);
-	str.Append("hello");
-	assert(strcmp(str.GetCString(), "hello") == 0);
-	std::cout << "nullptr 생성 이후 append : " << str.GetCString() << std::endl;
-
-
-	MyString constructortest("hello");
-	std::cout << "문자열 생성 : " << constructortest.GetCString() << std::endl;
-	std::cout << "문자열 생성 길이 : " << constructortest.GetLength() << std::endl;
-	assert(strcmp(constructortest.GetCString(), "hello") == 0);
-	assert(constructortest.GetLength() == 5);
+	//MyString str(nullptr);
+	//str.Append("hello");
+	//assert(strcmp(str.GetCString(), "hello") == 0);
+	//std::cout << "nullptr 생성 이후 append : " << str.GetCString() << std::endl;
 
 
-	std::cout << std::hex;
-	MyString originalStr("Hello");
-	MyString copyStr(originalStr);
-	int originalStrAddress = reinterpret_cast<int>(originalStr.GetCString());
-	int copyStrAddress = reinterpret_cast<int>(copyStr.GetCString());
-	std::cout << "원본 : " << originalStr.GetCString() << ", 원본 주소 : " << originalStrAddress << std::endl;
-	std::cout << "복사본 : " << copyStr.GetCString() << ", 복사본 주소 : " << copyStrAddress << std::endl;
-	assert(originalStrAddress != copyStrAddress);
-	assert(strcmp(originalStr.GetCString(), "Hello") == 0);
-	assert(strcmp(copyStr.GetCString(), "Hello") == 0);
+	//MyString constructortest("hello");
+	//std::cout << "문자열 생성 : " << constructortest.GetCString() << std::endl;
+	//std::cout << "문자열 생성 길이 : " << constructortest.GetLength() << std::endl;
+	//assert(strcmp(constructortest.GetCString(), "hello") == 0);
+	//assert(constructortest.GetLength() == 5);
 
 
-	MyString appendTestFunctional("Hello");
-	appendTestFunctional.Append(" World");
-	std::cout << "문자열 이어 붙히기 함수형 내부값 변경 : " << appendTestFunctional.GetCString() << std::endl;
-	assert(strcmp(appendTestFunctional.GetCString(), "Hello World") == 0);
+	//std::cout << std::hex;
+	//MyString originalStr("Hello");
+	//MyString copyStr(originalStr);
+	//int originalStrAddress = reinterpret_cast<int>(originalStr.GetCString());
+	//int copyStrAddress = reinterpret_cast<int>(copyStr.GetCString());
+	//std::cout << "원본 : " << originalStr.GetCString() << ", 원본 주소 : " << originalStrAddress << std::endl;
+	//std::cout << "복사본 : " << copyStr.GetCString() << ", 복사본 주소 : " << copyStrAddress << std::endl;
+	//assert(originalStrAddress != copyStrAddress);
+	//assert(strcmp(originalStr.GetCString(), "Hello") == 0);
+	//assert(strcmp(copyStr.GetCString(), "Hello") == 0);
 
 
-	MyString appendTestOperator1("Hello");
-	MyString appendTestOperator2(" World");
-	MyString appendTestOperator3 = appendTestOperator1 + appendTestOperator2;
-	std::cout << "문자열 이어 붙히기 연산자 반환 : " << appendTestOperator3.GetCString() << std::endl;
-	assert(strcmp(appendTestOperator3.GetCString(), "Hello World") == 0);
+	//MyString appendTestFunctional("Hello");
+	//appendTestFunctional.Append(" World");
+	//std::cout << "문자열 이어 붙히기 함수형 내부값 변경 : " << appendTestFunctional.GetCString() << std::endl;
+	//assert(strcmp(appendTestFunctional.GetCString(), "Hello World") == 0);
 
 
-	MyString indexOfTest("Hello");
-	assert(indexOfTest.IndexOf("el") == 1);
-	assert(indexOfTest.IndexOf("ll") == 2);
-	assert(indexOfTest.IndexOf("l") == 2);
-	assert(indexOfTest.IndexOf("asd") == -1);
-	assert(indexOfTest.IndexOf("") == 0);
-	assert(indexOfTest.IndexOf(nullptr) == -1);
-	assert(indexOfTest.IndexOf("lo") == 3);
-
-	assert(indexOfTest.LastIndexOf("l") == 3);
-	assert(indexOfTest.LastIndexOf("asd") == -1);
-	assert(indexOfTest.LastIndexOf("") == indexOfTest.GetLength());
-	assert(indexOfTest.LastIndexOf(nullptr) == -1);
-	assert(indexOfTest.LastIndexOf("He") == 0);
-
-	MyString emptyIndexOfTest("");
-	assert(emptyIndexOfTest.IndexOf("a") == -1);
-	assert(emptyIndexOfTest.IndexOf("") == 0);
-	assert(emptyIndexOfTest.LastIndexOf("") == emptyIndexOfTest.GetLength());
+	//MyString appendTestOperator1("Hello");
+	//MyString appendTestOperator2(" World");
+	//MyString appendTestOperator3 = appendTestOperator1 + appendTestOperator2;
+	//std::cout << "문자열 이어 붙히기 연산자 반환 : " << appendTestOperator3.GetCString() << std::endl;
+	//assert(strcmp(appendTestOperator3.GetCString(), "Hello World") == 0);
 
 
-	MyString interLeaveTest("Hello");
-	interLeaveTest.Interleave(" World");
-	std::cout << "문자열 번갈아가며 끼워맞추기 : " << interLeaveTest.GetCString() << std::endl;
-	assert(strcmp(interLeaveTest.GetCString(), "H eWlolrold") == 0);
+	//MyString indexOfTest("Hello");
+	//assert(indexOfTest.IndexOf("el") == 1);
+	//assert(indexOfTest.IndexOf("ll") == 2);
+	//assert(indexOfTest.IndexOf("l") == 2);
+	//assert(indexOfTest.IndexOf("asd") == -1);
+	//assert(indexOfTest.IndexOf("") == 0);
+	//assert(indexOfTest.IndexOf(nullptr) == -1);
+	//assert(indexOfTest.IndexOf("lo") == 3);
+
+	//assert(indexOfTest.LastIndexOf("l") == 3);
+	//assert(indexOfTest.LastIndexOf("asd") == -1);
+	//assert(indexOfTest.LastIndexOf("") == indexOfTest.GetLength());
+	//assert(indexOfTest.LastIndexOf(nullptr) == -1);
+	//assert(indexOfTest.LastIndexOf("He") == 0);
+
+	//MyString emptyIndexOfTest("");
+	//assert(emptyIndexOfTest.IndexOf("a") == -1);
+	//assert(emptyIndexOfTest.IndexOf("") == 0);
+	//assert(emptyIndexOfTest.LastIndexOf("") == emptyIndexOfTest.GetLength());
 
 
-	int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
-	interLeaveTest.Interleave("");
-	int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
-	assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
+	//MyString interLeaveTest("Hello");
+	//interLeaveTest.Interleave(" World");
+	//std::cout << "문자열 번갈아가며 끼워맞추기 : " << interLeaveTest.GetCString() << std::endl;
+	//assert(strcmp(interLeaveTest.GetCString(), "H eWlolrold") == 0);
 
+
+	//int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
+	//interLeaveTest.Interleave("");
+	//int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
+	//assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
+
+	//MyString testString1("Happy Happy Days");
+	//MyString testString2("Happy Days");
+	//MyString testString3("Happy Days");
+	//MyString testString4("");
+
+	//beforeAddress1 = (int)testString1.GetCString();
+	//testString1.Interleave("");
+	//assert(beforeAddress1 == (int)testString1.GetCString());
+	//std::cout << "M3_NoMallocInInterleaveEmpty 통과" << std::endl;
+
+	//MyString s7("Hello");
+	//s7.Interleave(" World");
+	//assert(s7 == MyString("H eWlolrold"));
+
+	//MyString s72("A");
+	//s72.Interleave("BCDEF");
+	//assert(s72 == MyString("ABCDEF"));
+
+	//MyString s73("bcdef");
+	//s73.Interleave("a");
+	//assert(s73 == MyString("bacdef"));
 
 	//std::cout << std::boolalpha;
 	//MyString removeTest("Hello");
@@ -369,6 +393,89 @@ int main()
 	//std::cout << padRightTest2.GetCString() << std::endl;
 	//assert(strcmp(padRightTest2.GetCString(), "Hello--") == 0);
 
+//int beforeAddress1;
+//int beforeAddress2;
+//
+//MyString testString1("Happy Happy Days");
+//MyString testString2("Happy Days");
+//MyString testString3("Happy Days");
+//MyString testString4("");
+//
+////	Operator == 관련
+//beforeAddress1 = (int)testString2.GetCString();
+//beforeAddress2 = (int)testString3.GetCString();
+//if (testString2 == testString3);
+//assert(beforeAddress1 == (int)testString2.GetCString());
+//assert(beforeAddress2 == (int)testString3.GetCString());
+//cout << "D2_NoMallocInCompareSameLength 통과" << endl;
+//
+//beforeAddress1 = (int)testString1.GetCString();
+//beforeAddress2 = (int)testString2.GetCString();
+//if (testString1 == testString2);
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//assert(beforeAddress2 == (int)testString2.GetCString());
+//cout << "D5_NoMallocInCompareDifferentLength 통과" << endl;
+//
+////	IndexOf, LastOfIndex 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.IndexOf("Happy");
+//testString1.IndexOf("");
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.LastIndexOf("Happy");
+//testString1.LastIndexOf("");
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "E5_NoMallocInIndexOf 통과" << endl;
+//
+////	ToUpper, ToLower 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.ToUpper();
+//testString1.ToLower();
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "F3_NoMallocInUpperLower 통과" << endl;
+//
+////	Reverse 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.Reverse();
+//testString1.Reverse();
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//beforeAddress1 = (int)testString4.GetCString();
+//testString4.Reverse();
+//assert(beforeAddress1 == (int)testString4.GetCString());
+//cout << "G4_NoMallocInReverse 통과" << endl;
+//
+////	Append 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.Append("");
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "H3_NoMallocInAppendEmpty 통과" << endl;
+//
+////	 RemoveAt 관련
+//beforeAddress1 = (int)testString4.GetCString();
+//testString4.RemoveAt(0);
+//assert(beforeAddress1 == (int)testString4.GetCString());
+//cout << "J2_RemoveAtNoMallocOnEmpty 통과" << endl;
+//
+////	PadLeft, PadRight 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.PadLeft(16);
+//testString1.PadLeft(16, '*');
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "K4_NoMallocInPadLeftShorter 통과" << endl;
+//
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.PadRight(16);
+//testString1.PadRight(16, '*');
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "L4_NoMallocInPadRightShorter 통과" << endl;
+//
+////	InterLeave 관련
+//beforeAddress1 = (int)testString1.GetCString();
+//testString1.Interleave("");
+//assert(beforeAddress1 == (int)testString1.GetCString());
+//cout << "M3_NoMallocInInterleaveEmpty 통과" << endl;
+//
+//return 0;
 
-	return 0;
 }

@@ -8,19 +8,27 @@ namespace assignment1
 	{	
 		unsigned int i = 0;
 		
-		while (*(s + i) != '\0')
+		if (s != nullptr)
 		{
-			mLen += 1;
-			i++;
-		}
-		//len은 null값뺀 전체 길이
-		mStr = new char[mLen + 1];
-		i = 0;
+			while (*(s + i) != '\0')
+			{
+				mLen += 1;
+				i++;
+			}
+			//len은 null값뺀 전체 길이
+			mStr = new char[mLen + 1];
+			i = 0;
 
-		while (i <= mLen)
+			while (i <= mLen)
+			{
+				mStr[i] = s[i];
+				i++;
+			}
+		}
+		else
 		{
-			mStr[i] = s[i];
-			i++;
+			mStr = new char[1];
+			mStr = nullptr;
 		}
 	}
 
@@ -129,16 +137,17 @@ namespace assignment1
 		unsigned int i;
 		unsigned int j;
 		int k = 0;
-		unsigned int slen = MyString(s).GetLength();
+		MyString st = MyString(s);
+		unsigned int slen = st.GetLength();
 		
+		if (mLen == 0 && mLen != slen || st.mStr == nullptr)
+		{
+			return -1;
+		}
+
 		if (slen == 0)
 		{
 			return 0;
-		}
-
-		if (mLen == 0 && mLen != slen)
-		{
-			return -1;
 		}
 
 		for (i = 0; i < mLen; i++)
@@ -179,9 +188,10 @@ namespace assignment1
 		int i;
 		int j;
 		int k = 0;
-		unsigned int slen = MyString(s).GetLength();
+		MyString st = MyString(s);
+		unsigned int slen = st.GetLength();
 
-		if (mLen == 0 && mLen != slen)
+		if (mLen == 0 && mLen != slen || st.mStr == nullptr)
 		{
 			return -1;
 		}

@@ -1,60 +1,59 @@
 #include "MyString.h"
-#include "iostream"
 
 namespace assignment1
 {
 	MyString::MyString(const char* s)
-		: len(0)
+		: mLen(0)
 	{	
 		unsigned int i = 0;
 		
 		while (*(s + i) != '\0')
 		{
-			len += 1;
+			mLen += 1;
 			i++;
 		}
 		//len은 null값뺀 전체 길이
-		str = new char[len + 1];
+		mStr = new char[mLen + 1];
 		i = 0;
 
-		while (i <= len)
+		while (i <= mLen)
 		{
-			str[i] = s[i];
+			mStr[i] = s[i];
 			i++;
 		}
 	}
 
 	MyString::MyString(const MyString& other)
-		: len(other.len)
+		: mLen(other.mLen)
 	{
 		unsigned i = 0;
-		str = new char[len + 1];
-		while (i <= len)
+		mStr = new char[mLen + 1];
+		while (i <= mLen)
 		{
-			str[i] = other.str[i];
+			mStr[i] = other.mStr[i];
 			i++;
 		}
 	}
 
 	MyString::~MyString()
 	{
-		delete[] str;
+		delete[] mStr;
 	}
 
 	unsigned int MyString::GetLength() const
 	{
-		return len;
+		return mLen;
 	}
 
 	const char* MyString::GetCString() const
 	{
-		return str;
+		return mStr;
 	}
 
 	void MyString::Append(const char* s)
 	{
-		MyString nstr = MyString(str);
-		delete[] str;
+		MyString nstr = MyString(mStr);
+		delete[] mStr;
 		unsigned int i = 0;
 		unsigned int nlen = 0;
 		unsigned int len2 = 0;
@@ -65,22 +64,22 @@ namespace assignment1
 			i++;
 		}
 
-		len2 = len + nlen;
-		str = new char[len2 + 1];
+		len2 = mLen + nlen;
+		mStr = new char[len2 + 1];
 
 		i = 0;
 
-		while (i < len)
+		while (i < mLen)
 		{
-			str[i] = nstr.str[i];
+			mStr[i] = nstr.mStr[i];
 			i++;
 		}
 
 		i = 0;
 
-		while (i <= nlen)
+		while (i <= mLen)
 		{
-			str[len + i] = s[i];
+			mStr[mLen + i] = s[i];
 			i++;
 		}
 		//delete[] nstr.str;
@@ -92,22 +91,22 @@ namespace assignment1
 		int nlen = 0;
 		int len2 = 0;
 
-		MyString nstr = MyString(str);
-		MyString nstr2 = MyString(str);
+		MyString nstr = MyString(mStr);
+		MyString nstr2 = MyString(mStr);
 
-		while (*(other.str + i) != '\0')
+		while (*(other.mStr + i) != '\0')
 		{
 			nlen += 1;
 			i++;
 		}
 
-		len2 = len + nlen;
-		nstr.str = new char[len2 + 1];
+		len2 = mLen + nlen;
+		nstr.mStr = new char[len2 + 1];
 		i = 0;
 
-		while (i < len)
+		while (i < mLen)
 		{
-			nstr.str[i] = nstr2.str[i];
+			nstr.mStr[i] = nstr2.mStr[i];
 			i++;
 		}
 
@@ -115,11 +114,11 @@ namespace assignment1
 
 		while (i <= nlen)
 		{
-			nstr.str[len + i] = other.str[i];
+			nstr.mStr[mLen + i] = other.mStr[i];
 			i++;
 		}
 
-		return MyString(nstr.str);
+		return MyString(nstr.mStr);
 	}
 
 	int MyString::IndexOf(const char* s)
@@ -135,18 +134,18 @@ namespace assignment1
 			return 0;
 		}
 
-		if (len == 0 && len != slen)
+		if (mLen == 0 && mLen != slen)
 		{
 			return -1;
 		}
 
-		for (i = 0; i < len; i++)
+		for (i = 0; i < mLen; i++)
 		{
-			if (str[i] == s[0])
+			if (mStr[i] == s[0])
 			{	
 				for (j = 0; j < slen; j++)
 				{
-					if (str[i + j] == s[j])
+					if (mStr[i + j] == s[j])
 					{
 						k += 1;
 					}
@@ -180,28 +179,28 @@ namespace assignment1
 		int k = 0;
 		unsigned int slen = MyString(s).GetLength();
 
-		if (len == 0 && len != slen)
+		if (mLen == 0 && mLen != slen)
 		{
 			return -1;
 		}
 
-		if (len == 0 && len == slen)
+		if (mLen == 0 && mLen == slen)
 		{
 			return 0;
 		}
 
 		if (slen == 0)
 		{
-			return len;
+			return mLen;
 		}
 
-		for (i = len - 1; i >= 0; i--)
+		for (i = mLen - 1; i >= 0; i--)
 		{
-			if (str[i] == s[slen - 1])
+			if (mStr[i] == s[slen - 1])
 			{
 				for (j = slen - 1; j >= 0; j--)
 				{
-					if (str[i - k] == s[j])
+					if (mStr[i - k] == s[j])
 					{
 						k += 1;
 					}
@@ -235,8 +234,8 @@ namespace assignment1
 		unsigned int len2 = 0;
 		unsigned int val1 = 0;
 		unsigned int val2 = 0;
-		MyString nstr = MyString(str);
-		delete[] str;
+		MyString nstr = MyString(mStr);
+		delete[] mStr;
 
 
 		while (*(s + i) != '\0')
@@ -245,31 +244,31 @@ namespace assignment1
 			i++;
 		}
 
-		len2 = len + nlen;
-		str = new char[len2 + 1];
+		len2 = mLen + nlen;
+		mStr = new char[len2 + 1];
 		i = 0;
 
-		if (len <= nlen)
+		if (mLen <= nlen)
 		{
-			while (i < len * 2)
+			while (i < mLen * 2)
 			{
 				if (i % 2 == 0)
 				{
-					str[i] = nstr.str[i / 2];
+					mStr[i] = nstr.mStr[i / 2];
 					i++;
 				}
 				else
 				{
-					str[i] = s[i / 2];
+					mStr[i] = s[i / 2];
 					i++;
 				}
 			}
 
 			i = 0;
 
-			while (i <= nlen - len)
+			while (i <= nlen - mLen)
 			{
-				str[len * 2 + i] = s[len + i];
+				mStr[mLen * 2 + i] = s[mLen + i];
 				i++;
 			}
 		}
@@ -279,21 +278,21 @@ namespace assignment1
 			{
 				if (i % 2 == 0)
 				{
-					str[i] = nstr.str[i / 2];
+					mStr[i] = nstr.mStr[i / 2];
 					i++;
 				}
 				else
 				{
-					str[i] = s[i / 2];
+					mStr[i] = s[i / 2];
 					i++;
 				}
 			}
 
 			i = 0;
 
-			while (i <= len - nlen)
+			while (i <= mLen - nlen)
 			{
-				str[nlen * 2 + i] = nstr.str[nlen + i];
+				mStr[nlen * 2 + i] = nstr.mStr[nlen + i];
 				i++;
 			}
 		}
@@ -377,9 +376,9 @@ namespace assignment1
 
 	void MyString::PadLeft(unsigned int totalLength)
 	{
-		MyString nstr = MyString(str);
-		delete[] str;
-		str = new char[len + 1];
+		MyString nstr = MyString(mStr);
+		delete[] mStr;
+		mStr = new char[mLen + 1];
 	}
 
 	void MyString::PadLeft(unsigned int totalLength, const char c)
@@ -396,15 +395,67 @@ namespace assignment1
 
 	void MyString::Reverse()
 	{
+		int i;
+		char temp;
+		int len = mLen / 2;
+
+		for (i = 0; i < len; i++)
+		{
+			temp = mStr[i];
+			mStr[i] = mStr[mLen - i - 1];
+			mStr[mLen - i - 1] = temp;
+		}
 	}
 
 	bool MyString::operator==(const MyString& rhs) const
 	{
-		return false;
+		unsigned int i;
+		unsigned int j = 0;
+
+		if (mLen != rhs.mLen)
+		{
+			return false;
+		}
+
+		if (mLen == 0 && rhs.mLen == 0)
+		{
+			return true;
+		}
+
+		for (i = 0; i < mLen; i++)
+		{
+			if (mStr[i] != rhs.mStr[i])
+			{
+				j++;
+			}
+		}
+
+		if (j == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+
+		}
 	}
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
+		unsigned int i = 0;
+
+		delete[] mStr;
+
+		mLen = rhs.mLen;
+		mStr = new char[rhs.mLen + 1];
+
+		while (i < mLen)
+		{
+			mStr[i] = rhs.mStr[i];
+			i++;
+		}
+
 		return *this;
 	}
 

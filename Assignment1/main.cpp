@@ -105,14 +105,14 @@ int main()
 		MyString s82("");
 		cout << boolalpha << s82.RemoveAt(0) << endl;  //false
 
-		///* PadLeft() Ex */
-		//cout << "-----------------------" << endl;
-		//cout << "PadLeft()" << endl;
-		//MyString s9("Hello");
-		//s9.PadLeft(2);  // "Hello"
-		//cout << s9.GetCString() << endl;
-		//s9.PadLeft(8);  // "   Hello"
-		//cout << s9.GetCString() << endl;
+		/* PadLeft() Ex */
+		cout << "-----------------------" << endl;
+		cout << "PadLeft()" << endl;
+		MyString s9("Hello");
+		s9.PadLeft(2);  // "Hello"
+		cout << s9.GetCString() << endl;
+		s9.PadLeft(8);  // "   Hello"
+		cout << s9.GetCString() << endl;
 
 		//MyString s92("World");
 		//s92.PadLeft(3, '-');  // "World"
@@ -135,36 +135,36 @@ int main()
 		//s102.PadRight(7, '-');  // "World--"
 		//cout << s102.GetCString() << endl;
 
-		///* Reverse() Ex */
-		//cout << "-----------------------" << endl;
-		//cout << "Reverse()" << endl;
-		//MyString s11("Hello");
-		//s11.Reverse();  // olleH
-		//cout << s11.GetCString() << endl;
+		/* Reverse() Ex */
+		cout << "-----------------------" << endl;
+		cout << "Reverse()" << endl;
+		MyString s11("Hello");
+		s11.Reverse();  // olleH
+		cout << s11.GetCString() << endl;
 
-		//MyString s112("Banana");
-		//s112.Reverse();   // ananaB
-		//cout << s112.GetCString() << endl;
+		MyString s112("Banana");
+		s112.Reverse();   // ananaB
+		cout << s112.GetCString() << endl;
 
-		//MyString s113("A");
-		//s113.Reverse();   // A
-		//cout << s113.GetCString() << endl;
+		MyString s113("A");
+		s113.Reverse();   // A
+		cout << s113.GetCString() << endl;
 
-		//MyString s114("");
-		//s114.Reverse();   // 
-		//cout << s114.GetCString() << endl;
+		MyString s114("");
+		s114.Reverse();   // 
+		cout << s114.GetCString() << endl;
 
-		///* operator== Ex */
-		//cout << "-----------------------" << endl;
-		//cout << "operator==" << endl;
-		//MyString s121("Hello");
-		//MyString s122("Hello");
-		//MyString s123("World");
-		//MyString s124("Hello ");
+		/* operator== Ex */
+		cout << "-----------------------" << endl;
+		cout << "operator==" << endl;
+		MyString s121("Hello");
+		MyString s122("Hello");
+		MyString s123("World");
+		MyString s124("Hello ");
 
-		//cout << boolalpha << (s121 == s122) << endl;   // true
-		//cout << boolalpha << (s121 == s123) << endl;   // false
-		//cout << boolalpha << (s121 == s124) << endl;   // false
+		cout << boolalpha << (s121 == s122) << endl;   // true
+		cout << boolalpha << (s121 == s123) << endl;   // false
+		cout << boolalpha << (s121 == s124) << endl;   // false
 
 		///* ToLower() Ex */
 		//cout << "-----------------------" << endl;

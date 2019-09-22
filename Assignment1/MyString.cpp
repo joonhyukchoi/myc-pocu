@@ -62,33 +62,36 @@ namespace assignment1
 
 	void MyString::Append(const char* s)
 	{
-		MyString nstr = MyString(mStr);
-		MyString str = MyString(s);
-		delete[] mStr;
-		unsigned int i = 0;
-		unsigned int len2 = 0;
-		unsigned int nlen = str.GetLength();
-
-		len2 = mLen + nlen;
-		mStr = new char[len2 + 1];
-
-		i = 0;
-
-		while (i < mLen)
+		if (*s != '\0')
 		{
-			mStr[i] = nstr.mStr[i];
-			i++;
+			MyString nstr = MyString(mStr);
+			MyString str = MyString(s);
+			delete[] mStr;
+			unsigned int i = 0;
+			unsigned int len2 = 0;
+			unsigned int nlen = str.GetLength();
+
+			len2 = mLen + nlen;
+			mStr = new char[len2 + 1];
+
+			i = 0;
+
+			while (i < mLen)
+			{
+				mStr[i] = nstr.mStr[i];
+				i++;
+			}
+
+			i = 0;
+
+			while (i <= nlen)
+			{
+				mStr[mLen + i] = s[i];
+				i++;
+			}
+
+			mLen = mLen + nlen;
 		}
-
-		i = 0;
-
-		while (i <= nlen)
-		{
-			mStr[mLen + i] = s[i];
-			i++;
-		}
-
-		mLen = mLen + nlen;
 		//mStr[len2] ='\0';
 		//for (i = 0; i < len2; i++)
 		//{
@@ -240,11 +243,10 @@ namespace assignment1
 
 	void MyString::Interleave(const char* s)
 	{
-		MyString st = MyString(s);
-		unsigned int slen = st.GetLength();
-
-		if (slen != 0)
+		if (*s != '\0')
 		{
+			MyString st = MyString(s);
+			unsigned int slen = st.GetLength();
 			unsigned int i = 0;
 			unsigned int div = 0;
 			unsigned int nlen = 0;
@@ -319,10 +321,16 @@ namespace assignment1
 
 	bool MyString::RemoveAt(unsigned int index)
 	{
+		if (mLen == 0)
+		{
+			return false;
+		}
+
 		if (index > mLen - 1)
 		{
 			return false;
 		}
+
 		MyString nstr = MyString(mStr);
 		delete[] mStr;
 		unsigned int i = 0;
@@ -497,6 +505,10 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
+		if (mStr == rhs.mStr)
+		{
+			return *this;
+		}
 		unsigned int i = 0;
 
 		delete[] mStr;
@@ -504,11 +516,13 @@ namespace assignment1
 		mLen = rhs.mLen;
 		mStr = new char[rhs.mLen + 1];
 
-		while (i <= mLen)
+		while (i < mLen)
 		{
 			mStr[i] = rhs.mStr[i];
 			i++;
 		}
+
+		mStr[mLen] = '\0';
 
 		return *this;
 	}

@@ -1,4 +1,5 @@
 #include "MyString.h"
+//#include <iostream>
 
 namespace assignment1
 {
@@ -53,16 +54,11 @@ namespace assignment1
 	void MyString::Append(const char* s)
 	{
 		MyString nstr = MyString(mStr);
+		MyString str = MyString(s);
 		delete[] mStr;
 		unsigned int i = 0;
-		unsigned int nlen = 0;
 		unsigned int len2 = 0;
-
-		while (*(s + i) != '\0')
-		{
-			nlen += 1;
-			i++;
-		}
+		unsigned int nlen = str.GetLength();
 
 		len2 = mLen + nlen;
 		mStr = new char[len2 + 1];
@@ -77,17 +73,23 @@ namespace assignment1
 
 		i = 0;
 
-		while (i <= mLen)
+		while (i <= nlen)
 		{
 			mStr[mLen + i] = s[i];
 			i++;
 		}
-		//delete[] nstr.str;
+
+		mStr[len2] ='\0';
+
+		//for (i = 0; i < len2; i++)
+		//{
+		//	std::cout << mStr[i] << std::endl;
+		//}
 	}
 
 	MyString MyString::operator+(const MyString& other) const
 	{
-		int i = 0;
+		unsigned int i = 0;
 		int nlen = 0;
 		int len2 = 0;
 
@@ -124,8 +126,8 @@ namespace assignment1
 	int MyString::IndexOf(const char* s)
 	{
 		int index = 0;
-		int i;
-		int j;
+		unsigned int i;
+		unsigned int j;
 		int k = 0;
 		unsigned int slen = MyString(s).GetLength();
 		
@@ -236,7 +238,6 @@ namespace assignment1
 		unsigned int val2 = 0;
 		MyString nstr = MyString(mStr);
 		delete[] mStr;
-
 
 		while (*(s + i) != '\0')
 		{
@@ -461,9 +462,27 @@ namespace assignment1
 
 	void MyString::ToLower()
 	{
+		unsigned int i;
+
+		for (i = 0; i < mLen; i++)
+		{
+			if (mStr[i] >= 'A' && mStr[i] <= 'Z')
+			{
+				mStr[i] = mStr[i] + 32;
+			}
+		}
 	}
 
 	void MyString::ToUpper()
 	{
+		unsigned int i;
+
+		for (i = 0; i < mLen; i++)
+		{
+			if (mStr[i] >= 'a' && mStr[i] <= 'z')
+			{
+				mStr[i] = mStr[i] - 32;
+			}
+		}
 	}
 }

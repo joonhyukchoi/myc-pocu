@@ -96,6 +96,8 @@ namespace assignment1
 
 	MyString MyString::operator+(const MyString& other) const
 	{
+		char* arr;
+
 		if (other.mLen == 0)
 		{
 			return *this;
@@ -117,7 +119,8 @@ namespace assignment1
 			nlen += 1;
 			i++;
 		}
-
+	
+		delete[] nstr.mStr;
 		len2 = mLen + nlen;
 		nstr.mStr = new char[len2 + 1];
 		i = 0;
@@ -138,7 +141,7 @@ namespace assignment1
 	
 		nstr.mLen = len2;
 
-		return MyString(nstr);
+		return nstr;
 	}
 
 	int MyString::IndexOf(const char* s)

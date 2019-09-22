@@ -56,6 +56,7 @@ namespace assignment1
 
 	const char* MyString::GetCString() const
 	{
+		//std::cout << "111111111111 : " << mLen << std::endl;
 		return mStr;
 	}
 
@@ -87,8 +88,8 @@ namespace assignment1
 			i++;
 		}
 
-		mStr[len2] ='\0';
-
+		mLen = mLen + nlen;
+		//mStr[len2] ='\0';
 		//for (i = 0; i < len2; i++)
 		//{
 		//	std::cout << mStr[i] << std::endl;
@@ -98,7 +99,7 @@ namespace assignment1
 	MyString MyString::operator+(const MyString& other) const
 	{
 		unsigned int i = 0;
-		int nlen = 0;
+		unsigned int nlen = 0;
 		int len2 = 0;
 
 		MyString nstr = MyString(mStr);

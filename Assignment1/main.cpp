@@ -203,6 +203,27 @@ using namespace assignment1;
 
 int main()
 {
+	/* GetLength() Ex */
+	MyString s1("Hello");
+	assert(s1.GetLength() == 5);
+
+	/* GetCString() Ex */
+	MyString s2("Hello");
+	assert(s2 == MyString("Hello"));
+
+	/* Append() Ex */
+	MyString s3("Hello");
+	s3.Append(" World");
+	std::cout << "111111111111 : " << s3.GetCString() << std::endl;
+	std::cout << "111111111111 : " << MyString("Hello World").GetCString() << std::endl;
+	assert(s3 == MyString("Hello World"));
+
+	/* operator+ Ex */
+	MyString s41("Hello");
+	MyString s42(" World");
+	MyString s43 = s41 + s42;
+	//s2 = s2 + s1;  ??? ??(?? ????? ???? ??)
+	assert(s43 == MyString("Hello World"));
 
 	MyString str(nullptr);
 	str.Append("hello");
@@ -268,10 +289,12 @@ int main()
 	std::cout << "문자열 번갈아가며 끼워맞추기 : " << interLeaveTest.GetCString() << std::endl;
 	assert(strcmp(interLeaveTest.GetCString(), "H eWlolrold") == 0);
 
+
 	//int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
 	//interLeaveTest.Interleave("");
 	//int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
 	//assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
+
 
 	//std::cout << std::boolalpha;
 	//MyString removeTest("Hello");
@@ -280,16 +303,17 @@ int main()
 	//assert(strcmp(removeTest.GetCString(), "ello") == 0);
 	//assert(b1 == true);
 
+
 	//bool b2 = removeTest.RemoveAt(3); // s는 "ell", b2은 true
 	//std::cout << "ello의 네번째 글자 지우기 : " << removeTest.GetCString() << ", 성공여부 : " << b2 << std::endl;
 	//assert(strcmp(removeTest.GetCString(), "ell") == 0);
 	//assert(b2 == true);
 
+
 	//bool b3 = removeTest.RemoveAt(4); // s는 "ell", b3은 false
 	//std::cout << "ell의 다섯번째 글자 지우기 : " << removeTest.GetCString() << ", 성공여부 : " << b3 << std::endl;
 	//assert(strcmp(removeTest.GetCString(), "ell") == 0);
 	//assert(b3 == false);
-
 
 
 	//MyString padLeftTest1("Hello");
@@ -300,10 +324,10 @@ int main()
 	//assert(previousPadLeftTest1StrAddress == currentPadLeftTest1StrAddress);
 	//assert(strcmp(padLeftTest1.GetCString(), "Hello") == 0);
 
+
 	//padLeftTest1.PadLeft(8); // s1: "   Hello"
 	//assert(strcmp(padLeftTest1.GetCString(), "   Hello") == 0);
 	//std::cout << padLeftTest1.GetCString() << std::endl;
-
 
 
 	//MyString padLeftTest2("Hello");
@@ -314,10 +338,10 @@ int main()
 	//assert(previousPadLeftTest2StrAddress == currentPadLeftTest2StrAddress);
 	//assert(strcmp(padLeftTest2.GetCString(), "Hello") == 0);
 
+
 	//padLeftTest2.PadLeft(7, '-'); // s1: "   Hello"
 	//std::cout << padLeftTest2.GetCString() << std::endl;
 	//assert(strcmp(padLeftTest2.GetCString(), "--Hello") == 0);
-
 
 
 	//MyString padRightTest1("Hello");
@@ -333,7 +357,6 @@ int main()
 	//assert(strcmp(padRightTest1.GetCString(), "Hello   ") == 0);
 
 
-
 	//MyString padRightTest2("Hello");
 	//int previousPadRightTest2StrAddress = reinterpret_cast<int>(padRightTest2.GetCString());
 	//padRightTest2.PadRight(3, '-'); // s1: "Hello"
@@ -346,36 +369,6 @@ int main()
 	//std::cout << padRightTest2.GetCString() << std::endl;
 	//assert(strcmp(padRightTest2.GetCString(), "Hello--") == 0);
 
-
-
-	//MyString reverseTest("Hello");
-	//int previousReverseTestStrAddress = reinterpret_cast<int>(reverseTest.GetCString());
-	//reverseTest.Reverse();
-	//int currentReverseTestStrAddress = reinterpret_cast<int>(reverseTest.GetCString());
-	//std::cout << "문자를 거꾸로 : " << reverseTest.GetCString() << std::endl;
-	//assert(strcmp(reverseTest.GetCString(), "olleH") == 0);
-
-
-
-	//MyString equelsOperatorTest1("Hello");
-	//MyString equelsOperatorTest2("Hello");
-	//MyString equelsOperatorTest3("World");
-	//assert((equelsOperatorTest1 == equelsOperatorTest2) == true);
-	//assert((equelsOperatorTest1 == equelsOperatorTest3) == false);
-
-
-
-	//MyString toLowerTest("HEllo 123K");
-	//toLowerTest.ToLower(); // s1: "hello 123k"
-	//assert(strcmp(toLowerTest.GetCString(), "hello 123k") == 0);
-	//std::cout << "전체 문자 소문자로 변경 : " << toLowerTest.GetCString() << std::endl;
-
-
-
-	//MyString toUpperTest("HEllo 123K");
-	//toUpperTest.ToUpper(); // s1: "HELLO 123K"
-	//assert(strcmp(toUpperTest.GetCString(), "HELLO 123K") == 0);
-	//std::cout << "전체 문자 대문자로 변경 : " << toUpperTest.GetCString() << std::endl;
 
 	return 0;
 }

@@ -290,10 +290,10 @@ int main()
 	assert(strcmp(interLeaveTest.GetCString(), "H eWlolrold") == 0);
 
 
-	//int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
-	//interLeaveTest.Interleave("");
-	//int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
-	//assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
+	int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
+	interLeaveTest.Interleave("");
+	int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
+	assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
 
 
 	//std::cout << std::boolalpha;

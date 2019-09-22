@@ -241,73 +241,81 @@ namespace assignment1
 
 	void MyString::Interleave(const char* s)
 	{
-		unsigned int i = 0;
-		unsigned int div = 0;
-		unsigned int nlen = 0;
-		unsigned int len2 = 0;
-		unsigned int val1 = 0;
-		unsigned int val2 = 0;
-		MyString nstr = MyString(mStr);
-		delete[] mStr;
+		MyString st = MyString(s);
+		unsigned int slen = st.GetLength();
 
-		while (*(s + i) != '\0')
+		if (slen != 0)
 		{
-			nlen += 1;
-			i++;
-		}
+			unsigned int i = 0;
+			unsigned int div = 0;
+			unsigned int nlen = 0;
+			unsigned int len2 = 0;
+			unsigned int val1 = 0;
+			unsigned int val2 = 0;
+			MyString nstr = MyString(mStr);
+			delete[] mStr;
 
-		len2 = mLen + nlen;
-		mStr = new char[len2 + 1];
-		i = 0;
-
-		if (mLen <= nlen)
-		{
-			while (i < mLen * 2)
+			while (*(s + i) != '\0')
 			{
-				if (i % 2 == 0)
-				{
-					mStr[i] = nstr.mStr[i / 2];
-					i++;
-				}
-				else
-				{
-					mStr[i] = s[i / 2];
-					i++;
-				}
-			}
-
-			i = 0;
-
-			while (i <= nlen - mLen)
-			{
-				mStr[mLen * 2 + i] = s[mLen + i];
+				nlen += 1;
 				i++;
 			}
-		}
-		else
-		{
-			while (i < nlen * 2)
-			{
-				if (i % 2 == 0)
-				{
-					mStr[i] = nstr.mStr[i / 2];
-					i++;
-				}
-				else
-				{
-					mStr[i] = s[i / 2];
-					i++;
-				}
-			}
 
+			len2 = mLen + nlen;
+			mStr = new char[len2 + 1];
 			i = 0;
 
-			while (i <= mLen - nlen)
+			if (mLen <= nlen)
 			{
-				mStr[nlen * 2 + i] = nstr.mStr[nlen + i];
-				i++;
+				while (i < mLen * 2)
+				{
+					if (i % 2 == 0)
+					{
+						mStr[i] = nstr.mStr[i / 2];
+						i++;
+					}
+					else
+					{
+						mStr[i] = s[i / 2];
+						i++;
+					}
+				}
+
+				i = 0;
+
+				while (i <= nlen - mLen)
+				{
+					mStr[mLen * 2 + i] = s[mLen + i];
+					i++;
+				}
+			}
+			else
+			{
+				while (i < nlen * 2)
+				{
+					if (i % 2 == 0)
+					{
+						mStr[i] = nstr.mStr[i / 2];
+						i++;
+					}
+					else
+					{
+						mStr[i] = s[i / 2];
+						i++;
+					}
+				}
+
+				i = 0;
+
+				while (i <= mLen - nlen)
+				{
+					mStr[nlen * 2 + i] = nstr.mStr[nlen + i];
+					i++;
+				}
 			}
 		}
+
+		
 		//if (len >= nlen)
 		//{
 		//	val1 = nlen * 2;

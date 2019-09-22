@@ -101,6 +101,11 @@ namespace assignment1
 			return *this;
 		}
 
+		if (mLen == 0)
+		{
+			return MyString(other);
+		}
+
 		unsigned int i = 0;
 		unsigned int nlen = 0;
 		int len2 = 0;
@@ -130,8 +135,10 @@ namespace assignment1
 			nstr.mStr[mLen + i] = other.mStr[i];
 			i++;
 		}
- 
-		return MyString(nstr.mStr);
+	
+		nstr.mLen = len2;
+
+		return MyString(nstr);
 	}
 
 	int MyString::IndexOf(const char* s)

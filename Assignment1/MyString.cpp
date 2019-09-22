@@ -92,15 +92,15 @@ namespace assignment1
 
 			mLen = mLen + nlen;
 		}
-		//mStr[len2] ='\0';
-		//for (i = 0; i < len2; i++)
-		//{
-		//	std::cout << mStr[i] << std::endl;
-		//}
 	}
 
 	MyString MyString::operator+(const MyString& other) const
 	{
+		if (other.mLen == 0)
+		{
+			return *this;
+		}
+
 		unsigned int i = 0;
 		unsigned int nlen = 0;
 		int len2 = 0;
@@ -130,20 +130,28 @@ namespace assignment1
 			nstr.mStr[mLen + i] = other.mStr[i];
 			i++;
 		}
-
+ 
 		return MyString(nstr.mStr);
 	}
 
 	int MyString::IndexOf(const char* s)
 	{
-		int index = 0;
-		unsigned int i;
-		unsigned int j;
+		int i = 0;
+		int j = 0;
+		int slen = 0;
 		int k = 0;
-		MyString st = MyString(s);
-		unsigned int slen = st.GetLength();
+		int index = 0;
+
+		if (s != nullptr)
+		{
+			while (*(s + i) != '\0')
+			{
+				slen += 1;
+				i++;
+			}
+		}
 		
-		if (mLen == 0 && mLen != slen || st.mStr == nullptr)
+		if (mLen == 0 && mLen != slen || slen == 0)
 		{
 			return -1;
 		}
@@ -187,14 +195,22 @@ namespace assignment1
 
 	int MyString::LastIndexOf(const char* s)
 	{
-		int index = 0;
-		int i;
-		int j;
+		int i = 0;
+		int j = 0;
+		unsigned int slen = 0;
 		int k = 0;
-		MyString st = MyString(s);
-		unsigned int slen = st.GetLength();
+		int index = 0;
 
-		if (mLen == 0 && mLen != slen || st.mStr == nullptr)
+		if (s != nullptr)
+		{
+			while (*(s + i) != '\0')
+			{
+				slen += 1;
+				i++;
+			}
+		}
+
+		if (mLen == 0 && mLen != slen || slen == 0)
 		{
 			return -1;
 		}
@@ -376,6 +392,8 @@ namespace assignment1
 			{
 				mStr[i] = nstr.mStr[i - totalLength + mLen];
 			}
+
+			mLen = totalLength;
 		}
 	}
 
@@ -398,6 +416,8 @@ namespace assignment1
 			{
 				mStr[i] = nstr.mStr[i - totalLength + mLen];
 			}
+
+			mLen = totalLength;
 		}
 	}
 
@@ -425,6 +445,8 @@ namespace assignment1
 				}
 				mStr[i] = ' ';
 			}
+
+			mLen = totalLength;
 		}
 	}
 
@@ -452,6 +474,8 @@ namespace assignment1
 				}
 				mStr[i] = c;
 			}
+
+			mLen = totalLength;
 		}
 	}
 

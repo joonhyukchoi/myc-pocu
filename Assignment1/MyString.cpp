@@ -96,8 +96,6 @@ namespace assignment1
 
 	MyString MyString::operator+(const MyString& other) const
 	{
-		char* arr;
-
 		if (other.mLen == 0)
 		{
 			return *this;

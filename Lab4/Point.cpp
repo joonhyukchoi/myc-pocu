@@ -14,7 +14,7 @@ namespace lab4
 	{
 	}
 
-	Point::Point(Point& point)
+	Point::Point(const Point& point)
 		: mX(point.mX)
 		, mY(point.mY)
 	{

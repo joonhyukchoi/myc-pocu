@@ -22,11 +22,12 @@ namespace lab4
 		}*/
 
 		delete[] mArr;
-		mArr = new Point[mCount];
+		mArr = new const Point * [mCount];
 
+		//**(other.mArr).GetX가 왜 안되는지 모르겠음
 		for (int i = 0; i < mCount; i++)
 		{
-			mArr[i] = other.mArr[i];
+			mArr[i] = new Point (*(other.mArr[i]));
 		}
 		
 		//아래 작동안되는 코드
@@ -44,25 +45,29 @@ namespace lab4
 
 	bool PolyLine::AddPoint(float x, float y)
 	{
+
 		if (mCount < 10)
 		{
-			Point* arr = new Point[mCount];
+			const Point** arr;
+			arr = new const Point * [mCount];
+			//arr = (Point*)malloc(sizeof(Point) * mCount);
 
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				arr[i] = mArr[i];
+				mArr[i] = nullptr;
 			}
 
 			delete[] mArr;
-			mArr = new Point[mCount + 1];
+			mArr = new const Point * [mCount + 1];
 
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
 			}
 
-			mArr[mCount].SetX(x);
-			mArr[mCount].SetY(y);
+			const Point* point = new Point(x, y);
+			mArr[mCount] = point;
 			mCount += 1;
 			delete[] arr;
 
@@ -83,22 +88,25 @@ namespace lab4
 
 		if (mCount < 10)
 		{
-			Point* arr = new Point[mCount];
+			const Point** arr;
+			arr = new const Point * [mCount];
+			//arr = (Point*)malloc(sizeof(Point) * mCount);
 
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				arr[i] = mArr[i];
+				mArr[i] = nullptr;
 			}
 
 			delete[] mArr;
-			mArr = new Point[mCount + 1];
+			mArr = new const Point * [mCount + 1];
 
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
 			}
 
-			mArr[mCount] = *point;
+			mArr[mCount] = point;
 			mCount += 1;
 			delete[] arr;
 
@@ -134,7 +142,8 @@ namespace lab4
 			return false;
 		}
 
-		Point* arr = new Point[mCount];
+		const Point** arr;
+		arr = new const Point * [mCount];
 
 		for (unsigned int j = 0; j < mCount; j++)
 		{
@@ -143,7 +152,7 @@ namespace lab4
 
 		delete[] mArr;
 		mCount -= 1;
-		mArr = new Point[mCount];
+		mArr = new const Point * [mCount];
 
 		for (unsigned int j = 0; j < mCount; j++)
 		{
@@ -155,6 +164,8 @@ namespace lab4
 			{
 				mArr[j] = arr[j];
 			}
+
+			arr[j] = nullptr;
 		}
 
 		delete[] arr;
@@ -170,18 +181,22 @@ namespace lab4
 			return false;
 		}
 
-		float x = mArr[0].GetX();
-		float y = mArr[0].GetY();
+		Point px = *mArr[0];
+		Point py = *mArr[0];
+		float x = px.GetX();
+		float y = py.GetY();
 
-		float minx = mArr[0].GetX();
-		float maxx = mArr[0].GetX();
-		float miny = mArr[0].GetY();
-		float maxy = mArr[0].GetY();
+		float minx = px.GetX();
+		float maxx = px.GetX();
+		float miny = py.GetY();
+		float maxy = py.GetY();
 
 		for (unsigned int i = 0; i < mCount; i++)
 		{
-			x = mArr[i].GetX();
-			y = mArr[i].GetY();
+			px = *mArr[i];
+			py = *mArr[i];
+			x = px.GetX();
+			y = py.GetY();
 
 			if (minx > x)
 			{
@@ -220,22 +235,27 @@ namespace lab4
 		}
 		else
 		{
-			return new Point(mArr[i].GetX(), mArr[i].GetY());
+			Point px = *mArr[i];
+			Point py = *mArr[i];
+			float x = px.GetX();
+			float y = py.GetY();
+
+			return new Point(x, y);
 		}
 	}
 
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
-		for (unsigned int i = 0; i < 10; i++)
-		{
-			delete[] mArr;
-		}
-
 		mCount = other.mCount;
-		mArr = new Point[mCount];
-		memcpy(mArr, other.mArr, mCount);
+		delete[] mArr;
+		mArr = new const Point * [mCount];
 
+		//**(other.mArr).GetX가 왜 안되는지 모르겠음
+		for (int i = 0; i < 10; i++)
+		{
+			mArr[i] = new Point(*(other.mArr[i]));
+		}
 
 		return *this;
 	}

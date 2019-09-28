@@ -5,6 +5,7 @@ namespace lab4
 	class Point
 	{
 	public:
+		Point();
 		Point(float x, float y);
 		Point(Point& point);
 		~Point();
@@ -14,6 +15,7 @@ namespace lab4
 		float Dot(const Point& other) const;
 		Point operator*(float operand) const;
 		friend Point operator*(float operand, const Point& p);
+		Point operator=(const Point& other);
 
 		float GetX() const;
 		float GetY() const;
@@ -21,8 +23,8 @@ namespace lab4
 		void SetY(const float y);
 	
 	private:
-		float mx;
-		float my;
+		float mX;
+		float mY;
 
 	};
 }

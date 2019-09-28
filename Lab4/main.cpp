@@ -74,43 +74,43 @@ int main()
 
 	//assert(pl.AddPoint(2.2f, 1.9f) == false);  // 11번째 점 추가 시도. AddPoint()는 false를 반환하고 이 점을 PolyLine 개체에 추가하지 않아야 함.
 
-	///*
-	//AddPoint 매개변수로 입력된 Point 개체를 다른 PolyLine 개체에 재사용하거나
-	//스택 메모리에 할당을 하면, 소멸자 오류가 발생한다.
-	//*/
-	//PolyLine pl2;
-	//Point* p1 = new Point(2.2f, 3.3f);
-	//assert(pl2.AddPoint(1.1f, 2.2f) == true);
-	//assert(pl2.AddPoint(p1) == true);
-	//assert(p1->GetX() == 2.2f && p1->GetY() == 3.3f);
+	/*
+	AddPoint 매개변수로 입력된 Point 개체를 다른 PolyLine 개체에 재사용하거나
+	스택 메모리에 할당을 하면, 소멸자 오류가 발생한다.
+	*/
+	/*PolyLine pl2;
+	Point* p1 = new Point(2.2f, 3.3f);
+	assert(pl2.AddPoint(1.1f, 2.2f) == true);
+	assert(pl2.AddPoint(p1) == true);
+	assert(p1->GetX() == 2.2f && p1->GetY() == 3.3f);
 
-	//PolyLine pl3(pl2);
-	//Point* p2 = new Point(22.22f, 33.33f);
-	//assert(pl3.AddPoint(11.11f, 22.22f) == true);
-	//assert(pl3.AddPoint(p2) == true);
-	//assert(p2->GetX() == 22.22f && p2->GetY() == 33.33f);
+	PolyLine pl3(pl2);
+	Point* p2 = new Point(22.22f, 33.33f);
+	assert(pl3.AddPoint(11.11f, 22.22f) == true);
+	assert(pl3.AddPoint(p2) == true);
+	assert(p2->GetX() == 22.22f && p2->GetY() == 33.33f);
 
-	//PolyLine* pl4 = new PolyLine(pl3);
-	//Point* p3 = new Point(222.22f, 333.33f);
-	//assert(pl4->AddPoint(11.11f, 22.22f) == true);
-	//assert(pl4->AddPoint(p3) == true);
+	PolyLine* pl4 = new PolyLine(pl3);
+	Point* p3 = new Point(222.22f, 333.33f);
+	assert(pl4->AddPoint(11.11f, 22.22f) == true);
+	assert(pl4->AddPoint(p3) == true);
 
-	//PolyLine* pl5 = pl4;
-	//assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	//assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	//assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	//assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	//assert(pl5->AddPoint(11.11f, 22.22f) == false);
-	//assert(pl5->AddPoint(11.11f, 22.22f) == false);
+	PolyLine* pl5 = pl4;
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == false);
+	assert(pl5->AddPoint(11.11f, 22.22f) == false);
 
-	//delete pl4;
+	delete pl4;
 
-	//PolyLine pl6 = pl3;
-	//assert(pl6.AddPoint(11.11f, 22.22f) == true);
-	//assert(pl6.AddPoint(11.11f, 22.22f) == true);
-	//assert(pl6.AddPoint(new Point(55.5f, 66.6f)) == true);
+	PolyLine pl6 = pl3;
+	assert(pl6.AddPoint(11.11f, 22.22f) == true);
+	assert(pl6.AddPoint(11.11f, 22.22f) == true);
+	assert(pl6.AddPoint(new Point(55.5f, 66.6f)) == true);
 
-	//cout << "- PolyLine::AddPoint() - END -" << endl;
+	cout << "- PolyLine::AddPoint() - END -" << endl;*/
 //////////////////////////////////////////////////////////////
 
 	//cout << "- PolyLine::RemovePoint() -" << endl;
@@ -132,12 +132,11 @@ int main()
 	//assert(pl.AddPoint(1.2f, 2.2f) == true);	// 테스트
 	//assert(pl.AddPoint(1.3f, 2.3f) == true);
 	//assert(pl.RemovePoint(1) == true);
-	//cout << "------------------pl[1]->GetX()" << pl[1]->GetX() << endl;
-	//cout << "------------------" << pl[2]->GetX() << endl;
+	//cout << "------------------pl[1]->GetX()" << pl[1]->GetY() << endl;
 	//cout << "------------------ END -" << endl;
 	//assert(pl[1]->GetX() == 1.2f && pl[1]->GetY() == 2.2f);
 	//assert(pl[2]->GetX() == 1.3f && pl[2]->GetY() == 2.3f);
-	//assert(pl[3] == nullptr);
+	////assert(pl[3] == nullptr);
 	//assert(pl.RemovePoint(3) == false);
 
 	//cout << "- PolyLine::RemovePoint() - END -" << endl;
@@ -166,6 +165,11 @@ int main()
 	//assert(pl3[0]->GetX() == 1.7f && pl3[0]->GetY() == 2.4f);
 	//assert(pl3[4]->GetX() == 10.1f && pl3[4]->GetY() == 20.1f);
 	//assert(pl3[5]->GetX() == 50.2f && pl3[5]->GetY() == 25.4f);
+	//cout << pl3[0]->GetX() << ", " << pl3[0]->GetY() << endl;  // [-2.1f, 4.0f]
+	//cout << pl3[1]->GetX() << ", " << pl3[1]->GetY() << endl;  // [-2.1f, 4.0f]
+	//cout << pl3[2]->GetX() << ", " << pl3[2]->GetY() << endl;  // [-2.1f, 4.0f]
+	//cout << pl3[3]->GetX() << ", " << pl3[3]->GetY() << endl;  // [-2.1f, 4.0f]
+
 	//assert(pl3[10] == nullptr);  // NULL
 	//assert(pl3[-4] == nullptr);  // NULL
 	//assert(pl3[20] == nullptr);  // NULL

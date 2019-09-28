@@ -6,11 +6,8 @@ namespace lab4
 {
 	PolyLine::PolyLine()
 		: mCount(0)
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			mArr[i] = nullptr;
-		}
+	{	
+			mArr = nullptr;
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
@@ -23,34 +20,52 @@ namespace lab4
 			mArr[i] = other.mArr[i];
 			mFlag[i] = other.mFlag[i];
 		}*/
+
+		delete[] mArr;
+		mArr = new Point[mCount];
+
 		for (int i = 0; i < mCount; i++)
 		{
-			mArr[i] = new Point(*other.mArr[i]);
+			mArr[i] = other.mArr[i];
 		}
+		
+		//아래 작동안되는 코드
+		/*delete[] mArr;
+		mArr = new Point[mCount];
+		memcpy(mArr, other.mArr, mCount);*/
 
-		// 아래와 같이 구현하지 않으면 복사생성자 에러
-		for (int i = mCount; i < 10; i++)
-		{
-			mArr[i] = nullptr;
-		}
 
 	}
 
 	PolyLine::~PolyLine()
 	{
-		//delete[] mArr 하면 에러 발생
-		for (int i = 0; i < 10; i++)
-		{
-			delete mArr[i];
-		}
+		delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
 	{
 		if (mCount < 10)
 		{
-			mArr[mCount] = new Point(x, y);
+			Point* arr = new Point[mCount];
+
+			for (int i = 0; i < mCount; i++)
+			{
+				arr[i] = mArr[i];
+			}
+
+			delete[] mArr;
+			mArr = new Point[mCount + 1];
+
+			for (int i = 0; i < mCount; i++)
+			{
+				mArr[i] = arr[i];
+			}
+
+			mArr[mCount].SetX(x);
+			mArr[mCount].SetY(y);
 			mCount += 1;
+			delete[] arr;
+
 			return true;
 		}
 		else
@@ -71,8 +86,26 @@ namespace lab4
 
 		if (mCount < 10)
 		{
-			mArr[mCount] = new Point(x, y);
+			Point* arr = new Point[mCount];
+
+			for (int i = 0; i < mCount; i++)
+			{
+				arr[i] = mArr[i];
+			}
+
+			delete[] mArr;
+			mArr = new Point[mCount + 1];
+
+			for (int i = 0; i < mCount; i++)
+			{
+				mArr[i] = arr[i];
+			}
+
+			mArr[mCount].SetX(x);
+			mArr[mCount].SetY(y);
 			mCount += 1;
+			delete[] arr;
+
 			return true;
 		}
 		else
@@ -105,16 +138,31 @@ namespace lab4
 			return false;
 		}
 
-		for (int j = i; j < mCount - 1; j++)
+		Point* arr = new Point[mCount];
+
+		for (int j = 0; j < mCount; j++)
 		{
-			delete mArr[j];
-			mArr[j] = new Point(*mArr[j + 1]);
+			arr[j] = mArr[j];
 		}
 
-		delete mArr[mCount - 1];
-		mArr[mCount - 1] = nullptr;
+		delete[] mArr;
 		mCount -= 1;
-		
+		mArr = new Point[mCount];
+
+		for (int j = 0; j < mCount; j++)
+		{
+			if (j >= i)
+			{
+				mArr[j] = arr[j + 1];
+			}
+			else
+			{
+				mArr[j] = arr[j];
+			}
+		}
+
+		delete[] arr;
+
 		return true;
 
 	}
@@ -126,18 +174,18 @@ namespace lab4
 			return false;
 		}
 
-		float x = mArr[0]->GetX();
-		float y = mArr[0]->GetY();
+		float x = mArr[0].GetX();
+		float y = mArr[0].GetY();
 
-		float minx = mArr[0]->GetX();
-		float maxx = mArr[0]->GetX();
-		float miny = mArr[0]->GetY();
-		float maxy = mArr[0]->GetY();
+		float minx = mArr[0].GetX();
+		float maxx = mArr[0].GetX();
+		float miny = mArr[0].GetY();
+		float maxy = mArr[0].GetY();
 
 		for (int i = 0; i < mCount; i++)
 		{
-			x = mArr[i]->GetX();
-			y = mArr[i]->GetY();
+			x = mArr[i].GetX();
+			y = mArr[i].GetY();
 
 			if (minx > x)
 			{
@@ -170,13 +218,13 @@ namespace lab4
 
 	const Point* PolyLine::operator[](unsigned int i) const
 	{
-		if (mArr[i] == nullptr || i >= 10)
+		if (mArr == nullptr || i >= 10 || mCount <= i)
 		{
 			return nullptr;
 		}
 		else
 		{
-			return new Point(mArr[i]->GetX(), mArr[i]->GetY());
+			return new Point(mArr[i].GetX(), mArr[i].GetY());
 		}
 	}
 
@@ -185,21 +233,13 @@ namespace lab4
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
 		for (int i = 0; i < 10; i++)
 		{
-			delete mArr[i];
+			delete[] mArr;
 		}
 
 		mCount = other.mCount;
+		mArr = new Point[mCount];
+		memcpy(mArr, other.mArr, mCount);
 
-		for (int i = 0; i < 10; i++)
-		{
-			mArr[i] = new Point(*other.mArr[i]);
-		}
-
-		// 아래와 같이 구현하지 않으면 복사생성자 에러
-		for (int i = mCount; i < 10; i++)
-		{
-			mArr[i] = nullptr;
-		}
 
 		return *this;
 	}

@@ -21,7 +21,7 @@ namespace lab4
 		PolyLine& operator=(const PolyLine& other);
 
 	private:
-		Point* mArr[10];
+		Point* mArr;
 		int mCount;	
 	};
 }

@@ -39,7 +39,7 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
-			delete[] mArr;
+		delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
@@ -71,7 +71,7 @@ namespace lab4
 			mArr[mCount] = point;
 			mCount += 1;
 
-			delete[] arr;
+			delete arr;
 	
 			return true;
 		}
@@ -112,7 +112,7 @@ namespace lab4
 
 			mArr[mCount] = point;
 			mCount += 1;
-			delete[] arr;
+			delete arr;
 
 			return true;
 		}
@@ -173,8 +173,9 @@ namespace lab4
 
 			arr[j] = nullptr;
 		}
+		arr[mCount] = nullptr;
 
-		delete[] arr;
+		delete arr;
 
 		return true;
 

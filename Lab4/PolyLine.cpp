@@ -254,11 +254,6 @@ namespace lab4
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
 		mCount = other.mCount;
 
-		for (unsigned int i = 0; i < mCount; i++)
-		{
-			delete[] mArr[i];
-		}
-
 		delete[] mArr;
 
 		mArr = new const Point * [mCount];

@@ -20,7 +20,6 @@ namespace lab4
 			mArr[i] = other.mArr[i];
 			mFlag[i] = other.mFlag[i];
 		}*/
-
 		delete[] mArr;
 		mArr = new const Point * [mCount];
 
@@ -40,7 +39,7 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
-		delete[] mArr;
+			delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
@@ -65,6 +64,7 @@ namespace lab4
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
+				arr[i] = nullptr;
 			}
 
 			const Point* point = new Point(x, y);
@@ -107,11 +107,11 @@ namespace lab4
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
+				arr[i] = nullptr;
 			}
 
 			mArr[mCount] = point;
 			mCount += 1;
-
 			delete[] arr;
 
 			return true;
@@ -152,6 +152,7 @@ namespace lab4
 		for (unsigned int j = 0; j < mCount; j++)
 		{
 			arr[j] = mArr[j];
+			mArr[j] = nullptr;
 		}
 
 		delete[] mArr;
@@ -181,7 +182,7 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		if (mCount < 2)
+		if (outMin == nullptr || outMax == nullptr)
 		{
 			return false;
 		}
@@ -259,7 +260,7 @@ namespace lab4
 		mArr = new const Point * [mCount];
 
 		//**(other.mArr).GetX가 왜 안되는지 모르겠음
-		for (int i = 0; i < mCount; i++)
+		for (unsigned int i = 0; i < mCount; i++)
 		{
 			mArr[i] = new Point(*(other.mArr[i]));
 		}

@@ -22,6 +22,6 @@ namespace lab4
 
 	private:
 		Point* mArr;
-		int mCount;	
+		unsigned int mCount;	
 	};
 }

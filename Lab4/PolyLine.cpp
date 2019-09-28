@@ -48,7 +48,7 @@ namespace lab4
 		{
 			Point* arr = new Point[mCount];
 
-			for (int i = 0; i < mCount; i++)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
 				arr[i] = mArr[i];
 			}
@@ -56,7 +56,7 @@ namespace lab4
 			delete[] mArr;
 			mArr = new Point[mCount + 1];
 
-			for (int i = 0; i < mCount; i++)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
 			}
@@ -81,14 +81,11 @@ namespace lab4
 			return false;
 		}
 
-		float x = point->GetX();
-		float y = point->GetY();
-
 		if (mCount < 10)
 		{
 			Point* arr = new Point[mCount];
 
-			for (int i = 0; i < mCount; i++)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
 				arr[i] = mArr[i];
 			}
@@ -96,13 +93,12 @@ namespace lab4
 			delete[] mArr;
 			mArr = new Point[mCount + 1];
 
-			for (int i = 0; i < mCount; i++)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = arr[i];
 			}
 
-			mArr[mCount].SetX(x);
-			mArr[mCount].SetY(y);
+			mArr[mCount] = *point;
 			mCount += 1;
 			delete[] arr;
 
@@ -132,7 +128,7 @@ namespace lab4
 	//}
 
 	bool PolyLine::RemovePoint(unsigned int i)
-	{
+	{	
 		if (i >= mCount || i < 0)
 		{
 			return false;
@@ -140,7 +136,7 @@ namespace lab4
 
 		Point* arr = new Point[mCount];
 
-		for (int j = 0; j < mCount; j++)
+		for (unsigned int j = 0; j < mCount; j++)
 		{
 			arr[j] = mArr[j];
 		}
@@ -149,7 +145,7 @@ namespace lab4
 		mCount -= 1;
 		mArr = new Point[mCount];
 
-		for (int j = 0; j < mCount; j++)
+		for (unsigned int j = 0; j < mCount; j++)
 		{
 			if (j >= i)
 			{
@@ -182,7 +178,7 @@ namespace lab4
 		float miny = mArr[0].GetY();
 		float maxy = mArr[0].GetY();
 
-		for (int i = 0; i < mCount; i++)
+		for (unsigned int i = 0; i < mCount; i++)
 		{
 			x = mArr[i].GetX();
 			y = mArr[i].GetY();
@@ -231,7 +227,7 @@ namespace lab4
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
-		for (int i = 0; i < 10; i++)
+		for (unsigned int i = 0; i < 10; i++)
 		{
 			delete[] mArr;
 		}

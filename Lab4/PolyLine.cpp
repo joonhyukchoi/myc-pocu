@@ -7,7 +7,7 @@ namespace lab4
 	PolyLine::PolyLine()
 		: mCount(0)
 	{	
-			mArr = nullptr;
+		mArr = nullptr;
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
@@ -20,14 +20,18 @@ namespace lab4
 			mArr[i] = other.mArr[i];
 			mFlag[i] = other.mFlag[i];
 		}*/
+		for (unsigned int i = 0; i < mCount; i++)
+		{
+			delete[] mArr[i];
+		}
 
-		delete[] mArr;
+		delete mArr;
 		mArr = new const Point * [mCount];
 
 		//**(other.mArr).GetX가 왜 안되는지 모르겠음
-		for (int i = 0; i < mCount; i++)
+		for (unsigned int i = 0; i < mCount; i++)
 		{
-			mArr[i] = new Point (*(other.mArr[i]));
+			mArr[i] = new Point(*(other.mArr[i]));
 		}
 		
 		//아래 작동안되는 코드
@@ -40,7 +44,11 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
-		delete[] mArr;
+		/*for (unsigned int i = 0; i < mCount; i++)
+		{
+			delete[] mArr[i];
+		}*/
+		delete mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
@@ -58,7 +66,12 @@ namespace lab4
 				mArr[i] = nullptr;
 			}
 
-			delete[] mArr;
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete[] mArr[i];
+			}
+			delete mArr;
+
 			mArr = new const Point * [mCount + 1];
 
 			for (unsigned int i = 0; i < mCount; i++)
@@ -69,7 +82,12 @@ namespace lab4
 			const Point* point = new Point(x, y);
 			mArr[mCount] = point;
 			mCount += 1;
-			delete[] arr;
+
+			for (unsigned int i = 0; i < mCount - 1; i++)
+			{
+				delete[] arr[i];
+			}
+			delete arr;
 
 			return true;
 		}
@@ -98,7 +116,12 @@ namespace lab4
 				mArr[i] = nullptr;
 			}
 
-			delete[] mArr;
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete[] mArr[i];
+			}
+			delete mArr;
+
 			mArr = new const Point * [mCount + 1];
 
 			for (unsigned int i = 0; i < mCount; i++)
@@ -108,7 +131,12 @@ namespace lab4
 
 			mArr[mCount] = point;
 			mCount += 1;
-			delete[] arr;
+
+			for (unsigned int i = 0; i < mCount - 1; i++)
+			{
+				delete[] arr[i];
+			}
+			delete arr;
 
 			return true;
 		}
@@ -150,7 +178,12 @@ namespace lab4
 			arr[j] = mArr[j];
 		}
 
-		delete[] mArr;
+		for (unsigned int i = 0; i < mCount; i++)
+		{
+			delete[] mArr[i];
+		}
+		delete mArr;
+
 		mCount -= 1;
 		mArr = new const Point * [mCount];
 
@@ -168,7 +201,11 @@ namespace lab4
 			arr[j] = nullptr;
 		}
 
-		delete[] arr;
+		for (unsigned int i = 0; i < mCount + 1; i++)
+		{
+			delete[] arr[i];
+		}
+		delete arr;
 
 		return true;
 
@@ -248,11 +285,17 @@ namespace lab4
 	{
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
 		mCount = other.mCount;
-		delete[] mArr;
+
+		for (unsigned int i = 0; i < mCount; i++)
+		{
+			delete[] mArr[i];
+		}
+		delete mArr;
+
 		mArr = new const Point * [mCount];
 
 		//**(other.mArr).GetX가 왜 안되는지 모르겠음
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < mCount; i++)
 		{
 			mArr[i] = new Point(*(other.mArr[i]));
 		}

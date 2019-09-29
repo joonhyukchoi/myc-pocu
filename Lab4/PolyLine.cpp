@@ -14,7 +14,10 @@ namespace lab4
 	{
 		if (other.mArr != nullptr)
 		{
-			delete[] mArr;
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete mArr[i];
+			}
 
 			mCount = other.mCount;
 			mArr = new const Point * [mCount];
@@ -38,8 +41,6 @@ namespace lab4
 		{
 			delete mArr[i];
 		}
-
-		delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
@@ -57,7 +58,11 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				delete[] mArr;
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
+
 				mArr = new const Point * [mCount + 1];
 
 				for (unsigned int i = 0; i < mCount; i++)
@@ -69,8 +74,8 @@ namespace lab4
 				const Point* point = new Point(x, y);
 				mArr[mCount] = point;
 				mCount += 1;
-
 				delete[] arr;
+
 				point = nullptr;
 				delete point;
 
@@ -123,7 +128,10 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				delete[] mArr;
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
 
 				mArr = new const Point * [mCount + 1];
 
@@ -136,7 +144,6 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
-
 				delete[] arr;
 				delete point;
 
@@ -185,7 +192,10 @@ namespace lab4
 				mArr[j] = nullptr;
 			}
 
-			delete[] mArr;
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete mArr[i];
+			}
 
 			mCount -= 1;
 			mArr = new const Point * [mCount];
@@ -327,7 +337,10 @@ namespace lab4
 			}
 			else
 			{
-				delete[] mArr;
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
 
 				mCount = other.mCount;
 				mArr = new const Point * [mCount];

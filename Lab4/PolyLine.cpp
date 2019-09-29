@@ -183,7 +183,7 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		if (outMin == nullptr || outMax == nullptr)
+		if (mCount == 0 && outMin == nullptr || outMax == nullptr)
 		{
 			return false;
 		}

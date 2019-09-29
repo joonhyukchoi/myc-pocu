@@ -14,11 +14,6 @@ namespace lab4
 	{
 		if (other.mArr != nullptr)
 		{
-			for (unsigned int i = 0; i < mCount; i++)
-			{
-				delete mArr[i];
-			}
-
 			delete[] mArr;
 
 			mCount = other.mCount;
@@ -62,11 +57,6 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
 				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 
@@ -79,11 +69,6 @@ namespace lab4
 				const Point* point = new Point(x, y);
 				mArr[mCount] = point;
 				mCount += 1;
-
-				for (unsigned int i = 0; i < mCount - 1; i++)
-				{
-					delete arr[i];
-				}
 
 				delete[] arr;
 				point = nullptr;
@@ -138,11 +123,6 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
 				delete[] mArr;
 
 				mArr = new const Point * [mCount + 1];
@@ -156,11 +136,6 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
-
-				for (unsigned int i = 0; i < mCount - 1; i++)
-				{
-					delete arr[i];
-				}
 
 				delete[] arr;
 				delete point;
@@ -210,11 +185,6 @@ namespace lab4
 				mArr[j] = nullptr;
 			}
 
-			for (unsigned int i = 0; i < mCount; i++)
-			{
-				delete mArr[i];
-			}
-
 			delete[] mArr;
 
 			mCount -= 1;
@@ -233,8 +203,8 @@ namespace lab4
 				//remove로 해당 객체 삭제해야함. 따라서 지울 것.
 				//arr[j] = nullptr;
 			}
-			arr[mCount] = nullptr;
 
+			arr[mCount] = nullptr;
 			delete[] arr;
 
 			return true;
@@ -357,11 +327,6 @@ namespace lab4
 			}
 			else
 			{
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
 				delete[] mArr;
 
 				mCount = other.mCount;

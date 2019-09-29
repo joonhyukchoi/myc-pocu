@@ -17,7 +17,9 @@ namespace lab4
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				delete mArr[i];
-			}
+			} 
+
+			delete[] mArr;
 
 			mCount = other.mCount;
 			mArr = new const Point * [mCount];
@@ -41,6 +43,8 @@ namespace lab4
 		{
 			delete mArr[i];
 		}
+
+		delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
@@ -49,8 +53,7 @@ namespace lab4
 		{
 			if (mCount != 0)
 			{
-				const Point** arr;
-				arr = new const Point * [mCount];
+				const Point** arr = new const Point * [mCount];
 
 				for (unsigned int i = 0; i < mCount; i++)
 				{
@@ -58,11 +61,7 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
+				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 
 				for (unsigned int i = 0; i < mCount; i++)
@@ -77,7 +76,7 @@ namespace lab4
 				delete[] arr;
 
 				point = nullptr;
-				delete point;
+				//delete point;
 
 				return true;
 			}
@@ -88,7 +87,7 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
-				delete point;
+				//delete point;
 
 				return true;
 			}
@@ -119,8 +118,7 @@ namespace lab4
 		{
 			if (mCount != 0)
 			{
-				const Point** arr;
-				arr = new const Point * [mCount];
+				const Point** arr = new const Point * [mCount];
 
 				for (unsigned int i = 0; i < mCount; i++)
 				{
@@ -128,11 +126,7 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
+				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 
 				for (unsigned int i = 0; i < mCount; i++)
@@ -145,7 +139,7 @@ namespace lab4
 				mCount += 1;
 				point = nullptr;
 				delete[] arr;
-				delete point;
+				//delete point;
 
 				return true;
 			}
@@ -156,7 +150,7 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
-				delete point;
+				//delete point;
 
 				return true;
 			}
@@ -177,14 +171,14 @@ namespace lab4
 		if (mCount == 1)
 		{
 			mCount -= 1;
+			delete mArr[i];
 			delete[] mArr;
 			mArr = nullptr;
 			return true;
 		}
 		else
 		{
-			const Point** arr;
-			arr = new const Point * [mCount];
+			const Point** arr = new const Point * [mCount];
 
 			for (unsigned int j = 0; j < mCount; j++)
 			{
@@ -192,10 +186,7 @@ namespace lab4
 				mArr[j] = nullptr;
 			}
 
-			for (unsigned int i = 0; i < mCount; i++)
-			{
-				delete mArr[i];
-			}
+			delete[] mArr;
 
 			mCount -= 1;
 			mArr = new const Point * [mCount];
@@ -211,10 +202,20 @@ namespace lab4
 					mArr[j] = arr[j];
 				}
 				//remove로 해당 객체 삭제해야함. 따라서 지울 것.
-				//arr[j] = nullptr;
+				
+				if (j != i)
+				{
+					arr[j] = nullptr;
+				}
 			}
 
 			arr[mCount] = nullptr;
+
+			for (unsigned int i = 0; i < mCount + 1; i++)
+			{
+				delete arr[i];
+			}
+
 			delete[] arr;
 
 			return true;
@@ -324,34 +325,29 @@ namespace lab4
 
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
+		if (this == &other)
+		{
+			return *this;
+		}
+
 		if (other.mArr != nullptr)
 		{
-			if (mCount == other.mCount)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					mArr[i] = new Point(*(other.mArr[i]));
-				}
-
-				return *this;
+				delete mArr[i];
 			}
-			else
+
+			delete[] mArr;
+			mCount = other.mCount;
+			mArr = new const Point * [mCount];
+
+			for (unsigned int i = 0; i < mCount; i++)
 			{
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					delete mArr[i];
-				}
-
-				mCount = other.mCount;
-				mArr = new const Point * [mCount];
-
-				for (unsigned int i = 0; i < mCount; i++)
-				{
-					mArr[i] = new Point(*(other.mArr[i]));
-				}
-
-				return *this;
+				mArr[i] = new Point(*(other.mArr[i]));
 			}
+
+			return *this;
+			
 		}
 		else
 		{

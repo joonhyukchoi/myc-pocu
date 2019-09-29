@@ -55,35 +55,47 @@ namespace lab4
 
 		if (mCount < 10)
 		{
-			const Point** arr;
-			arr = new const Point * [mCount];
-			//arr = (Point*)malloc(sizeof(Point) * mCount);
-
-			for (unsigned int i = 0; i < mCount; i++)
+			if (mCount != 0)
 			{
-				arr[i] = mArr[i];
-				mArr[i] = nullptr;
+				const Point** arr;
+				arr = new const Point * [mCount];
+				//arr = (Point*)malloc(sizeof(Point) * mCount);
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					arr[i] = mArr[i];
+					mArr[i] = nullptr;
+				}
+
+				delete[] mArr;
+				mArr = new const Point * [mCount + 1];
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					mArr[i] = arr[i];
+					arr[i] = nullptr;
+				}
+
+				const Point* point = new Point(x, y);
+				mArr[mCount] = point;
+				mCount += 1;
+				delete[] arr;
+				point = nullptr;
+				delete point;
+
+				return true;
 			}
-
-			delete[] mArr;
-
-			mArr = new const Point * [mCount + 1];
-
-			for (unsigned int i = 0; i < mCount; i++)
+			else if (mCount == 0)
 			{
-				mArr[i] = arr[i];
-				arr[i] = nullptr;
+				mArr = new const Point * [mCount + 1];
+				const Point* point = new Point(x, y);
+				mArr[mCount] = point;
+				mCount += 1;
+				point = nullptr;
+				delete point;
+
+				return true;
 			}
-
-			const Point* point = new Point(x, y);
-			mArr[mCount] = point;
-			mCount += 1;
-
-			delete[] arr;
-			point = nullptr;
-			delete point;
-
-			return true;
 		}
 		else
 		{
@@ -95,39 +107,51 @@ namespace lab4
 	{
 		if (point == nullptr)
 		{
-			delete point;
 			return false;
 		}
 
 		if (mCount < 10)
 		{
-			const Point** arr;
-			arr = new const Point * [mCount];
-			//arr = (Point*)malloc(sizeof(Point) * mCount);
-
-			for (unsigned int i = 0; i < mCount; i++)
+			if (mCount != 0)
 			{
-				arr[i] = mArr[i];
-				mArr[i] = nullptr;
+				const Point** arr;
+				arr = new const Point * [mCount];
+				//arr = (Point*)malloc(sizeof(Point) * mCount);
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					arr[i] = mArr[i];
+					mArr[i] = nullptr;
+				}
+
+				delete[] mArr;
+
+				mArr = new const Point * [mCount + 1];
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					mArr[i] = arr[i];
+					arr[i] = nullptr;
+				}
+
+				mArr[mCount] = point;
+				mCount += 1;
+				point = nullptr;
+				delete[] arr;
+				delete point;
+
+				return true;
 			}
-
-			delete[] mArr;
-
-			mArr = new const Point * [mCount + 1];
-
-			for (unsigned int i = 0; i < mCount; i++)
+			else if (mCount == 0)
 			{
-				mArr[i] = arr[i];
-				arr[i] = nullptr;
+				mArr = new const Point * [mCount + 1];
+				mArr[mCount] = point;
+				mCount += 1;
+				point = nullptr;
+				delete point;
+
+				return true;
 			}
-
-			mArr[mCount] = point;
-			mCount += 1;
-			point = nullptr;
-			delete[] arr;
-			delete point;
-
-			return true;
 		}
 		else
 		{
@@ -159,49 +183,54 @@ namespace lab4
 			return false;
 		}
 
-		const Point** arr;
-		arr = new const Point * [mCount];
-
-		for (unsigned int j = 0; j < mCount; j++)
+		if (mCount == 1)
 		{
-			arr[j] = mArr[j];
-			mArr[j] = nullptr;
+			mCount -= 1;
+			delete[] mArr;
+			mArr = nullptr;
+			return true;
 		}
-
-		delete[] mArr;
-
-		mCount -= 1;
-		mArr = new const Point * [mCount];
-
-		for (unsigned int j = 0; j < mCount; j++)
+		else
 		{
-			if (j >= i)
+			const Point** arr;
+			arr = new const Point * [mCount];
+
+			for (unsigned int j = 0; j < mCount; j++)
 			{
-				mArr[j] = arr[j + 1];
-			}
-			else
-			{
-				mArr[j] = arr[j];
+				arr[j] = mArr[j];
+				mArr[j] = nullptr;
 			}
 
-			arr[j] = nullptr;
+			delete[] mArr;
+
+			mCount -= 1;
+			mArr = new const Point * [mCount];
+
+			for (unsigned int j = 0; j < mCount; j++)
+			{
+				if (j >= i)
+				{
+					mArr[j] = arr[j + 1];
+				}
+				else
+				{
+					mArr[j] = arr[j];
+				}
+
+				arr[j] = nullptr;
+			}
+			arr[mCount] = nullptr;
+
+			delete[] arr;
+
+			return true;
 		}
-		arr[mCount] = nullptr;
-
-		delete[] arr;
-
-		return true;
-
 	}
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
 		if (mCount == 0 && outMin == nullptr || outMax == nullptr)
 		{
-			outMax = nullptr;
-			outMin = nullptr;
-			delete outMin;
-			delete outMax;
 			return false;
 		}
 
@@ -262,7 +291,7 @@ namespace lab4
 			outMin = nullptr;
 			delete outMin;
 			delete outMax;
-			return false;
+			return true;
 		}
 		else if (outMin->GetX() != outMax->GetX() && outMin->GetY() == outMax->GetY())
 		{
@@ -270,7 +299,7 @@ namespace lab4
 			outMin = nullptr;
 			delete outMin;
 			delete outMax;
-			return false;
+			return true;
 		}
 		else
 		{
@@ -304,19 +333,31 @@ namespace lab4
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
 		if (other.mArr != nullptr)
 		{
-			mCount = other.mCount;
-
-			delete[] mArr;
-
-			mArr = new const Point * [mCount];
-
-			//**(other.mArr).GetX가 왜 안되는지 모르겠음
-			for (unsigned int i = 0; i < mCount; i++)
+			if (mCount == other.mCount)
 			{
-				mArr[i] = new Point(*(other.mArr[i]));
-			}
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					mArr[i] = new Point(*(other.mArr[i]));
+				}
 
-			return *this;
+				return *this;
+			}
+			else
+			{
+				mCount = other.mCount;
+
+				delete[] mArr;
+
+				mArr = new const Point * [mCount];
+
+				//**(other.mArr).GetX가 왜 안되는지 모르겠음
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					mArr[i] = new Point(*(other.mArr[i]));
+				}
+
+				return *this;
+			}
 		}
 		else
 		{

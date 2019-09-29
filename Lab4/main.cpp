@@ -131,10 +131,13 @@ void PolyLineRemovePointTest()
 	assert(pl.AddPoint(new Point(2.0f, 3.0f)) == true);
 	assert(pl.AddPoint(2.2f, 1.9f) == true);  // pl은 [1.0f, 2.0f], [2.0f, 3.0f], [2.2f, 1.9f]
 
-	assert(pl.RemovePoint(1) == true);   // pl은 [1.0f, 2.0f], [2.2f, 1.9f]. true를 반환.
+	assert(pl.RemovePoint(0) == true);   // pl은 [1.0f, 2.0f], [2.2f, 1.9f]. true를 반환.
+
+
 	assert(pl.RemovePoint(3) == false);  // 4번째 점이 존재하지 않기 때문에 pl은 변하지 않음. false를 반환.
 	assert(pl.RemovePoint(-1) == false);
 	assert(pl.RemovePoint(0) == true);
+	cout << pl[0]->GetX() << ", " << pl[0]->GetY() << endl;
 	assert(pl.RemovePoint(0) == true);
 	assert(pl.RemovePoint(0) == false);
 

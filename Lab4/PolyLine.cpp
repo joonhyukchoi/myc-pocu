@@ -123,7 +123,7 @@ namespace lab4
 		{
 			if (mArr[i] == point)
 			{
-				return false;
+				return true;
 			}
 		}
 

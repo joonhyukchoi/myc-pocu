@@ -14,14 +14,16 @@ namespace lab4
 	{
 		if (other.mArr != nullptr)
 		{
-			for (unsigned int i = 0; i < mCount; i++)
+			unsigned int count = mCount;
+			mCount = other.mCount;
+
+			for (unsigned int i = 0; i < count; i++)
 			{
 				delete mArr[i];
 			} 
 
 			delete[] mArr;
 
-			mCount = other.mCount;
 			mArr = new const Point * [mCount];
 
 			for (unsigned int i = 0; i < mCount; i++)
@@ -61,6 +63,11 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
+
 				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 
@@ -73,6 +80,12 @@ namespace lab4
 				const Point* point = new Point(x, y);
 				mArr[mCount] = point;
 				mCount += 1;
+
+				for (unsigned int i = 0; i < mCount - 1; i++)
+				{
+					delete arr[i];
+				}
+
 				delete[] arr;
 
 				point = nullptr;
@@ -126,6 +139,11 @@ namespace lab4
 					mArr[i] = nullptr;
 				}
 
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
+
 				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 
@@ -138,8 +156,14 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
+
+				for (unsigned int i = 0; i < mCount - 1; i++)
+				{
+					delete arr[i];
+				}
+
 				delete[] arr;
-				//delete point;
+				delete point;
 
 				return true;
 			}
@@ -150,7 +174,7 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
-				//delete point;
+				delete point;
 
 				return true;
 			}
@@ -184,6 +208,11 @@ namespace lab4
 			{
 				arr[j] = mArr[j];
 				mArr[j] = nullptr;
+			}
+
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete mArr[i];
 			}
 
 			delete[] mArr;
@@ -332,13 +361,15 @@ namespace lab4
 
 		if (other.mArr != nullptr)
 		{
-			for (unsigned int i = 0; i < mCount; i++)
+			unsigned int count = mCount;
+			mCount = other.mCount;
+
+			for (unsigned int i = 0; i < count; i++)
 			{
 				delete mArr[i];
 			}
 
 			delete[] mArr;
-			mCount = other.mCount;
 			mArr = new const Point * [mCount];
 
 			for (unsigned int i = 0; i < mCount; i++)

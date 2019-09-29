@@ -71,8 +71,9 @@ namespace lab4
 			mArr[mCount] = point;
 			mCount += 1;
 
-			delete[] *arr;
-	
+			delete[] arr;
+			point = nullptr;
+			delete[] point;
 			return true;
 		}
 		else
@@ -112,7 +113,9 @@ namespace lab4
 
 			mArr[mCount] = point;
 			mCount += 1;
-			delete[] *arr;
+			point = nullptr;
+			delete[] arr;
+			delete point;
 
 			return true;
 		}
@@ -175,7 +178,7 @@ namespace lab4
 		}
 		arr[mCount] = nullptr;
 
-		delete[] *arr;
+		delete[] arr;
 
 		return true;
 

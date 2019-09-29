@@ -71,7 +71,7 @@ namespace lab4
 			mArr[mCount] = point;
 			mCount += 1;
 
-			delete arr;
+			delete[] *arr;
 	
 			return true;
 		}
@@ -112,7 +112,7 @@ namespace lab4
 
 			mArr[mCount] = point;
 			mCount += 1;
-			delete arr;
+			delete[] *arr;
 
 			return true;
 		}
@@ -175,7 +175,7 @@ namespace lab4
 		}
 		arr[mCount] = nullptr;
 
-		delete arr;
+		delete[] *arr;
 
 		return true;
 
@@ -231,7 +231,22 @@ namespace lab4
 		outMin->SetY(miny);
 		outMax->SetY(maxy);
 
-		return true;
+		if (outMin->GetX() == outMax->GetX() && outMin->GetY() == outMax->GetY())
+		{
+			return true;
+		}
+		else if (outMin->GetX() == outMax->GetX() && outMin->GetY() != outMax->GetY())
+		{
+			return false;
+		}
+		else if (outMin->GetX() != outMax->GetX() && outMin->GetY() == outMax->GetY())
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	const Point* PolyLine::operator[](unsigned int i) const

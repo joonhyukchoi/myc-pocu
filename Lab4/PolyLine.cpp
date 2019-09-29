@@ -105,7 +105,6 @@ namespace lab4
 
 	bool PolyLine::AddPoint(const Point* point)
 	{
-		int teacher = 0;
 
 		if (point == nullptr)
 		{
@@ -114,7 +113,7 @@ namespace lab4
 
 		for (unsigned int i = 0; i < mCount; i++)
 		{
-			if (mArr[mCount] == point)
+			if (mArr[i] == point)
 			{
 				return false;
 			}
@@ -159,7 +158,6 @@ namespace lab4
 				mCount += 1;
 				point = nullptr;
 				delete point;
-				mFlag[mCount] = true;
 
 				return true;
 			}

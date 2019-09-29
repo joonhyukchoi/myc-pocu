@@ -85,7 +85,7 @@ namespace lab4
 
 				return true;
 			}
-			else if (mCount == 0)
+			else
 			{
 				mArr = new const Point * [mCount + 1];
 				const Point* point = new Point(x, y);
@@ -142,7 +142,7 @@ namespace lab4
 
 				return true;
 			}
-			else if (mCount == 0)
+			else
 			{
 				mArr = new const Point * [mCount + 1];
 				mArr[mCount] = point;
@@ -229,7 +229,7 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		if (mCount == 0 && outMin == nullptr || outMax == nullptr)
+		if (mCount == 0 || outMin == nullptr || outMax == nullptr)
 		{
 			return false;
 		}

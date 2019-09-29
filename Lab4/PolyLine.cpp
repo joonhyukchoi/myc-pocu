@@ -12,27 +12,35 @@ namespace lab4
 
 	PolyLine::PolyLine(const PolyLine& other)
 	{
-		mCount = other.mCount;
-		
-		//아래와 같이 구현하면 같은 주소를 가리키기 때문에 사용X
-		/*for (int i = 0; i < mCount; i++)
+		if (other.mArr != nullptr)
 		{
-			mArr[i] = other.mArr[i];
-			mFlag[i] = other.mFlag[i];
-		}*/
-		delete[] mArr;
-		mArr = new const Point * [mCount];
+			mCount = other.mCount;
 
-		//**(other.mArr).GetX가 왜 안되는지 모르겠음
-		for (unsigned int i = 0; i < mCount; i++)
-		{
-			mArr[i] = new Point(*(other.mArr[i]));
+			//아래와 같이 구현하면 같은 주소를 가리키기 때문에 사용X
+			/*for (int i = 0; i < mCount; i++)
+			{
+				mArr[i] = other.mArr[i];
+				mFlag[i] = other.mFlag[i];
+			}*/
+			delete[] mArr;
+			mArr = new const Point * [mCount];
+
+			//**(other.mArr).GetX가 왜 안되는지 모르겠음
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				mArr[i] = new Point(*(other.mArr[i]));
+			}
+
+			//아래 작동안되는 코드
+			/*delete[] mArr;
+			mArr = new Point[mCount];
+			memcpy(mArr, other.mArr, mCount);*/
 		}
-		
-		//아래 작동안되는 코드
-		/*delete[] mArr;
-		mArr = new Point[mCount];
-		memcpy(mArr, other.mArr, mCount);*/
+		else
+		{
+			mCount = 0;
+			mArr = nullptr;
+		}
 
 
 	}
@@ -73,7 +81,8 @@ namespace lab4
 
 			delete[] arr;
 			point = nullptr;
-			delete[] point;
+			delete point;
+
 			return true;
 		}
 		else
@@ -86,6 +95,7 @@ namespace lab4
 	{
 		if (point == nullptr)
 		{
+			delete point;
 			return false;
 		}
 
@@ -188,6 +198,10 @@ namespace lab4
 	{
 		if (mCount == 0 && outMin == nullptr || outMax == nullptr)
 		{
+			outMax = nullptr;
+			outMin = nullptr;
+			delete outMin;
+			delete outMax;
 			return false;
 		}
 
@@ -236,18 +250,34 @@ namespace lab4
 
 		if (outMin->GetX() == outMax->GetX() && outMin->GetY() == outMax->GetY())
 		{
+			outMax = nullptr;
+			outMin = nullptr;
+			delete outMin;
+			delete outMax;
 			return true;
 		}
 		else if (outMin->GetX() == outMax->GetX() && outMin->GetY() != outMax->GetY())
 		{
+			outMax = nullptr;
+			outMin = nullptr;
+			delete outMin;
+			delete outMax;
 			return false;
 		}
 		else if (outMin->GetX() != outMax->GetX() && outMin->GetY() == outMax->GetY())
 		{
+			outMax = nullptr;
+			outMin = nullptr;
+			delete outMin;
+			delete outMax;
 			return false;
 		}
 		else
 		{
+			outMax = nullptr;
+			outMin = nullptr;
+			delete outMin;
+			delete outMax;
 			return true;
 		}
 	}
@@ -272,19 +302,28 @@ namespace lab4
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
 		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
-		mCount = other.mCount;
-
-		delete[] mArr;
-
-		mArr = new const Point * [mCount];
-
-		//**(other.mArr).GetX가 왜 안되는지 모르겠음
-		for (unsigned int i = 0; i < mCount; i++)
+		if (other.mArr != nullptr)
 		{
-			mArr[i] = new Point(*(other.mArr[i]));
-		}
+			mCount = other.mCount;
 
-		return *this;
+			delete[] mArr;
+
+			mArr = new const Point * [mCount];
+
+			//**(other.mArr).GetX가 왜 안되는지 모르겠음
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				mArr[i] = new Point(*(other.mArr[i]));
+			}
+
+			return *this;
+		}
+		else
+		{
+			mCount = 0;
+			mArr = nullptr;
+			return *this;
+		}
 	}
 
 

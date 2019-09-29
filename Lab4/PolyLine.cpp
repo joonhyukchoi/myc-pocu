@@ -105,9 +105,19 @@ namespace lab4
 
 	bool PolyLine::AddPoint(const Point* point)
 	{
+		int teacher = 0;
+
 		if (point == nullptr)
 		{
 			return false;
+		}
+
+		for (unsigned int i = 0; i < mCount; i++)
+		{
+			if (mArr[mCount] == point)
+			{
+				return false;
+			}
 		}
 
 		if (mCount < 10)
@@ -149,6 +159,7 @@ namespace lab4
 				mCount += 1;
 				point = nullptr;
 				delete point;
+				mFlag[mCount] = true;
 
 				return true;
 			}
@@ -216,8 +227,8 @@ namespace lab4
 				{
 					mArr[j] = arr[j];
 				}
-
-				arr[j] = nullptr;
+				//remove로 해당 객체 삭제해야함. 따라서 지울 것.
+				//arr[j] = nullptr;
 			}
 			arr[mCount] = nullptr;
 

@@ -22,6 +22,7 @@ namespace lab4
 
 	private:
 		const Point** mArr;
+		bool mFlag[10];
 		unsigned int mCount;	
 	};
 }

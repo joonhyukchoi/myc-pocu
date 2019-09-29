@@ -92,9 +92,12 @@ void PolyLineAddPointTest()
 	Point* p1 = new Point(2.2f, 3.3f);
 	assert(pl2.AddPoint(1.1f, 2.2f) == true);
 	assert(pl2.AddPoint(p1) == true);
+	assert(pl2.AddPoint(p1) == false);
 	assert(p1->GetX() == 2.2f && p1->GetY() == 3.3f);
 
 	PolyLine pl3(pl2);
+
+	cout << pl3[0]->GetX() << ", " << pl3[0]->GetY() << endl;
 	Point* p2 = new Point(22.22f, 33.33f);
 	assert(pl3.AddPoint(11.11f, 22.22f) == true);
 	assert(pl3.AddPoint(p2) == true);
@@ -106,14 +109,15 @@ void PolyLineAddPointTest()
 	assert(pl4->AddPoint(p3) == true);
 
 	PolyLine* pl5 = pl4;
-	assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	assert(pl5->AddPoint(11.11f, 22.22f) == true);
-	assert(pl5->AddPoint(11.11f, 22.22f) == false);
-	assert(pl5->AddPoint(11.11f, 22.22f) == false);
-
 	delete pl4;
+
+	/*assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == true);
+	assert(pl5->AddPoint(11.11f, 22.22f) == false);
+	assert(pl5->AddPoint(11.11f, 22.22f) == false);*/
+
 
 	PolyLine pl6 = pl3;
 	assert(pl6.AddPoint(11.11f, 22.22f) == true);

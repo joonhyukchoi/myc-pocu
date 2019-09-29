@@ -14,57 +14,57 @@ namespace lab4
 	{
 		if (other.mArr != nullptr)
 		{
-			mCount = other.mCount;
-
-			//아래와 같이 구현하면 같은 주소를 가리키기 때문에 사용X
-			/*for (int i = 0; i < mCount; i++)
+			for (unsigned int i = 0; i < mCount; i++)
 			{
-				mArr[i] = other.mArr[i];
-				mFlag[i] = other.mFlag[i];
-			}*/
+				delete mArr[i];
+			}
+
 			delete[] mArr;
+
+			mCount = other.mCount;
 			mArr = new const Point * [mCount];
 
-			//**(other.mArr).GetX가 왜 안되는지 모르겠음
 			for (unsigned int i = 0; i < mCount; i++)
 			{
 				mArr[i] = new Point(*(other.mArr[i]));
 			}
 
-			//아래 작동안되는 코드
-			/*delete[] mArr;
-			mArr = new Point[mCount];
-			memcpy(mArr, other.mArr, mCount);*/
 		}
 		else
 		{
 			mCount = 0;
 			mArr = nullptr;
 		}
-
-
 	}
 
 	PolyLine::~PolyLine()
 	{
+		for (unsigned int i = 0; i < mCount; i++)
+		{
+			delete mArr[i];
+		}
+
 		delete[] mArr;
 	}
 
 	bool PolyLine::AddPoint(float x, float y)
 	{
-
 		if (mCount < 10)
 		{
 			if (mCount != 0)
 			{
 				const Point** arr;
 				arr = new const Point * [mCount];
-				//arr = (Point*)malloc(sizeof(Point) * mCount);
 
 				for (unsigned int i = 0; i < mCount; i++)
 				{
 					arr[i] = mArr[i];
 					mArr[i] = nullptr;
+				}
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
 				}
 
 				delete[] mArr;
@@ -79,6 +79,12 @@ namespace lab4
 				const Point* point = new Point(x, y);
 				mArr[mCount] = point;
 				mCount += 1;
+
+				for (unsigned int i = 0; i < mCount - 1; i++)
+				{
+					delete arr[i];
+				}
+
 				delete[] arr;
 				point = nullptr;
 				delete point;
@@ -125,12 +131,16 @@ namespace lab4
 			{
 				const Point** arr;
 				arr = new const Point * [mCount];
-				//arr = (Point*)malloc(sizeof(Point) * mCount);
 
 				for (unsigned int i = 0; i < mCount; i++)
 				{
 					arr[i] = mArr[i];
 					mArr[i] = nullptr;
+				}
+
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
 				}
 
 				delete[] mArr;
@@ -146,6 +156,12 @@ namespace lab4
 				mArr[mCount] = point;
 				mCount += 1;
 				point = nullptr;
+
+				for (unsigned int i = 0; i < mCount - 1; i++)
+				{
+					delete arr[i];
+				}
+
 				delete[] arr;
 				delete point;
 
@@ -153,6 +169,7 @@ namespace lab4
 			}
 			else
 			{
+				delete[] mArr;
 				mArr = new const Point * [mCount + 1];
 				mArr[mCount] = point;
 				mCount += 1;
@@ -167,23 +184,6 @@ namespace lab4
 			return false;
 		}
 	}
-
-	//bool PolyLine::AddPoint(const Point point)
-	//{
-	//	float x = point.GetX();
-	//	float y = point.GetY();
-
-	//	if (mCount <= 10)
-	//	{
-	//		mArr[mCount] = new Point(x, y);
-	//		mCount += mCount;
-	//		return true;
-	//	}
-	//	else
-	//	{
-	//		return false;
-	//	}
-	//}
 
 	bool PolyLine::RemovePoint(unsigned int i)
 	{	
@@ -208,6 +208,11 @@ namespace lab4
 			{
 				arr[j] = mArr[j];
 				mArr[j] = nullptr;
+			}
+
+			for (unsigned int i = 0; i < mCount; i++)
+			{
+				delete mArr[i];
 			}
 
 			delete[] mArr;
@@ -339,7 +344,6 @@ namespace lab4
 
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
-		//대입연산자는 기존에 있던 메모리 삭제 넣을 것
 		if (other.mArr != nullptr)
 		{
 			if (mCount == other.mCount)
@@ -353,13 +357,16 @@ namespace lab4
 			}
 			else
 			{
-				mCount = other.mCount;
+				for (unsigned int i = 0; i < mCount; i++)
+				{
+					delete mArr[i];
+				}
 
 				delete[] mArr;
 
+				mCount = other.mCount;
 				mArr = new const Point * [mCount];
 
-				//**(other.mArr).GetX가 왜 안되는지 모르겠음
 				for (unsigned int i = 0; i < mCount; i++)
 				{
 					mArr[i] = new Point(*(other.mArr[i]));

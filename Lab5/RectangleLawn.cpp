@@ -27,11 +27,11 @@ namespace lab5
 		double doubleCountH = 0;
 		double errorH = 0;
 
-		countW = mWidth / 0.25;
-		doubleCountW = mWidth / 0.25;
+		doubleCountW = static_cast<double>(mWidth) / 0.25;
+		countW = static_cast<unsigned int>(doubleCountW);
 		errorW = doubleCountW - countW;
-		countH = mHeight / 0.25;
-		doubleCountH = mHeight / 0.25;
+		doubleCountH = static_cast<double>(mHeight) / 0.25;
+		countH = static_cast<unsigned int>(doubleCountH);
 		errorH = doubleCountH - countH;
 
 		countW = countW * 2;

@@ -55,8 +55,8 @@ namespace lab5
 		double doubleCount = 0;
 		double error = 0;
 
-		count = mArea / 0.3;
-		doubleCount = mArea / 0.3;
+		doubleCount = static_cast<double>(mArea) / 0.3;
+		count = static_cast<unsigned int>(doubleCount);
 		error = doubleCount - count;
 
 		if (error != 0)

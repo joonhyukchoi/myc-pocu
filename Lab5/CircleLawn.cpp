@@ -14,8 +14,8 @@ namespace lab5
 		double doubleArea = 0;
 		double error = 0;
 
-		area = mRad * mRad * 3.14;
-		doubleArea = mRad * (double)mRad * 3.14;
+		doubleArea = static_cast<double>(mRad) * static_cast<double>(mRad) * 3.14;
+		area = static_cast<unsigned int>(doubleArea);
 		error = doubleArea - area;
 
 		if (error >= 0.5)

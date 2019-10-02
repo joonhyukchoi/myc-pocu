@@ -15,8 +15,8 @@ namespace lab5
 		double doubleArea = 0;
 		double error = 0;
 
-		area = mLen * (double)mLen * sqrt(3) / 4;
-		doubleArea = mLen * (double)mLen * sqrt(3) / 4;
+		doubleArea = static_cast<double>(mLen) * static_cast<double>(mLen) * sqrt(3) / 4;
+		area = static_cast<unsigned int>(doubleArea);
 		error = doubleArea - area;
 
 		if (error >= 0.5)
@@ -33,8 +33,8 @@ namespace lab5
 		double doubleCount = 0;
 		double error = 0;
 
-		count = mLen / 0.25;
-		doubleCount = mLen / 0.25;
+		doubleCount = static_cast<double>(mLen) / 0.25;
+		count = static_cast<unsigned int>(doubleCount);
 		error = doubleCount - count;
 
 		count = count * 3;

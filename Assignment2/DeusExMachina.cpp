@@ -1,0 +1,178 @@
+#include "DeusExMachina.h"
+//#include "iostream"
+
+namespace assignment2
+{
+	DeusExMachina* DeusExMachina::mInstance = nullptr;
+	Vehicle* DeusExMachina::mVeh[10] = { nullptr };
+	unsigned int DeusExMachina::mCnt = 0;
+	unsigned int DeusExMachina::mTravel[10] = { 0 };
+	unsigned int DeusExMachina::mTravelGo[10] = { 0 };
+
+	DeusExMachina* DeusExMachina::GetInstance()
+	{
+		if (mInstance != nullptr)
+		{ 
+			return mInstance;
+		}
+
+		mInstance = new DeusExMachina;
+		mCnt = 0;
+		unsigned int i;
+
+		for (i = 0; i < 10; i++)
+		{
+			mTravel[i] = 0;
+			mTravelGo[i] = 0;
+		}
+
+		return mInstance;
+	}
+
+	void DeusExMachina::Travel() const
+	{
+		unsigned int i;
+		//std::cout << mCnt;
+		for (i = 0; i < mCnt; i++)
+		{
+			mTravel[i]++;
+			switch (mVeh[i]->GetName())
+			{
+			case AIRPLANE:
+				if ((mTravel[i] - 1) % 4 == 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case BOAT:
+				if (mTravel[i] % 3 != 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case BOATPLANE:
+				if ((mTravel[i] - 1) % 4 == 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case UBOAT:
+				if ((mTravel[i] - 1) % 6 == 0 || (mTravel[i] - 2) % 6 == 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case MOTORCYCLE:
+				if (mTravel[i] % 6 != 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case SEDAN:
+				if (mTravel[i] % 6 != 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			case SEDANT:
+				if (mTravel[i] % 6 != 0 && mTravel[i] % 7 != 0)
+				{
+					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+				}
+
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	bool DeusExMachina::AddVehicle(Vehicle* vehicle)
+	{
+		if (mCnt < 10)
+		{
+			mVeh[mCnt] = vehicle;
+			mCnt++;
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool DeusExMachina::RemoveVehicle(unsigned int i)
+	{
+		if (0 <= i && i < mCnt)
+		{
+			unsigned int j;
+
+			delete mVeh[i];
+			mCnt--;
+
+			for (j = i; j < mCnt; j++)
+			{
+				mVeh[j] = mVeh[j + 1];
+			}
+			mVeh[mCnt] = nullptr;
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	const Vehicle* DeusExMachina::GetFurthestTravelled() const
+	{
+		unsigned int max;
+		unsigned int i;
+		unsigned int num;
+
+		num = 0;
+
+		if (mVeh[0] == nullptr || mTravelGo[0] == 0)
+		{
+			return NULL;
+		}
+
+		max = mTravelGo[0];
+
+		for (i = 0; i < mCnt; i++)
+		{
+			if (max <= mTravelGo[i])
+			{
+				max = mTravelGo[i];
+				num = i;
+			}
+			//std::cout << mTravelGo[i] << std::endl;
+		}
+	
+		return mVeh[i];
+	}
+
+	bool DeusExMachina::operator==(DeusExMachina* deus) const
+	{
+		if (this != nullptr && deus != nullptr)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	DeusExMachina::~DeusExMachina()
+	{
+		delete mInstance;
+	}
+}

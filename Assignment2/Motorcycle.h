@@ -13,5 +13,6 @@ namespace assignment2
 		unsigned int GetDriveSpeed() const;
 		unsigned int GetMaxSpeed() const;
 		eTravelName GetName() const;
+		Motorcycle operator=(Motorcycle& bp);
 	};
 }

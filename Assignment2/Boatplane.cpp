@@ -32,8 +32,8 @@ namespace assignment2
 		double ex;
 
 		sum = GetSumWeight();
-		ex = exp(static_cast<double>(500 - sum) / 300);
-		speed = 150 * static_cast<unsigned int>(ex);
+		ex = exp(static_cast<int>(500 - sum) / 300);
+		speed = static_cast<unsigned int>(150 * ex + 0.5);
 
 		return speed;
 	}
@@ -44,7 +44,7 @@ namespace assignment2
 		unsigned int left;
 
 		sum = GetSumWeight();
-		left = 800 - static_cast< unsigned int>(1.7 * static_cast<double>(sum));
+		left = static_cast<unsigned int>(800 - 1.7 * static_cast<double>(sum) + 0.5);
 
 		if (left >= 20)
 		{

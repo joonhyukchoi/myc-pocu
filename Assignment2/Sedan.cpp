@@ -90,4 +90,19 @@ namespace assignment2
 			return SEDAN;
 		}
 	}
+
+	Sedan Sedan::operator=(Sedan& bp)
+	{
+		unsigned int i;
+
+		InitializePassenger2();
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+
+		return *this;
+	}
 }

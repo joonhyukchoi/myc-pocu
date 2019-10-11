@@ -22,7 +22,7 @@ namespace assignment2
 		unsigned int speed;
 
 		sum = GetSumWeight();
-		ex = exp(static_cast<double>(400 - sum) / 70);
+		ex = exp((400 - sum) / 70);
 		speed = static_cast<unsigned int>(4 * ex + 0.5);
 		
 		return speed;
@@ -32,7 +32,7 @@ namespace assignment2
 	{
 		unsigned int sum;
 		unsigned int speed;
-		double numerator;
+		int numerator;
 
 		sum = GetSumWeight();
 		numerator = 800 - sum;
@@ -96,5 +96,20 @@ namespace assignment2
 	eTravelName Airplane::GetName() const
 	{
 		return AIRPLANE;
+	}
+
+	Airplane Airplane::operator=(Airplane& bp)
+	{
+		unsigned int i;
+
+		InitializePassenger2();
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+
+		return *this;
 	}
 }

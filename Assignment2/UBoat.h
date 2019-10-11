@@ -15,5 +15,6 @@ namespace assignment2
 		unsigned int GetDiveSpeed() const;
 		unsigned int GetMaxSpeed() const;
 		eTravelName GetName() const;
+		UBoat operator=(UBoat& bp);
 	};
 }

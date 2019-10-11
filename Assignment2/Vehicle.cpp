@@ -25,7 +25,7 @@ namespace assignment2
 
 		unsigned int i;
 
-		for (i = 0; i < 100; i++)
+		for (i = 0; i < mCountCurrent; i++)
 		{
 			mPerson[i] = new Person(vc.GetPassenger(i));
 		}
@@ -41,13 +41,14 @@ namespace assignment2
 			{
 				break;
 			}
+
 			delete mPerson[i];
 		}
 	}
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
-		if (person == nullptr || mCountCurrent > mCountMax)
+		if (person == nullptr || mCountCurrent == mCountMax)
 		{
 			return false;
 		}
@@ -61,7 +62,7 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger2(const Person* person)
 	{
-		if (person == nullptr || mCountCurrent > mCountMax)
+		if (person == nullptr || mCountCurrent == mCountMax)
 		{
 			return false;
 		}
@@ -75,6 +76,11 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
+		if (i > mCountCurrent - 1 || mPerson[i] == nullptr)
+		{
+			return false;
+		}
+
 		if (mCountCurrent == 1 && i == 0)
 		{
 			delete mPerson[i];
@@ -82,9 +88,11 @@ namespace assignment2
 			return true;
 		}
 
-		if (i > mCountCurrent - 1 || mPerson[i] == nullptr)
+		if (mCountCurrent == 100 && i == 99)
 		{
-			return false;
+			delete mPerson[i];
+
+			return true;
 		}
 
 		delete mPerson[i];
@@ -92,6 +100,11 @@ namespace assignment2
 
 		for (cnt = i; cnt < mCountCurrent; cnt++)
 		{
+			if (cnt == mCountCurrent - 1)
+			{
+				break;
+			}
+
 			mPerson[cnt] = mPerson[cnt + 1];
 		}
 
@@ -134,6 +147,7 @@ namespace assignment2
 			{
 				break;
 			}
+
 			delete mPerson[i];
 		}
 	}
@@ -149,5 +163,4 @@ namespace assignment2
 	{
 		mPerson[i] = new Person(ps);
 	}
-
 }

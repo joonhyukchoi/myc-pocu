@@ -19,5 +19,6 @@ namespace assignment2
 		unsigned int GetMaxSpeed() const;
 		Boatplane operator+(Boat& boat);
 		eTravelName GetName() const;
+		Airplane operator=(Airplane& bp);
 	};
 }

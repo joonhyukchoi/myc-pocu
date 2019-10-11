@@ -8,7 +8,7 @@ namespace assignment2
 	unsigned int DeusExMachina::mCnt = 0;
 	unsigned int DeusExMachina::mTravel[10] = { 0 };
 	unsigned int DeusExMachina::mTravelGo[10] = { 0 };
-	bool DeusExMachina::mFlag = false;
+	bool DeusExMachina::mbFlag = false;
 
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
@@ -45,7 +45,7 @@ namespace assignment2
 	void DeusExMachina::Travel() const
 	{
 		unsigned int i;
-		mFlag = true;
+		mbFlag = true;
 		//std::cout << mCnt;
 		for (i = 0; i < mCnt; i++)
 		{
@@ -133,7 +133,7 @@ namespace assignment2
 		{
 			delete mVeh[i];
 			mCnt--;
-			mFlag = false;
+			mbFlag = false;
 
 			return true;
 		}
@@ -168,7 +168,7 @@ namespace assignment2
 
 		num = 0;
 
-		if (mVeh[0] == nullptr || mFlag == false)
+		if (mCnt == 0 || mbFlag == false)
 		{
 			return NULL;
 		}

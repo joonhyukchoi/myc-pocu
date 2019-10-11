@@ -11,14 +11,14 @@ namespace assignment2
 	unsigned int UBoat::GetSailSpeed() const
 	{
 		unsigned int sum;
-		unsigned int left;
+		int left;
 
 		sum = GetSumWeight();
 		left = (550 - sum) / 10;
 
 		if (left >= 200)
 		{
-			return left;
+			return static_cast<unsigned int>(left + 0.5);
 		}
 		else
 		{
@@ -68,4 +68,18 @@ namespace assignment2
 		return UBOAT;
 	}
 
+	UBoat UBoat::operator=(UBoat& bp)
+	{
+		unsigned int i;
+
+		InitializePassenger2();
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+
+		return *this;
+	}
 }

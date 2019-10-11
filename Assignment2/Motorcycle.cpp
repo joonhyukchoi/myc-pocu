@@ -11,14 +11,14 @@ namespace assignment2
 	unsigned int Motorcycle::GetDriveSpeed() const
 	{
 		double sum;
-		unsigned int left;
+		double left;
 
 		sum = static_cast<double>(GetSumWeight());
-		left = static_cast<unsigned int>(400 + 2 * sum - (sum / 15) * (sum / 15) * (sum / 15) + 0.5);
+		left = 400 + 2 * sum - (sum / 15) * (sum / 15) * (sum / 15);
 
 		if (left >= 0)
 		{
-			return left;
+			return static_cast<unsigned int>(left + 0.5);
 		}
 		else
 		{
@@ -38,5 +38,20 @@ namespace assignment2
 
 	Motorcycle::~Motorcycle()
 	{
+	}
+
+	Motorcycle Motorcycle::operator=(Motorcycle& bp)
+	{
+		unsigned int i;
+
+		InitializePassenger2();
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+
+		return *this;
 	}
 }

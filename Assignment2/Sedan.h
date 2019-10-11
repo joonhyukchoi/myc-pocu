@@ -18,6 +18,7 @@ namespace assignment2
 		unsigned int GetDriveSpeed() const;
 		unsigned int GetMaxSpeed() const;
 		eTravelName GetName() const;
+		Sedan operator=(Sedan& bp);
 
 	private:
 		const Trailer* mTr;

@@ -27,7 +27,7 @@ namespace assignment2
 
 		for (i = 0; i < 100; i++)
 		{
-			mPerson[i] = vc.GetPassenger(i);
+			mPerson[i] = new Person(vc.GetPassenger(i));
 		}
 	}
 	

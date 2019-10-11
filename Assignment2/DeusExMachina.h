@@ -7,12 +7,12 @@ namespace assignment2
 	{
 	public:
 		static DeusExMachina* GetInstance();
+		~DeusExMachina();
 		void Travel() const;
 		bool AddVehicle(Vehicle* vehicle);  
 		bool RemoveVehicle(unsigned int i);
 		const Vehicle* GetFurthestTravelled() const;
 		bool operator==(DeusExMachina* deus) const;
-		~DeusExMachina();
 
 	private:
 		static DeusExMachina* mInstance;
@@ -20,5 +20,6 @@ namespace assignment2
 		static unsigned int mCnt;
 		static unsigned int mTravel[10];
 		static unsigned int mTravelGo[10];
+		static bool mFlag;
 	};
 }

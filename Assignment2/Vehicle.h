@@ -8,6 +8,7 @@ namespace assignment2
 	{
 	public:
 		Vehicle(unsigned int maxPassengersCount);
+		Vehicle(Vehicle& vc);
 		~Vehicle();
 
 		virtual unsigned int GetMaxSpeed() const = 0; 
@@ -20,10 +21,10 @@ namespace assignment2
 		unsigned int GetPassengersCount() const;
 		unsigned int GetMaxPassengersCount() const;
 		unsigned int GetSumWeight() const;
-		void PassengerInitialize();
-		void PassengerInitialize2();
-		void Setter(unsigned int max, unsigned int current, unsigned int sum);
-		void Setter2(unsigned int i, const Person* ps);
+		void InitializePassenger();
+		void InitializePassenger2();
+		void Set(unsigned int max, unsigned int current, unsigned int sum);
+		void Set2(unsigned int i, const Person* ps);
 
 	private:
 		const Person* mPerson[100];

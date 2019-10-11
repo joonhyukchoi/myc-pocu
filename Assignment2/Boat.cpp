@@ -53,18 +53,18 @@ namespace assignment2
 	
 		for (i = 0; i < plane.GetPassengersCount(); i++)
 		{ 
-			bp.AddPassenger(plane.GetPassenger(i));
+			bp.AddPassenger2(plane.GetPassenger(i));
 			k = i;
 		}
 
 		for (i = k - 1; i < sumCurrent; i++)
 		{
-			bp.AddPassenger(this->GetPassenger(j));
+			bp.AddPassenger2(this->GetPassenger(j));
 			j++;
 		}
 
-		plane.PassengerInitialize(); 
-		this->PassengerInitialize();
+		plane.InitializePassenger();
+		this->InitializePassenger();
 
 		return bp;
 	}

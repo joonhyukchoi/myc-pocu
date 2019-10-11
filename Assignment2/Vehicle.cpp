@@ -17,6 +17,20 @@ namespace assignment2
 		}
 	}
 
+	Vehicle::Vehicle(Vehicle& vc)
+	{
+		mCountMax = vc.GetMaxPassengersCount();
+		mCountCurrent = vc.GetPassengersCount();
+		mSumWeight = vc.GetSumWeight();
+
+		unsigned int i;
+
+		for (i = 0; i < 100; i++)
+		{
+			mPerson[i] = vc.GetPassenger(i);
+		}
+	}
+	
 	Vehicle::~Vehicle()
 	{
 		unsigned int i;
@@ -33,7 +47,7 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
-		if (person == nullptr)
+		if (person == nullptr || mCountCurrent > mCountMax)
 		{
 			return false;
 		}
@@ -47,7 +61,7 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger2(const Person* person)
 	{
-		if (person == nullptr)
+		if (person == nullptr || mCountCurrent > mCountMax)
 		{
 			return false;
 		}
@@ -61,7 +75,14 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
-		if (i > mCountCurrent - 1)
+		if (mCountCurrent == 1 && i == 0)
+		{
+			delete mPerson[i];
+
+			return true;
+		}
+
+		if (i > mCountCurrent - 1 || mPerson[i] == nullptr)
 		{
 			return false;
 		}
@@ -73,8 +94,6 @@ namespace assignment2
 		{
 			mPerson[cnt] = mPerson[cnt + 1];
 		}
-
-		mPerson[mCountCurrent - 1] = nullptr;
 
 		return true;
 	}
@@ -99,13 +118,13 @@ namespace assignment2
 		return mSumWeight;
 	}
 
-	void Vehicle::PassengerInitialize()
+	void Vehicle::InitializePassenger()
 	{
 		mCountMax = 0;
 		mCountCurrent = 0;
 	}
 
-	void Vehicle::PassengerInitialize2()
+	void Vehicle::InitializePassenger2()
 	{
 		unsigned int i;
 
@@ -119,14 +138,14 @@ namespace assignment2
 		}
 	}
 
-	void Vehicle::Setter(unsigned int max, unsigned int current, unsigned int sum)
+	void Vehicle::Set(unsigned int max, unsigned int current, unsigned int sum)
 	{
 		mCountMax = max;
 		mCountCurrent = current;
 		mSumWeight = sum;
 	}
 
-	void Vehicle::Setter2(unsigned int i, const Person* ps)
+	void Vehicle::Set2(unsigned int i, const Person* ps)
 	{
 		mPerson[i] = new Person(ps);
 	}

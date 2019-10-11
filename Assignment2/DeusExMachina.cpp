@@ -8,6 +8,7 @@ namespace assignment2
 	unsigned int DeusExMachina::mCnt = 0;
 	unsigned int DeusExMachina::mTravel[10] = { 0 };
 	unsigned int DeusExMachina::mTravelGo[10] = { 0 };
+	bool DeusExMachina::mFlag = false;
 
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
@@ -29,9 +30,22 @@ namespace assignment2
 		return mInstance;
 	}
 
+	DeusExMachina::~DeusExMachina()
+	{
+		unsigned int cnt;
+
+		delete mInstance;
+		
+		for (cnt = 0; cnt < mCnt; cnt++)
+		{
+			delete mVeh[cnt];
+		}
+	}
+
 	void DeusExMachina::Travel() const
 	{
 		unsigned int i;
+		mFlag = true;
 		//std::cout << mCnt;
 		for (i = 0; i < mCnt; i++)
 		{
@@ -95,6 +109,11 @@ namespace assignment2
 
 	bool DeusExMachina::AddVehicle(Vehicle* vehicle)
 	{
+		if (vehicle == nullptr)
+		{
+			return false;
+		}
+
 		if (mCnt < 10)
 		{
 			mVeh[mCnt] = vehicle;
@@ -110,7 +129,16 @@ namespace assignment2
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)
 	{
-		if (0 <= i && i < mCnt)
+		if (i == 0 && mCnt == 1)
+		{
+			delete mVeh[i];
+			mCnt--;
+			mFlag = false;
+
+			return true;
+		}
+
+		if (i < mCnt)
 		{
 			unsigned int j;
 
@@ -120,8 +148,9 @@ namespace assignment2
 			for (j = i; j < mCnt; j++)
 			{
 				mVeh[j] = mVeh[j + 1];
+				mTravel[j] = mTravel[j + 1];
+				mTravelGo[j] = mTravelGo[j + 1];
 			}
-			mVeh[mCnt] = nullptr;
 
 			return true;
 		}
@@ -139,7 +168,7 @@ namespace assignment2
 
 		num = 0;
 
-		if (mVeh[0] == nullptr || mTravelGo[0] == 0)
+		if (mVeh[0] == nullptr || mFlag == false)
 		{
 			return NULL;
 		}
@@ -169,10 +198,5 @@ namespace assignment2
 		{
 			return false;
 		}
-	}
-
-	DeusExMachina::~DeusExMachina()
-	{
-		delete mInstance;
 	}
 }

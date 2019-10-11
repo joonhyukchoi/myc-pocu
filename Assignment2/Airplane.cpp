@@ -87,8 +87,8 @@ namespace assignment2
 			j++;
 		}
 	
-		boat.PassengerInitialize();
-		this->PassengerInitialize();
+		boat.InitializePassenger();
+		this->InitializePassenger();
 
 		return bp;
 	}

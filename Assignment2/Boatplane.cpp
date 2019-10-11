@@ -13,11 +13,11 @@ namespace assignment2
 	{
 		unsigned int i;
 
-		Setter(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
 
 		for (i = 0; i < GetPassengersCount(); i++)
 		{
-			Setter2(i, bp.GetPassenger(i));
+			Set2(i, bp.GetPassenger(i));
 		}
 	}
 
@@ -83,12 +83,12 @@ namespace assignment2
 	{
 		unsigned int i;
 
-		PassengerInitialize2();
-		Setter(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+		InitializePassenger2();
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
 
 		for (i = 0; i < GetPassengersCount(); i++)
 		{
-			Setter2(i, bp.GetPassenger(i));
+			Set2(i, bp.GetPassenger(i));
 		}
 
 		return *this;

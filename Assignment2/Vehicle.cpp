@@ -77,44 +77,20 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
-		if (i > mCountCurrent - 1)
+		if (i >= mCountCurrent)
 		{
 			return false;
 		}
 
-		if (mCountCurrent == 1 && i == 0)
-		{
-			mCountCurrent--;
-			mSumWeight -= mPerson[i]->GetWeight();
-			delete mPerson[i];
-
-			return true;
-		}
-
-		if (mCountCurrent == 100 && i == 99)
-		{
-			mCountCurrent--;
-			mSumWeight -= mPerson[i]->GetWeight();
-			delete mPerson[i];
-
-			return true;
-		}
-
+		--mCountCurrent;
 		mSumWeight -= mPerson[i]->GetWeight();
 		delete mPerson[i];
 		unsigned int cnt;
 
 		for (cnt = i; cnt < mCountCurrent; cnt++)
 		{
-			if (cnt == mCountCurrent - 1)
-			{
-				break;
-			}
-
 			mPerson[cnt] = mPerson[cnt + 1];
 		}
-
-		mCountCurrent--;
 
 		return true;
 	}

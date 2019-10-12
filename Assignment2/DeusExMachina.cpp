@@ -47,6 +47,7 @@ namespace assignment2
 		unsigned int i;
 		mbFlag = true;
 		//std::cout << mCnt;
+		//std::cout << mCnt << std::endl;
 		for (i = 0; i < mCnt; i++)
 		{
 			mTravel[i]++;
@@ -171,12 +172,12 @@ namespace assignment2
 		unsigned int num;
 
 		num = 0;
-
+		//std::cout << mbFlag << std::endl;
 		if (mCnt == 0 || mbFlag == false)
 		{
 			return NULL;
 		}
-
+		//std::cout << mbFlag << std::endl;
 		max = mTravelGo[0];
 
 		for (i = 0; i < mCnt; i++)
@@ -188,8 +189,8 @@ namespace assignment2
 			}
 			//std::cout << mTravelGo[i] << std::endl;
 		}
-	
-		return mVeh[i];
+		//std::cout << max << std::endl;
+		return mVeh[num];
 	}
 
 	bool DeusExMachina::operator==(DeusExMachina* deus) const

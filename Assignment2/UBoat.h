@@ -9,6 +9,7 @@ namespace assignment2
 	{
 	public:
 		UBoat();
+		UBoat(UBoat& bp);
 		~UBoat();
 
 		unsigned int GetSailSpeed() const;

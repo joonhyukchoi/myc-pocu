@@ -8,6 +8,7 @@ namespace assignment2
 	{
 	public:
 		Motorcycle();
+		Motorcycle(Motorcycle& bp);
 		~Motorcycle();
 
 		unsigned int GetDriveSpeed() const;

@@ -32,7 +32,7 @@ namespace assignment2
 		double ex;
 
 		sum = GetSumWeight();
-		ex = exp(static_cast<int>(500 - sum) / 300);
+		ex = exp(static_cast<double>(500 - sum) / 300);
 		speed = static_cast<unsigned int>(150 * ex + 0.5);
 
 		return speed;
@@ -81,6 +81,11 @@ namespace assignment2
 
 	Boatplane Boatplane::operator=(Boatplane& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

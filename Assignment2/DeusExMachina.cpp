@@ -132,6 +132,8 @@ namespace assignment2
 		if (i == 0 && mCnt == 1)
 		{
 			delete mVeh[i];
+			mTravel[i] = 0;
+			mTravelGo[i] = 0;
 			mCnt--;
 			mbFlag = false;
 
@@ -141,9 +143,8 @@ namespace assignment2
 		if (i < mCnt)
 		{
 			unsigned int j;
-
-			delete mVeh[i];
 			mCnt--;
+			delete mVeh[i];
 
 			for (j = i; j < mCnt; j++)
 			{
@@ -151,6 +152,9 @@ namespace assignment2
 				mTravel[j] = mTravel[j + 1];
 				mTravelGo[j] = mTravelGo[j + 1];
 			}
+
+			mTravel[mCnt] = 0;
+			mTravelGo[mCnt] = 0;
 
 			return true;
 		}

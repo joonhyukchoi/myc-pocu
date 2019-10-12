@@ -8,6 +8,19 @@ namespace assignment2
 	{
 	}
 
+	Motorcycle::Motorcycle(Motorcycle& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+	{
+		unsigned int i;
+
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+	}
+
 	unsigned int Motorcycle::GetDriveSpeed() const
 	{
 		double sum;
@@ -42,6 +55,11 @@ namespace assignment2
 
 	Motorcycle Motorcycle::operator=(Motorcycle& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

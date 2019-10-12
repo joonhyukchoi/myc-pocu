@@ -9,6 +9,20 @@ namespace assignment2
 	{
 	}
 
+	Sedan::Sedan(Sedan& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+		, Trailer(bp.GetSumWeight())
+	{
+		unsigned int i;
+
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+	}
+
 	Sedan::~Sedan()
 	{
 	}
@@ -93,6 +107,11 @@ namespace assignment2
 
 	Sedan Sedan::operator=(Sedan& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

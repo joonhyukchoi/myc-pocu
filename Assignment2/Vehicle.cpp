@@ -17,6 +17,7 @@ namespace assignment2
 		}
 	}
 
+
 	Vehicle::Vehicle(Vehicle& vc)
 	{
 		mCountMax = vc.GetMaxPassengersCount();
@@ -76,13 +77,14 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
-		if (i > mCountCurrent - 1 || mPerson[i] == nullptr)
+		if (i > mCountCurrent - 1)
 		{
 			return false;
 		}
 
 		if (mCountCurrent == 1 && i == 0)
 		{
+			mCountCurrent--;
 			delete mPerson[i];
 
 			return true;
@@ -90,6 +92,7 @@ namespace assignment2
 
 		if (mCountCurrent == 100 && i == 99)
 		{
+			mCountCurrent--;
 			delete mPerson[i];
 
 			return true;
@@ -107,6 +110,8 @@ namespace assignment2
 
 			mPerson[cnt] = mPerson[cnt + 1];
 		}
+
+		mCountCurrent--;
 
 		return true;
 	}
@@ -163,4 +168,58 @@ namespace assignment2
 	{
 		mPerson[i] = new Person(ps);
 	}
+
+	bool Vehicle::operator==(const Vehicle& vc) const
+	{
+		unsigned int i;
+		unsigned int j = 0;
+
+		if (mCountMax != vc.mCountMax || mCountCurrent != vc.mCountCurrent || mSumWeight != vc.mSumWeight)
+		{
+			return false;
+		}
+
+		if (mCountCurrent == 0 && vc.mCountCurrent == 0)
+		{
+			return true;
+		}
+
+		for (i = 0; i < mCountCurrent; i++)
+		{
+			if (mPerson[i] != vc.mPerson[i])
+			{
+				j++;
+			}
+		}
+
+		if (j == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+
+		}
+	}
+
+	//Vehicle Vehicle::operator=(Vehicle& bp)
+	//{
+	//	if (*this == bp)
+	//	{
+	//		return *this;
+	//	}
+
+	//	unsigned int i;
+
+	//	InitializePassenger2();
+	//	Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+	//	for (i = 0; i < GetPassengersCount(); i++)
+	//	{
+	//		Set2(i, bp.GetPassenger(i));
+	//	}
+
+	//	return *this;
+	//}
 }

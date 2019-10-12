@@ -9,6 +9,19 @@ namespace assignment2
 	{
 	}
 
+	Boat::Boat(Boat& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+	{
+		unsigned int i;
+
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+	}
+
 	Boat::~Boat()
 	{
 	}
@@ -53,13 +66,13 @@ namespace assignment2
 	
 		for (i = 0; i < plane.GetPassengersCount(); i++)
 		{ 
-			bp.AddPassenger2(plane.GetPassenger(i));
+			bp.AddPassenger(plane.GetPassenger(i));
 			k = i;
 		}
 
 		for (i = k - 1; i < sumCurrent; i++)
 		{
-			bp.AddPassenger2(this->GetPassenger(j));
+			bp.AddPassenger(this->GetPassenger(j));
 			j++;
 		}
 

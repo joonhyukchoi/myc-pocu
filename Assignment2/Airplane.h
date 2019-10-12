@@ -12,6 +12,7 @@ namespace assignment2
 	{
 	public:
 		Airplane(unsigned int maxPassengersCount);
+		Airplane(Airplane& bp);
 		~Airplane();
 
 		unsigned int GetDriveSpeed() const;

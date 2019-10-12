@@ -11,6 +11,7 @@ namespace assignment2
 	{
 	public:
 		Boat(unsigned int maxPassengersCount);
+		Boat(Boat& bp);
 		~Boat();
 
 		unsigned int GetSailSpeed() const;

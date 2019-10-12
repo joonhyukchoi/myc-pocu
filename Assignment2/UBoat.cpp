@@ -8,12 +8,25 @@ namespace assignment2
 	{
 	}
 
+	UBoat::UBoat(UBoat& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+	{
+		unsigned int i;
+
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+	}
+
 	unsigned int UBoat::GetSailSpeed() const
 	{
 		unsigned int sum;
-		int left;
+		double left;
 
-		sum = GetSumWeight();
+		sum = static_cast<double>(GetSumWeight());
 		left = (550 - sum) / 10;
 
 		if (left >= 200)
@@ -70,6 +83,11 @@ namespace assignment2
 
 	UBoat UBoat::operator=(UBoat& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

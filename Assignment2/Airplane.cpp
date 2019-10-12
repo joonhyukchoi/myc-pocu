@@ -11,6 +11,19 @@ namespace assignment2
 	{
 	}
 
+	Airplane::Airplane(Airplane& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+	{
+		unsigned int i;
+
+		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
+
+		for (i = 0; i < GetPassengersCount(); i++)
+		{
+			Set2(i, bp.GetPassenger(i));
+		}
+	}
+
 	Airplane::~Airplane()
 	{
 	}
@@ -22,7 +35,7 @@ namespace assignment2
 		unsigned int speed;
 
 		sum = GetSumWeight();
-		ex = exp((400 - sum) / 70);
+		ex = exp((400 - static_cast<double>(sum)) / 70);
 		speed = static_cast<unsigned int>(4 * ex + 0.5);
 		
 		return speed;
@@ -35,8 +48,7 @@ namespace assignment2
 		int numerator;
 
 		sum = GetSumWeight();
-		numerator = 800 - sum;
-		speed = static_cast<unsigned int>(200 * exp(numerator / 500) + 0.5);
+		speed = static_cast<unsigned int>(200 * exp(static_cast<double>(800 - sum) / 500) + 0.5);
 
 		return speed;
 	}
@@ -77,13 +89,13 @@ namespace assignment2
 		//bp.AddPassenger2(this->GetPassenger(0));
 		for (i = 0; i < this->GetPassengersCount(); i++)
 		{
-			bp.AddPassenger2(this->GetPassenger(i));
+			bp.AddPassenger(this->GetPassenger(i));
 			k = i;
 		}
 
 		for (i = k - 1; i < sumCurrent; i++)
 		{
-			bp.AddPassenger2(boat.GetPassenger(j));
+			bp.AddPassenger(boat.GetPassenger(j));
 			j++;
 		}
 	
@@ -100,6 +112,11 @@ namespace assignment2
 
 	Airplane Airplane::operator=(Airplane& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

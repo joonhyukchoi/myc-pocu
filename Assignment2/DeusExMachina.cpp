@@ -17,7 +17,7 @@ namespace assignment2
 			return mInstance;
 		}
 
-		//mInstance = new DeusExMachina;
+		mInstance = new DeusExMachina();
 		mCnt = 0;
 		unsigned int i;
 

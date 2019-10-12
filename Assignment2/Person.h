@@ -13,6 +13,7 @@ namespace assignment2
 		const std::string& GetName() const;
 		char* GetName2() const;
 		unsigned int GetWeight() const;
+		bool operator==(const Person& ps) const;
 
 	private:
 		char* mName;

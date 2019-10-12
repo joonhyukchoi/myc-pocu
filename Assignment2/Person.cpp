@@ -53,4 +53,17 @@ namespace assignment2
 	{
 		return mWeight;
 	}
+
+	bool Person::operator==(const Person& vc) const
+	{
+		if (mWeight == vc.mWeight && mName2 == vc.mName2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+
+		}
+	}
 }

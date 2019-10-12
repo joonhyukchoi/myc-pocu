@@ -12,6 +12,7 @@ namespace assignment2
 	Sedan::Sedan(Sedan& bp)
 		: Vehicle(bp.GetMaxPassengersCount())
 		, Trailer(bp.GetSumWeight())
+		, mTr(bp.mTr)
 	{
 		unsigned int i;
 

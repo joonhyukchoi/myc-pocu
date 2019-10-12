@@ -26,7 +26,11 @@ int main()
 	const unsigned int MAX_CAPACITY = 10;
 
 	Vehicle* air = new Airplane(MAX_CAPACITY);
-
+	unsigned int sum;
+	double left;
+	sum = 1004;
+	left = static_cast<double>(800 - 1.7 * sum);
+	cout << left;
 	Person* toAdd;
 	const unsigned int personWeight = 10;
 
@@ -67,9 +71,9 @@ int main()
 	}
 
 	const Person* comp1 = dockingTest1.GetPassenger(0);
-
+	dockingTest1 + dockingTest2;
 	Boatplane bp1 = dockingTest1 + dockingTest2;
-	Boatplane bp2 = dockingTest2 + dockingTest1;
+	//Boatplane bp2 = dockingTest2 + dockingTest1;
 
 	//const Person* comp2 = bp1.GetPassenger(0);
 
@@ -79,27 +83,54 @@ int main()
 	//assert(bp1.GetPassengersCount() == 10);
 	//assert(bp2.GetPassengersCount() == 0);
 
-	//Boatplane copyConstuctorTest(bp1);
+	Boatplane copyConstuctorTest(bp1);
 
-	//for (size_t i = 0; i < bp1.GetPassengersCount(); i++)
-	//{
-	//	const Person* p1 = bp1.GetPassenger(i);
-	//	const Person* p2 = copyConstuctorTest.GetPassenger(i);
-	//	assert(p1 != p2);
-	//}
-	//assert(bp1.GetMaxPassengersCount() == copyConstuctorTest.GetMaxPassengersCount());
-	//assert(bp1.GetPassengersCount() == copyConstuctorTest.GetPassengersCount());
-	//assert(bp1.GetMaxSpeed() == copyConstuctorTest.GetMaxSpeed());
+	for (size_t i = 0; i < bp1.GetPassengersCount(); i++)
+	{
+		const Person* p1 = bp1.GetPassenger(i);
+		const Person* p2 = copyConstuctorTest.GetPassenger(i);
+		assert(p1 != p2);
+	}
+	assert(bp1.GetMaxPassengersCount() == copyConstuctorTest.GetMaxPassengersCount());
+	assert(bp1.GetPassengersCount() == copyConstuctorTest.GetPassengersCount());
+	assert(bp1.GetMaxSpeed() == copyConstuctorTest.GetMaxSpeed());
 
-	//Sedan sedanTest;
-	//Trailer* t1 = new Trailer(10);
-	//Trailer* t2 = new Trailer(20);
+	Sedan sedanTest;
+	Trailer* t1 = new Trailer(10);
+	Trailer* t2 = new Trailer(20);
 
-	//assert(sedanTest.AddTrailer(t1));
-	//assert(!sedanTest.AddTrailer(t1));
-	//assert(!sedanTest.AddTrailer(t2));
-	//assert(sedanTest.RemoveTrailer());
-	//assert(sedanTest.AddTrailer(t2));
-	//assert(sedanTest.RemoveTrailer());
+	assert(sedanTest.AddTrailer(t1));
+	assert(!sedanTest.AddTrailer(t1));
+	assert(!sedanTest.AddTrailer(t2));
+	assert(sedanTest.RemoveTrailer());
+	assert(sedanTest.AddTrailer(t2));
+	assert(sedanTest.RemoveTrailer());
+
+	DeusExMachina* d = DeusExMachina::GetInstance();
+	Vehicle* demAirplain = new Airplane(MAX_CAPACITY);
+	Vehicle* demBoat = new Airplane(MAX_CAPACITY);
+	Vehicle* demBoatplain = new Boatplane(MAX_CAPACITY);
+	Vehicle* demMotorcycle = new Motorcycle();
+	Vehicle* demSedan1 = new Sedan();
+	Vehicle* demSedan2 = new Sedan();
+	Trailer* demTrailer = new Trailer(10);
+	static_cast<Sedan*>(demSedan2)->AddTrailer(demTrailer);
+	Vehicle* demUBoat = new UBoat();
+
+	d->AddVehicle(demAirplain);
+	d->AddVehicle(demBoat);
+	d->AddVehicle(demBoatplain);
+	d->AddVehicle(demMotorcycle);
+	d->AddVehicle(demSedan1);
+	d->AddVehicle(demSedan2);
+	d->AddVehicle(demUBoat);
+
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		d->Travel();
+	}
+
+	delete d;
 
 }

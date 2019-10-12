@@ -17,7 +17,7 @@ namespace assignment2
 			return mInstance;
 		}
 
-		mInstance = new DeusExMachina;
+		//mInstance = new DeusExMachina;
 		mCnt = 0;
 		unsigned int i;
 
@@ -33,13 +33,13 @@ namespace assignment2
 	DeusExMachina::~DeusExMachina()
 	{
 		unsigned int cnt;
-
-		delete mInstance;
 		
 		for (cnt = 0; cnt < mCnt; cnt++)
 		{
 			delete mVeh[cnt];
 		}
+
+		//delete mInstance;
 	}
 
 	void DeusExMachina::Travel() const

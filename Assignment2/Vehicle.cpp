@@ -85,6 +85,7 @@ namespace assignment2
 		if (mCountCurrent == 1 && i == 0)
 		{
 			mCountCurrent--;
+			mSumWeight -= mPerson[i]->GetWeight();
 			delete mPerson[i];
 
 			return true;
@@ -93,11 +94,13 @@ namespace assignment2
 		if (mCountCurrent == 100 && i == 99)
 		{
 			mCountCurrent--;
+			mSumWeight -= mPerson[i]->GetWeight();
 			delete mPerson[i];
 
 			return true;
 		}
 
+		mSumWeight -= mPerson[i]->GetWeight();
 		delete mPerson[i];
 		unsigned int cnt;
 

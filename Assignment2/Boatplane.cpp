@@ -44,7 +44,7 @@ namespace assignment2
 		unsigned int left;
 
 		sum = GetSumWeight();
-		left = static_cast<unsigned int>(800 - 1.7 * static_cast<double>(sum) + 0.5);
+		left = static_cast<unsigned int>(static_cast<double>(800 - 1.7 * sum) + 0.5);
 
 		if (left >= 20)
 		{

@@ -26,8 +26,8 @@ namespace assignment2
 		unsigned int sum;
 		double left;
 
-		sum = static_cast<double>(GetSumWeight());
-		left = (550 - sum) / 10;
+		sum = GetSumWeight();
+		left = (550 - static_cast<double>(sum)) / 10;
 
 		if (left >= 200)
 		{

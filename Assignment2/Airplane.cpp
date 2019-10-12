@@ -45,7 +45,6 @@ namespace assignment2
 	{
 		unsigned int sum;
 		unsigned int speed;
-		int numerator;
 
 		sum = GetSumWeight();
 		speed = static_cast<unsigned int>(200 * exp(static_cast<double>(800 - sum) / 500) + 0.5);

@@ -47,7 +47,7 @@ namespace assignment2
 		}
 	}
 
-	bool Vehicle::AddPassenger2(const Person* person)
+	bool Vehicle::AddPassenger(const Person* person)
 	{
 		if (person == nullptr || mCountCurrent == mCountMax)
 		{
@@ -61,7 +61,7 @@ namespace assignment2
 		return true;
 	}
 
-	bool Vehicle::AddPassenger(const Person* person)
+	bool Vehicle::AddPassenger2(const Person* person)
 	{
 		if (person == nullptr || mCountCurrent == mCountMax)
 		{
@@ -189,13 +189,13 @@ namespace assignment2
 
 		for (i = 0; i < mCountCurrent; i++)
 		{
-			if (*mPerson[i] != *vc.mPerson[i])
+			if (*mPerson[i] == *vc.mPerson[i])
 			{
 				j++;
 			}
 		}
 
-		if (j == 0)
+		if (j == mCountCurrent)
 		{
 			return true;
 		}

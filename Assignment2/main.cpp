@@ -22,73 +22,65 @@ using namespace std;
 
 int main()
 {
-	unsigned int sum;
-	double speed;
-	double ex;
 
-	sum = 555;
-	speed = log((150 + static_cast<double>(sum)) / 150);
-
-	//cout << ex << endl;
-	cout << speed;
 
 	const char* MAX_SPEED_LABLE = "Max Speed: ";
 	const char* CUR_P_LABLE = "Current Person: ";
 	const unsigned int MAX_CAPACITY = 10;
 
-	//Vehicle* air = new Airplane(MAX_CAPACITY);
-	//unsigned int sum;
-	//double left;
-	//sum = 1004;
-	//left = static_cast<double>(800 - 1.7 * sum);
-	//cout << left;
-	//Person* toAdd;
-	//const unsigned int personWeight = 10;
+	Vehicle* air = new Airplane(MAX_CAPACITY);
+	unsigned int sum;
+	double left;
+	sum = 1004;
+	left = static_cast<double>(800 - 1.7 * sum);
+	cout << left;
+	Person* toAdd;
+	const unsigned int personWeight = 10;
 
-	//for (size_t i = 0; i < MAX_CAPACITY + 10; i++)
+	for (size_t i = 0; i < MAX_CAPACITY + 10; i++)
+	{
+		toAdd = new Person(STR(i), i);
+		if (air->AddPassenger(toAdd) == false)
+		{
+			delete toAdd;
+		}
+
+		cout << MAX_SPEED_LABLE << air->GetMaxSpeed() << endl
+			<< CUR_P_LABLE << air->GetPassengersCount() << endl;
+	}
+
+	//while (air->RemovePassenger(0))
 	//{
-	//	toAdd = new Person(STR(i), i);
-	//	if (air->AddPassenger(toAdd) == false)
-	//	{
-	//		delete toAdd;
-	//	}
-
-	//	cout << MAX_SPEED_LABLE << air->GetMaxSpeed() << endl
-	//		<< CUR_P_LABLE << air->GetPassengersCount() << endl;
+	//	cout << CUR_P_LABLE << air->GetPassengersCount() << endl;;
 	//}
 
-	////while (air->RemovePassenger(0))
-	////{
-	////	cout << CUR_P_LABLE << air->GetPassengersCount() << endl;;
-	////}
+	//Person* overlapTest = new Person("Overlap Test", 100);
+	//air->AddPassenger(overlapTest);
+	//air->AddPassenger(overlapTest);
+	//assert(air->GetPassengersCount() == 1);
 
-	////Person* overlapTest = new Person("Overlap Test", 100);
-	////air->AddPassenger(overlapTest);
-	////air->AddPassenger(overlapTest);
-	////assert(air->GetPassengersCount() == 1);
+	//toAdd = NULL;
+	//assert(air->AddPassenger(toAdd) == false);
 
-	////toAdd = NULL;
-	////assert(air->AddPassenger(toAdd) == false);
+	//delete air;
 
-	////delete air;
+	Airplane dockingTest1(10);
+	Boat dockingTest2(10);
 
-	//Airplane dockingTest1(10);
-	//Boat dockingTest2(10);
+	for (size_t i = 0; i < 5; i++)
+	{
+		dockingTest1.AddPassenger(new Person(STR(i), i));
+		dockingTest2.AddPassenger(new Person(STR(i), i));
+	}
 
-	//for (size_t i = 0; i < 5; i++)
-	//{
-	//	dockingTest1.AddPassenger(new Person(STR(i), i));
-	//	dockingTest2.AddPassenger(new Person(STR(i), i));
-	//}
-
-	//const Person* comp1 = dockingTest1.GetPassenger(0);
-	//dockingTest1 + dockingTest2;
+	const Person* comp1 = dockingTest1.GetPassenger(0);
+	dockingTest1 + dockingTest2;
 	//Boatplane bp1 = dockingTest1 + dockingTest2;
-	//Boatplane bp2 = dockingTest2 + dockingTest1;
+	/*Boatplane bp2 = dockingTest2 + dockingTest1;
 
-	//const Person* comp2 = bp1.GetPassenger(0);
-
-	////assert(comp1 == comp2);
+	const Person* comp2 = bp1.GetPassenger(0);
+	assert(bp1.GetPassenger(0) == bp2.GetPassenger(0));
+	assert(comp1 == comp2);*/
 	////assert(dockingTest1.GetPassengersCount() == 0);
 	////assert(dockingTest2.GetPassengersCount() == 0);
 	////assert(bp1.GetPassengersCount() == 10);
@@ -141,7 +133,7 @@ int main()
 	//{
 	//	d->Travel();
 	//}
-
-	//delete d;
+/*
+	delete d;*/
 
 }

@@ -118,7 +118,7 @@ namespace assignment2
 		if (mCnt < 10)
 		{
 			mVeh[mCnt] = vehicle;
-			mCnt++;
+			++mCnt;
 
 			return true;
 		}
@@ -135,7 +135,7 @@ namespace assignment2
 			delete mVeh[i];
 			mTravel[i] = 0;
 			mTravelGo[i] = 0;
-			mCnt--;
+			--mCnt;
 			mbFlag = false;
 
 			return true;
@@ -144,7 +144,7 @@ namespace assignment2
 		if (i < mCnt)
 		{
 			unsigned int j;
-			mCnt--;
+			--mCnt;
 			delete mVeh[i];
 
 			for (j = i; j < mCnt; j++)

@@ -49,9 +49,19 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
+		unsigned int cnt;
+
 		if (person == nullptr || mCountCurrent == mCountMax)
 		{
 			return false;
+		}
+
+		for (cnt = 0; cnt < mCountCurrent; cnt++)
+		{
+			if (mPerson[cnt] == person)
+			{
+				return false;
+			}
 		}
 
 		mPerson[mCountCurrent] = person;
@@ -77,9 +87,19 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
-		if (i >= mCountCurrent)
+		if (i >= mCountCurrent || mPerson[i] == nullptr)
 		{
 			return false;
+		}
+
+		if (i == 0 && mCountCurrent == 1)
+		{
+			--mCountCurrent;
+			mSumWeight -= mPerson[i]->GetWeight();
+			delete mPerson[i];
+			mPerson[i] = nullptr;
+
+			return true;
 		}
 
 		--mCountCurrent;
@@ -90,6 +110,7 @@ namespace assignment2
 		for (cnt = i; cnt < mCountCurrent; cnt++)
 		{
 			mPerson[cnt] = mPerson[cnt + 1];
+			mPerson[cnt + 1] = nullptr;
 		}
 
 		return true;
@@ -119,6 +140,7 @@ namespace assignment2
 	{
 		mCountMax = 0;
 		mCountCurrent = 0;
+		mSumWeight = 0;
 	}
 
 	void Vehicle::InitializePassenger2()
@@ -144,6 +166,11 @@ namespace assignment2
 	}
 
 	void Vehicle::Set2(unsigned int i, const Person* ps)
+	{
+		mPerson[i] = ps;
+	}
+
+	void Vehicle::Set3(unsigned int i, const Person* ps)
 	{
 		mPerson[i] = new Person(ps);
 	}

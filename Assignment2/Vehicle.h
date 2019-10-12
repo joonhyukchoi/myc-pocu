@@ -25,6 +25,7 @@ namespace assignment2
 		void InitializePassenger2();
 		void Set(unsigned int max, unsigned int current, unsigned int sum);
 		void Set2(unsigned int i, const Person* ps);
+		void Set3(unsigned int i, const Person* ps);
 		bool operator==(const Vehicle& vc) const;
 		//Vehicle Vehicle::operator=(Vehicle& bp);
 

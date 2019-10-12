@@ -17,7 +17,7 @@ namespace assignment2
 
 		for (i = 0; i < GetPassengersCount(); i++)
 		{
-			Set2(i, bp.GetPassenger(i));
+			Set3(i, bp.GetPassenger(i));
 		}
 	}
 

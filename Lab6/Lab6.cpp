@@ -107,24 +107,27 @@ namespace lab6
 			if (arr[i] == max)
 			{
 				index = i;
-				return v[index];
 			}
 		}
+
+		return v[index];
 	}
 
 	void SortDescending(std::vector<int>& v)
 	{
+		int temp;
+
 		if (v.size() != 0)
 		{
-			int min = 0;
-
 			for (size_t i = 0; i < v.size(); i++)
 			{
 				for (size_t j = i; j < v.size(); j++)
 				{
 					if (v[i] <= v[j])
 					{
+						temp = v[i];
 						v[i] = v[j];
+						v[j] = temp;
 					}
 				}
 			}

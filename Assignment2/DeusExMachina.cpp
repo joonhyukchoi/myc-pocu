@@ -39,7 +39,7 @@ namespace assignment2
 			delete mVeh[cnt];
 		}
 
-		delete mInstance;
+		//delete mInstance;
 	}
 
 	void DeusExMachina::Travel() const

@@ -189,11 +189,6 @@ namespace assignment2
 			return false;
 		}
 
-		if (mCountCurrent == 0 && vc.mCountCurrent == 0)
-		{
-			return true;
-		}
-
 		for (i = 0; i < mCountCurrent; i++)
 		{
 			if (*mPerson[i] == *vc.mPerson[i])

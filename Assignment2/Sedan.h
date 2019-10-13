@@ -7,7 +7,7 @@ namespace assignment2
 {
 	class Trailer;
 
-	class Sedan : public Vehicle, public IDrivable, public Trailer
+	class Sedan : public Vehicle, public IDrivable
 	{
 	public:
 		Sedan();

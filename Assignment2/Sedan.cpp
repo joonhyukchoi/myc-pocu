@@ -5,16 +5,22 @@ namespace assignment2
 	Sedan::Sedan()
 		: Vehicle(4)
 		, mTr(nullptr)
-		, Trailer(0)
 	{
 	}
 
 	Sedan::Sedan(Sedan& bp)
 		: Vehicle(bp.GetMaxPassengersCount())
-		, Trailer(bp.GetSumWeight())
-		, mTr(bp.mTr)
 	{
 		unsigned int i;
+
+		if (bp.mTr != nullptr) 
+		{
+			mTr = new Trailer(*bp.mTr);
+		}
+		else
+		{
+			mTr = nullptr;
+		}
 
 		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
 
@@ -26,6 +32,7 @@ namespace assignment2
 
 	Sedan::~Sedan()
 	{
+		delete mTr;
 	}
 
 	bool Sedan::AddTrailer(const Trailer* trailer)
@@ -115,6 +122,16 @@ namespace assignment2
 
 		unsigned int i;
 
+		if (this->mTr != nullptr)
+		{
+			delete mTr;
+		}
+
+		if (bp.mTr != nullptr)
+		{
+			this->mTr = bp.mTr;
+		}
+		
 		InitializePassenger2();
 		Set(bp.GetMaxPassengersCount(), bp.GetPassengersCount(), bp.GetSumWeight());
 

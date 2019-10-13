@@ -91,6 +91,11 @@ namespace assignment2
 
 	Boat Boat::operator=(Boat& bp)
 	{
+		if (*this == bp)
+		{
+			return *this;
+		}
+
 		unsigned int i;
 
 		InitializePassenger2();

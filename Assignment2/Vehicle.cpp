@@ -127,6 +127,11 @@ namespace assignment2
 
 	const Person* Vehicle::GetPassenger(unsigned int i) const
 	{
+		if (i >= mCountCurrent)
+		{
+			return NULL;
+		}
+
 		return mPerson[i];
 	}
 

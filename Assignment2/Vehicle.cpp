@@ -87,7 +87,7 @@ namespace assignment2
 
 	bool Vehicle::RemovePassenger(unsigned int i)
 	{
-		if (i >= mCountCurrent || mPerson[i] == nullptr)
+		if (i >= mCountCurrent)
 		{
 			return false;
 		}
@@ -110,7 +110,6 @@ namespace assignment2
 		for (cnt = i; cnt < mCountCurrent; cnt++)
 		{
 			mPerson[cnt] = mPerson[cnt + 1];
-			mPerson[cnt + 1] = nullptr;
 		}
 
 		return true;

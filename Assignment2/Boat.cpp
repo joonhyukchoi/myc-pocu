@@ -67,6 +67,11 @@ namespace assignment2
 			bp.AddPassenger(plane.GetPassenger(i));
 		}
 
+		if (i == 0)
+		{
+			i = 1;
+		}
+
 		for (i = i - 1; i < sumCurrent; i++)
 		{
 			bp.AddPassenger(this->GetPassenger(j));

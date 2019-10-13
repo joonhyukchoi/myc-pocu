@@ -20,6 +20,5 @@ namespace assignment2
 		static unsigned int mCnt;
 		static unsigned int mTravel[10];
 		static unsigned int mTravelGo[10];
-		static bool mbFlag;
 	};
 }

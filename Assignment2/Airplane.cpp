@@ -77,15 +77,21 @@ namespace assignment2
 		unsigned int i;
 		unsigned int j;
 
+		i = 0;
 		j = 0;
 		sumCurrent = boat.GetPassengersCount() + this->GetPassengersCount();
 		sumMax = boat.GetMaxPassengersCount() + this->GetMaxPassengersCount();
 		
 		Boatplane bp(sumMax);
 		
-		for (i = 0; i < this->GetPassengersCount(); i++)
+		for (i; i < this->GetPassengersCount(); i++)
 		{
 			bp.AddPassenger(this->GetPassenger(i));
+		}
+		
+		if (i == 0)
+		{
+			i = 1;
 		}
 
 		for (i = i - 1; i < sumCurrent; i++)

@@ -1,5 +1,5 @@
 #include "DeusExMachina.h"
-//#include "iostream"
+#include "iostream"
 
 namespace assignment2
 {
@@ -8,7 +8,6 @@ namespace assignment2
 	unsigned int DeusExMachina::mCnt = 0;
 	unsigned int DeusExMachina::mTravel[10] = { 0 };
 	unsigned int DeusExMachina::mTravelGo[10] = { 0 };
-	bool DeusExMachina::mbFlag = false;
 
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
@@ -45,7 +44,6 @@ namespace assignment2
 	void DeusExMachina::Travel() const
 	{
 		unsigned int i;
-		mbFlag = true;
 		//std::cout << mCnt;
 		//std::cout << mCnt << std::endl;
 		for (i = 0; i < mCnt; i++)
@@ -118,6 +116,8 @@ namespace assignment2
 		if (mCnt < 10)
 		{
 			mVeh[mCnt] = vehicle;
+			mTravel[mCnt] = 0;
+			mTravelGo[mCnt] = 0;
 			++mCnt;
 
 			return true;
@@ -130,39 +130,37 @@ namespace assignment2
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)
 	{
+		if (i >= mCnt)
+		{
+			return false;
+		}
+
 		if (i == 0 && mCnt == 1)
 		{
 			delete mVeh[i];
 			mTravel[i] = 0;
 			mTravelGo[i] = 0;
 			--mCnt;
-			mbFlag = false;
 
 			return true;
 		}
 
-		if (i < mCnt)
+		unsigned int j;
+		--mCnt;
+		delete mVeh[i];
+
+		for (j = i; j < mCnt; j++)
 		{
-			unsigned int j;
-			--mCnt;
-			delete mVeh[i];
-
-			for (j = i; j < mCnt; j++)
-			{
-				mVeh[j] = mVeh[j + 1];
-				mTravel[j] = mTravel[j + 1];
-				mTravelGo[j] = mTravelGo[j + 1];
-			}
-
-			mTravel[mCnt] = 0;
-			mTravelGo[mCnt] = 0;
-
-			return true;
+			mVeh[j] = mVeh[j + 1];
+			mTravel[j] = mTravel[j + 1];
+			mTravelGo[j] = mTravelGo[j + 1];
 		}
-		else
-		{
-			return false;
-		}
+
+		mTravel[mCnt] = 0;
+		mTravelGo[mCnt] = 0;
+
+		return true;
+	
 	}
 
 	const Vehicle* DeusExMachina::GetFurthestTravelled() const
@@ -170,13 +168,29 @@ namespace assignment2
 		unsigned int max;
 		unsigned int i;
 		unsigned int num;
+		unsigned int nogo;
 
 		num = 0;
+		nogo = 0;
 		//std::cout << mbFlag << std::endl;
-		if (mCnt == 0 || mbFlag == false)
+		if (mCnt == 0)
 		{
 			return NULL;
 		}
+
+		for (i = 0; i < mCnt; i++)
+		{
+			if (mTravelGo[i] == 0)
+			{
+				++nogo;
+			}
+		}
+
+		if (nogo == mCnt)
+		{
+			return mVeh[0];
+		}
+
 		//std::cout << mbFlag << std::endl;
 		max = mTravelGo[0];
 

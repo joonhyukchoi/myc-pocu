@@ -109,23 +109,26 @@ int main()
 	Vehicle* demMotorcycle = new Motorcycle();
 	Vehicle* demSedan1 = new Sedan();
 	Vehicle* demSedan2 = new Sedan();
+	Vehicle* demSedan3 = new Sedan();
 	Trailer* demTrailer = new Trailer(10);
 	static_cast<Sedan*>(demSedan2)->AddTrailer(demTrailer);
 	Vehicle* demUBoat = new UBoat();
+	demSedan3 = demSedan2;
+	demSedan2 = demSedan2;
+	assert(demSedan3 == demSedan2);
+	//d->AddVehicle(demAirplain);
+	//d->AddVehicle(demBoat);
+	//d->AddVehicle(demBoatplain);
+	//d->AddVehicle(demMotorcycle);
+	//d->AddVehicle(demSedan1);
+	//d->AddVehicle(demSedan2);
+	//d->AddVehicle(demUBoat);
 
-	d->AddVehicle(demAirplain);
-	d->AddVehicle(demBoat);
-	d->AddVehicle(demBoatplain);
-	d->AddVehicle(demMotorcycle);
-	d->AddVehicle(demSedan1);
-	d->AddVehicle(demSedan2);
-	d->AddVehicle(demUBoat);
 
-
-	for (size_t i = 0; i < 10; i++)
-	{
-		d->Travel();
-	}
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	d->Travel();
+	//}
 
 	delete d;
 }

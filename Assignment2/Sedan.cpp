@@ -13,7 +13,7 @@ namespace assignment2
 	{
 		unsigned int i;
 
-		if (bp.mTr != nullptr) 
+		if (bp.mTr != nullptr)
 		{
 			mTr = new Trailer(*bp.mTr);
 		}
@@ -115,7 +115,7 @@ namespace assignment2
 
 	Sedan Sedan::operator=(Sedan& bp)
 	{
-		if (*this == bp)
+		if (*this == bp && this->mTr == bp.mTr)
 		{
 			return *this;
 		}

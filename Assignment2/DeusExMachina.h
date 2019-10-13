@@ -19,6 +19,6 @@ namespace assignment2
 		static Vehicle* mVeh[10];
 		static unsigned int mCnt;
 		static unsigned int mTravel[10];
-		static unsigned int mTravelGo[10];
+		static double mTravelGo[10];
 	};
 }

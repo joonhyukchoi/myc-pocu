@@ -1,5 +1,6 @@
 #include "DeusExMachina.h"
 //#include "iostream"
+#include "cmath"
 
 namespace assignment2
 {
@@ -7,8 +8,8 @@ namespace assignment2
 	Vehicle* DeusExMachina::mVeh[10] = { nullptr };
 	unsigned int DeusExMachina::mCnt = 0;
 	unsigned int DeusExMachina::mTravel[10] = { 0 };
-	unsigned int DeusExMachina::mTravelGo[10] = { 0 };
-
+	double DeusExMachina::mTravelGo[10] = { 0 };
+	
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
 		if (mInstance != nullptr)
@@ -48,55 +49,98 @@ namespace assignment2
 		//std::cout << mCnt << std::endl;
 		for (i = 0; i < mCnt; i++)
 		{
-			mTravel[i]++;
+			++mTravel[i];
+
 			switch (mVeh[i]->GetName())
 			{
 			case AIRPLANE:
+				if (mTravel[i] == 5)
+				{
+					mTravel[i] = 1;
+				}
+
 				if ((mTravel[i] - 1) % 4 == 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case BOAT:
+				if (mTravel[i] == 4)
+				{
+					mTravel[i] = 1;
+				}
+
 				if (mTravel[i] % 3 != 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case BOATPLANE:
+				if (mTravel[i] == 5)
+				{
+					mTravel[i] = 1;
+				}
+
 				if ((mTravel[i] - 1) % 4 == 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case UBOAT:
+				if (mTravel[i] == 7)
+				{
+					mTravel[i] = 1;
+				}
+
 				if ((mTravel[i] - 1) % 6 == 0 || (mTravel[i] - 2) % 6 == 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case MOTORCYCLE:
+				if (mTravel[i] == 7)
+				{
+					mTravel[i] = 1;
+				}
+
 				if (mTravel[i] % 6 != 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case SEDAN:
+				if (mTravel[i] == 7)
+				{
+					mTravel[i] = 1;
+				}
+
 				if (mTravel[i] % 6 != 0)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
 			case SEDANT:
-				if (mTravel[i] % 6 != 0 && mTravel[i] % 7 != 0)
+				if (mTravel[i] == 8)
 				{
-					mTravelGo[i] += mVeh[i]->GetMaxSpeed();
+					mTravel[i] = 1;
+				}
+
+				if (mTravel[i] % 6 != 0 && mTravel[i] % 7 != 0) 
+				{
+					mTravelGo[i] += static_cast<double>(mVeh[i]->GetMaxSpeed()) / INT_MAX;
+					//mTravelGo[i] = log(mTravelGo[i]);
 				}
 
 				break;
@@ -165,7 +209,7 @@ namespace assignment2
 
 	const Vehicle* DeusExMachina::GetFurthestTravelled() const
 	{
-		unsigned int max;
+		double max;
 		unsigned int i;
 		unsigned int num;
 		unsigned int nogo;
@@ -180,7 +224,7 @@ namespace assignment2
 
 		for (i = 0; i < mCnt; i++)
 		{
-			if (mTravelGo[i] == 0)
+			if (mTravel[i] == 0)
 			{
 				++nogo;
 			}

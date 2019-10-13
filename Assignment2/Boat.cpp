@@ -55,10 +55,8 @@ namespace assignment2
 		unsigned int sumMax;
 		unsigned int i;
 		unsigned int j;
-		unsigned int k;
 		
 		j = 0;
-		k = 0;
 		sumCurrent = plane.GetPassengersCount() + this->GetPassengersCount();
 		sumMax = plane.GetMaxPassengersCount() + this->GetMaxPassengersCount();
 
@@ -67,10 +65,9 @@ namespace assignment2
 		for (i = 0; i < plane.GetPassengersCount(); i++)
 		{ 
 			bp.AddPassenger(plane.GetPassenger(i));
-			k = i;
 		}
 
-		for (i = k - 1; i < sumCurrent; i++)
+		for (i = i - 1; i < sumCurrent; i++)
 		{
 			bp.AddPassenger(this->GetPassenger(j));
 			j++;
@@ -96,7 +93,7 @@ namespace assignment2
 
 		for (i = 0; i < GetPassengersCount(); i++)
 		{
-			Set2(i, bp.GetPassenger(i));
+			Set3(i, bp.GetPassenger(i));
 		}
 
 		return *this;

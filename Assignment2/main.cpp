@@ -63,33 +63,39 @@ int main()
 
 		dockingTest1.AddPassenger(new Person("jhk", 1));
 		dockingTest2.AddPassenger(new Person("hg", 1));
-		dockingTest1.AddPassenger(new Person("jhk1", 2));
+		/*dockingTest1.AddPassenger(new Person("jhk1", 2));
 		dockingTest2.AddPassenger(new Person("hg1", 2));
 		dockingTest1.AddPassenger(new Person("jhk2", 3));
 		dockingTest2.AddPassenger(new Person("hg2", 3));
 		dockingTest1.AddPassenger(new Person("jhk3", 4));
 		dockingTest2.AddPassenger(new Person("hg3", 4));
 		dockingTest1.AddPassenger(new Person("jhk4", 5));
-		dockingTest2.AddPassenger(new Person("hg4", 5));
+		dockingTest2.AddPassenger(new Person("hg4", 5));*/
 	
 
-	const Person* comp1 = dockingTest1.GetPassenger(0);
-	cout << dockingTest1.GetPassenger(0)->GetName() << endl;
-	Boatplane bp1 = dockingTest1 + dockingTest2;
-	Boatplane bp2 = dockingTest2 + dockingTest1;
+	//const Person* comp1 = dockingTest1.GetPassenger(0);
+	//cout << dockingTest1.GetPassenger(0)->GetName() << endl;
+	//Boatplane bp1 = dockingTest1 + dockingTest2;
+	Boatplane bp1 = dockingTest2 + dockingTest1;
+	//bp1.RemovePassenger(0);
+	//const Person* comp2 = bp1.GetPassenger(0);
 
-	const Person* comp2 = bp1.GetPassenger(0);
-
-	cout << dockingTest2.GetSumWeight() << endl;
-	/*cout << comp2 << endl;
+	//cout << dockingTest2.GetSumWeight() << endl;
+	//cout << comp2 << endl;
 
 	cout << bp1.GetMaxPassengersCount() << endl;
 	cout << bp1.GetPassengersCount() << endl;
+	cout << bp1.GetSumWeight() << endl;
 	cout << bp1.GetPassenger(0)->GetName() << endl;
 	cout << bp1.GetPassenger(1)->GetName() << endl;
-	cout << bp1.GetPassenger(2)->GetName() << endl;
-	cout << bp1.GetPassenger(3)->GetName() << endl;
-	cout << bp1.GetPassenger(4)->GetName() << endl;*/
+	//cout << bp1.GetPassenger(2)->GetName() << endl;
+	//cout << bp1.GetPassenger(3)->GetName() << endl;
+	//cout << bp1.GetPassenger(4)->GetName() << endl;
+	//cout << bp1.GetPassenger(5)->GetName() << endl;
+	//cout << bp1.GetPassenger(6)->GetName() << endl;
+	//cout << bp1.GetPassenger(7)->GetName() << endl;
+	//cout << bp1.GetPassenger(8)->GetName() << endl;
+	//cout << bp1.GetPassenger(9)->GetName() << endl;
 
 	//cout << dockingTest1.GetPassenger(0)->GetName() << endl;
 	/*assert(comp1 == comp2);

@@ -76,23 +76,19 @@ namespace assignment2
 		unsigned int sumMax;
 		unsigned int i;
 		unsigned int j;
-		unsigned int k;
 
 		j = 0;
-		k = 0;
 		sumCurrent = boat.GetPassengersCount() + this->GetPassengersCount();
 		sumMax = boat.GetMaxPassengersCount() + this->GetMaxPassengersCount();
 		
 		Boatplane bp(sumMax);
-		//std::cout << this->GetPassenger(0) << std::endl;
-		//bp.AddPassenger2(this->GetPassenger(0));
+		
 		for (i = 0; i < this->GetPassengersCount(); i++)
 		{
 			bp.AddPassenger(this->GetPassenger(i));
-			k = i;
 		}
 
-		for (i = k - 1; i < sumCurrent; i++)
+		for (i = i - 1; i < sumCurrent; i++)
 		{
 			bp.AddPassenger(boat.GetPassenger(j));
 			j++;
@@ -123,7 +119,7 @@ namespace assignment2
 
 		for (i = 0; i < GetPassengersCount(); i++)
 		{
-			Set2(i, bp.GetPassenger(i));
+			Set3(i, bp.GetPassenger(i));
 		}
 
 		return *this;

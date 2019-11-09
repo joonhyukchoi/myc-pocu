@@ -1,6 +1,6 @@
 #include <cassert>
 #include <iostream>
-
+#include <iomanip>
 #include "SmartStack.h"
 #include "SmartQueue.h"
 #include "QueueStack.h"
@@ -22,13 +22,14 @@ int main()
 	ss.Push(1.1);
 	ss.Push(-12.4);
 	ss.Push(9.2);
-	double a = 3.4+ 1.2+ 4.6+ 3.32+ 10.2+ 1.1 - 5.9 + 1.1 + -12.4 + 9.2;
+	double a = 9.2 -12.4 +1.1 -5.9 +1.1 +10.2 +3.32 +4.6 +1.2 +3.4;
+
 	assert(ss.GetCount() == 10U);
 	assert(ss.Peek() == 9.2);
 	assert(ss.GetMax() == 10.2);
 	assert(ss.GetMin() == -12.4);
-	cout << ss.GetSum() << "sum" << a << endl;
-	//assert(a == 15.82);
+	cout << fixed << setprecision(20) << ss.GetSum() << "sum" << 15.82 << endl;
+	assert(ss.GetSum() == 15.82);
 	assert(ss.GetAverage() == 1.582);
 	assert(ss.GetVariance() == 39.983);
 	assert(ss.GetStandardDeviation() == 6.323);

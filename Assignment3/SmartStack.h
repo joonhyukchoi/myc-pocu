@@ -2,7 +2,6 @@
 #include <stack>
 #include <limits>
 #include <cmath>
-#include <iostream>
 
 namespace assignment3
 {
@@ -42,6 +41,7 @@ namespace assignment3
 	template<typename T>
 	void SmartStack<T>::Push(T num)
 	{
+		//double num2 = num 
 		if (!mNum.empty())
 		{
 			if (num > mMax.top())
@@ -69,9 +69,10 @@ namespace assignment3
 		{
 			mMax.push(num);
 			mMin.push(num);
-			mSum += num;
-			mSum2 += num * num;
+			mSum = num;
+			mSum2 = num * num;
 		}
+
 		mNum.push(num);
 	}
 
@@ -133,7 +134,11 @@ namespace assignment3
 	template<typename T>
 	T SmartStack<T>::GetSum() const
 	{
-		return mSum;
+		T sum;
+
+		sum = std::round(mSum * 10000) / 10000;
+
+		return sum;
 	}
 
 	template<typename T>

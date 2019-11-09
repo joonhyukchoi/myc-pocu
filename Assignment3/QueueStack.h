@@ -3,7 +3,6 @@
 #include <limits>
 #include <stack>
 #include <cmath>
-#include <iostream>
 
 namespace assignment3
 {

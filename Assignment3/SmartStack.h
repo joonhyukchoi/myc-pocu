@@ -11,7 +11,6 @@ namespace assignment3
 	{
 	public:
 		SmartStack();
-		SmartStack<T> operator=(const SmartStack<T>& ss);
 		void Push(T num);
 		T Pop();
 		T Peek() const;
@@ -38,16 +37,6 @@ namespace assignment3
 		: mSum(0)
 		, mSum2(0)
 	{
-	}
-
-	template<typename T>
-	SmartStack<T> SmartStack<T>::operator=(const SmartStack<T>& ss)
-	{
-		mSum = ss.mSum;
-		mSum2 = ss.mSum2;
-		mNum = ss.mNum;
-		mMax = ss.mMax;
-		mMin = ss.mMin;
 	}
 
 	template<typename T>

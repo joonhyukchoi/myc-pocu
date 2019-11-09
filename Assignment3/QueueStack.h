@@ -14,7 +14,6 @@ namespace assignment3
 		QueueStack(unsigned int init);
 		~QueueStack();
 		QueueStack(const QueueStack<T>& ss);
-		QueueStack<T> operator=(const QueueStack<T>& ss);
 		void Enqueue(T num);
 		T Peek();
 		T Dequeue();
@@ -61,17 +60,6 @@ namespace assignment3
 		, mStackCnt(ss.mStackCnt)
 		, mNum(ss.mNum)
 	{
-	}
-
-	template<typename T>
-	QueueStack<T> QueueStack<T>::operator=(const QueueStack<T>& ss)
-	{
-		mSum = ss.mSum;
-		mSum2 = ss.mSum2;
-		mNum = ss.mNum;
-		mSize = ss.mSize;
-		mCnt = ss.mCnt;
-		mStackCnt = ss.mStackCnt;
 	}
 
 	template<typename T>

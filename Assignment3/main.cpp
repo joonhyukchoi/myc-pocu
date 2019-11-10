@@ -46,7 +46,11 @@ int main()
 	assert(ss.GetAverage() == 2.398);
 	assert(ss.GetVariance() == 17.714);
 	assert(ss.GetStandardDeviation() == 4.209);
+	SmartQueue<double> q;
+	q.Enqueue(6);
 
+	assert(q.GetVariance() == 0.000);
+	assert(q.GetStandardDeviation() == 0.000);
 	SmartQueue<float> sq;
 
 	sq.Enqueue(3.4999f);

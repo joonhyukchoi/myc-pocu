@@ -27,7 +27,7 @@ namespace assignment3
 		std::stack<T> mMax;
 		std::stack<T> mMin;
 		T mSum;
-		T mSum2;
+		double mSum2;
 		unsigned int mCnt;
 	};
 
@@ -65,14 +65,14 @@ namespace assignment3
 			}
 
 			mSum += num;
-			mSum2 += num * num;
+			mSum2 += static_cast<double>(num) * static_cast<double>(num);
 		}
 		else
 		{
 			mMax.push(num);
 			mMin.push(num);
 			mSum = num;
-			mSum2 = num * num;
+			mSum2 = static_cast<double>(num) * static_cast<double>(num);
 		}
 
 		mNum.push(num);
@@ -85,7 +85,7 @@ namespace assignment3
 		T tp = mNum.top();
 
 		mSum -= mNum.top();
-		mSum2 -= mNum.top() * mNum.top();
+		mSum2 -= static_cast<double>(mNum.top()) * static_cast<double>(mNum.top());
 		mNum.pop();
 		mMax.pop();
 		mMin.pop();
@@ -149,8 +149,8 @@ namespace assignment3
 
 		avr = static_cast<double>(mSum) / mCnt;
 		//avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
-		var = std::round(var * 1000) / 1000;
+		var = mSum2 / mCnt - avr * avr;
+		var = static_cast<double>(std::round(var * 1000)) / 1000;
 		return var;
 	}
 
@@ -163,9 +163,9 @@ namespace assignment3
 
 		avr = static_cast<double>(mSum) / mCnt;
 		//avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
+		var = mSum2 / mCnt - avr * avr;
 		//var = std::round(var * 10000) / 10000;
-		var2 = std::round(std::sqrt(var) * 1000) / 1000;
+		var2 = static_cast<double>(std::round(std::sqrt(var) * 1000)) / 1000;
 		return var2;
 	}
 

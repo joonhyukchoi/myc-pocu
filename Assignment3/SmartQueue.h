@@ -155,7 +155,7 @@ namespace assignment3
 		avr = static_cast<double>(mSum) / mCnt;
 		//avr = std::round(avr * 10000) / 10000;
 		var = static_cast<double>(mSum2) / mCnt - avr * avr;
-		var = std::round(var * 1000) / 1000;
+		var = static_cast<double>(std::round(var * 1000)) / 1000;
 		return var;
 	}
 
@@ -170,7 +170,7 @@ namespace assignment3
 		//avr = std::round(avr * 10000) / 10000;
 		var = static_cast<double>(mSum2) / mCnt - avr * avr;
 		//var = std::round(var * 10000) / 10000;
-		var2 = std::round(std::sqrt(var) * 1000) / 1000;
+		var2 = static_cast<double>(std::round(std::sqrt(var) * 1000)) / 1000;
 		return var2;
 	}
 

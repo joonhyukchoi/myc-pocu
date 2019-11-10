@@ -12,7 +12,7 @@ namespace assignment3
 	public:
 		QueueStack(unsigned int init);
 		~QueueStack();
-		QueueStack(const QueueStack<T>& ss);
+		//QueueStack(const QueueStack<T>& ss);
 		void Enqueue(T num);
 		T Peek();
 		T Dequeue();
@@ -50,16 +50,16 @@ namespace assignment3
 	{
 	}
 
-	template<typename T>
-	QueueStack<T>::QueueStack(const QueueStack<T>& ss)
-		: mSum(ss.mSum)
-		, mSum2(ss.mSum2)
-		, mSize(ss.mSize)
-		, mCnt(ss.mCnt)
-		, mStackCnt(ss.mStackCnt)
-		, mNum(ss.mNum)
-	{
-	}
+	//template<typename T>
+	//QueueStack<T>::QueueStack(const QueueStack<T>& ss)
+	//	: mSum(ss.mSum)
+	//	, mSum2(ss.mSum2)
+	//	, mSize(ss.mSize)
+	//	, mCnt(ss.mCnt)
+	//	, mStackCnt(ss.mStackCnt)
+	//	, mNum(ss.mNum)
+	//{
+	//}
 
 	template<typename T>
 	void QueueStack<T>::Enqueue(T num)
@@ -130,7 +130,6 @@ namespace assignment3
 
 			while (!copy.empty())
 			{
-				std::cout << "**********" << max << std::endl;
 				while (!copy.front().empty())
 				{
 					if (copy.front().top() > max)
@@ -186,7 +185,7 @@ namespace assignment3
 	{
 		double avr;
 
-		avr = mSum / mCnt;
+		avr = static_cast<double>(mSum) / mCnt;
 		avr = std::round(avr * 1000) / 1000;
 		return avr;
 	}
@@ -203,9 +202,9 @@ namespace assignment3
 		double avr;
 		double var;
 
-		avr = mSum / mCnt;
+		avr = static_cast<double>(mSum) / mCnt;
 		avr = std::round(avr * 10000) / 10000;
-		var = mSum2 / mCnt - avr * avr;
+		var = static_cast<double>(mSum2) / mCnt - avr * avr;
 		var = std::round(var * 1000) / 1000;
 		return var;
 	}
@@ -217,9 +216,9 @@ namespace assignment3
 		double var;
 		double var2;
 
-		avr = mSum / mCnt;
+		avr = static_cast<double>(mSum) / mCnt;
 		avr = std::round(avr * 10000) / 10000;
-		var = mSum2 / mCnt - avr * avr;
+		var = static_cast<double>(mSum2) / mCnt - avr * avr;
 		var = std::round(var * 10000) / 10000;
 		var2 = std::round(std::sqrt(var) * 1000) / 1000;
 		return var2;

@@ -126,7 +126,7 @@ namespace assignment3
 	{
 		double avr;
 
-		avr = mSum / mNum.size();
+		avr = static_cast<double>(mSum) / mNum.size();
 		avr = std::round(avr * 1000) / 1000;
 		return avr;
 	}
@@ -134,11 +134,7 @@ namespace assignment3
 	template<typename T>
 	T SmartStack<T>::GetSum() const
 	{
-		T sum;
-
-		sum = std::round(mSum * 10000) / 10000;
-
-		return sum;
+		return mSum;
 	}
 
 	template<typename T>
@@ -147,9 +143,9 @@ namespace assignment3
 		double avr;
 		double var;
 
-		avr = mSum / mNum.size();
+		avr = static_cast<double>(mSum) / mNum.size();
 		avr = std::round(avr * 10000) / 10000;
-		var = mSum2 / mNum.size() - avr * avr;
+		var = static_cast<double>(mSum2) / mNum.size() - avr * avr;
 		var = std::round(var * 1000) / 1000;
 		return var;
 	}
@@ -161,9 +157,9 @@ namespace assignment3
 		double var;
 		double var2;
 
-		avr = mSum / mNum.size();
+		avr = static_cast<double>(mSum) / mNum.size();
 		avr = std::round(avr * 10000) / 10000;
-		var = mSum2 / mNum.size() - avr * avr;
+		var = static_cast<double>(mSum2) / mNum.size() - avr * avr;
 		var = std::round(var * 10000) / 10000;
 		var2 = std::round(std::sqrt(var) * 1000) / 1000;
 		return var2;

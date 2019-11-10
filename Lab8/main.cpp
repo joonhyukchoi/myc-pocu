@@ -131,5 +131,20 @@ int main()
 	assert(boolVector2.GetIndex(true) == -1);
 	std::cout << "Test FixedBoolVector GetIndex(): PASS" << std::endl;
 
+	FixedVector<bool, 33> v;
+	for (int i = 0; i < 33; i++)
+		v.Add(i % 2);
+	for (int i = 0; i < 33; i++)
+		std::cout << v[i] << "  ";
+	std::cout << std::endl;
+
+	v.Remove(1);
+	v.Remove(1);
+	v.Remove(1);
+
+	for (int i = 0; i < 30; i++)
+		std::cout << v[i] << "  ";
+	std::cout << std::endl;
+
 	return 0;
 }

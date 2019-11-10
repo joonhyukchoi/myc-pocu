@@ -97,12 +97,22 @@ namespace lab8
 		num1 = (~num1) & mArray[i / 32];
 		num1 = num1 >> 1;
 		mArray[i / 32] = num1 + num2;
-		--mSize;
 
 		for (size_t k = (i / 32) + 1; k <= N / 32; ++k)
 		{
+			if (Get(k * 32))
+			{
+				mArray[k - 1] |= (1 << mSize++);
+			}
+			else
+			{
+				mArray[k - 1] &= ~(1 << mSize++);
+			}
+
 			mArray[k] = mArray[k] >> 1;
 		}
+
+		--mSize;
 
 		return true;
 	}

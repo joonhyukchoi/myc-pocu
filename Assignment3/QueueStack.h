@@ -11,8 +11,6 @@ namespace assignment3
 	{
 	public:
 		QueueStack(unsigned int init);
-		~QueueStack();
-		//QueueStack(const QueueStack<T>& ss);
 		void Enqueue(T num);
 		T Peek();
 		T Dequeue();
@@ -20,15 +18,12 @@ namespace assignment3
 		T GetMin() const;
 		double GetAverage() const;
 		T GetSum() const;
-		double GetVariance() const;
-		double GetStandardDeviation() const;
 		unsigned int GetCount() const;
 		unsigned int GetStackCount() const;
 
 	private:
 		std::queue<std::stack<T>> mNum;
 		T mSum;
-		T mSum2;
 		unsigned int mSize;
 		unsigned int mCnt;
 		unsigned int mStackCnt;
@@ -38,7 +33,6 @@ namespace assignment3
 	template<typename T>
 	QueueStack<T>::QueueStack(unsigned int init)
 		: mSum(0)
-		, mSum2(0)
 		, mSize(init)
 		, mCnt(0)
 		, mStackCnt(0)
@@ -46,26 +40,9 @@ namespace assignment3
 	}
 
 	template<typename T>
-	QueueStack<T>::~QueueStack()
-	{
-	}
-
-	//template<typename T>
-	//QueueStack<T>::QueueStack(const QueueStack<T>& ss)
-	//	: mSum(ss.mSum)
-	//	, mSum2(ss.mSum2)
-	//	, mSize(ss.mSize)
-	//	, mCnt(ss.mCnt)
-	//	, mStackCnt(ss.mStackCnt)
-	//	, mNum(ss.mNum)
-	//{
-	//}
-
-	template<typename T>
 	void QueueStack<T>::Enqueue(T num)
 	{
 		mSum += num;
-		mSum2 += num * num;
 
 		if (mNum.empty())
 		{
@@ -102,7 +79,6 @@ namespace assignment3
 		T num = mNum.front().top();
 		mNum.front().pop();
 		mSum -= num;
-		mSum2 -= num * num;
 		--mCnt;
 
 		if (mNum.front().empty())
@@ -194,34 +170,6 @@ namespace assignment3
 	T QueueStack<T>::GetSum() const
 	{
 		return mSum;
-	}
-
-	template<typename T>
-	double QueueStack<T>::GetVariance() const
-	{
-		double avr;
-		double var;
-
-		avr = static_cast<double>(mSum) / mCnt;
-		avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
-		var = std::round(var * 1000) / 1000;
-		return var;
-	}
-
-	template<typename T>
-	double QueueStack<T>::GetStandardDeviation() const
-	{
-		double avr;
-		double var;
-		double var2;
-
-		avr = static_cast<double>(mSum) / mCnt;
-		avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
-		var = std::round(var * 10000) / 10000;
-		var2 = std::round(std::sqrt(var) * 1000) / 1000;
-		return var2;
 	}
 
 	template<typename T>

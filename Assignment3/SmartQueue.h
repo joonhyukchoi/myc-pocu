@@ -26,7 +26,7 @@ namespace assignment3
 	private:
 		std::queue<T> mNum;
 		T mSum;
-		T mSum2;
+		double mSum2;
 		unsigned int mCnt;
 	};
 
@@ -51,7 +51,7 @@ namespace assignment3
 	void SmartQueue<T>::Enqueue(T num)
 	{
 		mSum += num;
-		mSum2 += num * num;
+		mSum2 += static_cast<double>(num) * static_cast<double>(num);
 		mNum.push(num);
 		++mCnt;
 	}
@@ -67,7 +67,7 @@ namespace assignment3
 	{
 		T value = mNum.front();
 		mSum -= mNum.front();
-		mSum2 -= mNum.front() * mNum.front();
+		mSum2 -= static_cast<double>(mNum.front()) * static_cast<double>(mNum.front());
 		mNum.pop();
 		--mCnt;
 
@@ -154,7 +154,7 @@ namespace assignment3
 
 		avr = static_cast<double>(mSum) / mCnt;
 		//avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
+		var = mSum2 / mCnt - avr * avr;
 		var = static_cast<double>(std::round(var * 1000)) / 1000;
 		return var;
 	}
@@ -168,7 +168,7 @@ namespace assignment3
 
 		avr = static_cast<double>(mSum) / mCnt;
 		//avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mCnt - avr * avr;
+		var = mSum2 / mCnt - avr * avr;
 		//var = std::round(var * 10000) / 10000;
 		var2 = static_cast<double>(std::round(std::sqrt(var) * 1000)) / 1000;
 		return var2;

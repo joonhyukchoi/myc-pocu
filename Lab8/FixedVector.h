@@ -1,5 +1,5 @@
 #pragma once
-
+ 
 namespace lab8
 {
 	template<typename T, size_t N>
@@ -9,7 +9,7 @@ namespace lab8
 		FixedVector();
 
 		bool Add(const T& t);
-		bool Remove(const T t);
+		bool Remove(const T& t);
 		T Get(unsigned int num) const;
 		T& operator[](unsigned int num);
 		int GetIndex(const T& t) const;
@@ -41,32 +41,31 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	bool FixedVector<T, N>::Remove(const T t)
+	bool FixedVector<T, N>::Remove(const T& t)
 	{
-		unsigned int flag = 0;
+		bool bFlag = false;
 
 		for (unsigned int i = 0; i < mSize; ++i)
 		{
 			if (mArray[i] == t)
 			{
-				flag = 1;
+				bFlag = true;
 			}
 
-			if (flag == 1)
+			if (bFlag)
 			{
 				mArray[i] = mArray[i + 1];
 			}
 		}
 
-		if (flag == 0)
-		{
-			return false;
-		}
-
-		if (flag == 1)
+		if (bFlag)
 		{
 			--mSize;
 			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

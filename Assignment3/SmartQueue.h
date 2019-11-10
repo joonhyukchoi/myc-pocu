@@ -27,6 +27,7 @@ namespace assignment3
 		std::queue<T> mNum;
 		T mSum;
 		T mSum2;
+		unsigned int mCnt;
 	};
 
 	//template<typename T>
@@ -42,6 +43,7 @@ namespace assignment3
 	SmartQueue<T>::SmartQueue()
 		: mSum(0)
 		, mSum2(0)
+		, mCnt(0)
 	{
 	}
 
@@ -51,6 +53,7 @@ namespace assignment3
 		mSum += num;
 		mSum2 += num * num;
 		mNum.push(num);
+		++mCnt;
 	}
 
 	template<typename T>
@@ -66,6 +69,7 @@ namespace assignment3
 		mSum -= mNum.front();
 		mSum2 -= mNum.front() * mNum.front();
 		mNum.pop();
+		--mCnt;
 
 		return value;
 	}
@@ -131,7 +135,7 @@ namespace assignment3
 	{
 		double avr;
 
-		avr = static_cast<double>(mSum) / mNum.size();
+		avr = static_cast<double>(mSum) / mCnt;
 		avr = std::round(avr * 1000) / 1000;
 		return avr;
 	}
@@ -148,9 +152,9 @@ namespace assignment3
 		double avr;
 		double var;
 
-		avr = static_cast<double>(mSum) / mNum.size();
-		avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mNum.size() - avr * avr;
+		avr = static_cast<double>(mSum) / mCnt;
+		//avr = std::round(avr * 10000) / 10000;
+		var = static_cast<double>(mSum2) / mCnt - avr * avr;
 		var = std::round(var * 1000) / 1000;
 		return var;
 	}
@@ -162,10 +166,10 @@ namespace assignment3
 		double var;
 		double var2;
 
-		avr = static_cast<double>(mSum) / mNum.size();
-		avr = std::round(avr * 10000) / 10000;
-		var = static_cast<double>(mSum2) / mNum.size() - avr * avr;
-		var = std::round(var * 10000) / 10000;
+		avr = static_cast<double>(mSum) / mCnt;
+		//avr = std::round(avr * 10000) / 10000;
+		var = static_cast<double>(mSum2) / mCnt - avr * avr;
+		//var = std::round(var * 10000) / 10000;
 		var2 = std::round(std::sqrt(var) * 1000) / 1000;
 		return var2;
 	}
@@ -173,6 +177,6 @@ namespace assignment3
 	template<typename T>
 	unsigned int SmartQueue<T>::GetCount() const
 	{
-		return mNum.size();
+		return mCnt;
 	}
 }

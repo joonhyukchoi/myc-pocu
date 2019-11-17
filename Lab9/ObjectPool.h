@@ -78,7 +78,6 @@ namespace lab9
 		}
 	}
 	
-		
 	template<typename T>
 	const size_t ObjectPool<T>::GetFreeObjectCount() const
 	{

@@ -33,7 +33,7 @@ namespace lab11
 	//	mArray2 = new T[mLength];
 		for (unsigned int i = 0; i < mLength; i++)
 		{
-			mArray[i] = static_cast<T>(0);
+			mArray[i] = {};
 		//	mArray2[i] = 0;
 		}
 	//	std::cout << mArray[1];

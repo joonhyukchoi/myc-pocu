@@ -77,26 +77,26 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Search(const T& data)
 	{
-		auto temp = mRoot;
-		std::shared_ptr<TreeNode<T>> before = nullptr;
+		//auto temp = mRoot;
+		//std::shared_ptr<TreeNode<T>> before = nullptr;
 
-		while (temp != nullptr)
-		{
-			if (*(temp->Data) == data)
-			{
-				return true;
-			}
-			else if (*(temp->Data) < data)
-			{
-				before = temp;
-				temp = temp->Right;
-			}
-			else if (*(temp->Data) > data)
-			{
-				before = temp;
-				temp = temp->Left;
-			}
-		}
+		//while (temp != nullptr)
+		//{
+		//	if (*(temp->Data) == data)
+		//	{
+		//		return true;
+		//	}
+		//	else if (*(temp->Data) < data)
+		//	{
+		//		before = temp;
+		//		temp = temp->Right;
+		//	}
+		//	else if (*(temp->Data) > data)
+		//	{
+		//		before = temp;
+		//		temp = temp->Left;
+		//	}
+		//}
 
 		return false;
 	}

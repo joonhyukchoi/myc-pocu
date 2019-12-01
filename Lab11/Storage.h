@@ -20,7 +20,7 @@ namespace lab11
 		unsigned int GetSize() const;
 		
 	private:
-		T* mArray;
+		std::unique_ptr<T[]> mArray;
 		unsigned int mLength;
 	};
 
@@ -28,14 +28,19 @@ namespace lab11
 	Storage<T>::Storage(unsigned int length)
 		: mLength(length)
 	{
-		mArray = new T[mLength];
+		mArray = std::make_unique<T[]>(mLength);
+
+		for (unsigned int i = 0; i < mLength; i++)
+		{
+			mArray[i] = 0;
+		}
 	}
 
 	template<typename T>
 	Storage<T>::Storage(unsigned int length, const T& initialValue)
 		: mLength(length)
 	{
-		mArray = new T[mLength];
+		mArray = std::make_unique<T[]>(mLength);
 		
 		for (unsigned int i = 0; i < mLength; i++)
 		{
@@ -47,7 +52,7 @@ namespace lab11
 	Storage<T>::Storage(Storage& s)
 		: mLength(s.mLength)
 	{
-		mArray = new T[mLength];
+		mArray = std::make_unique<T[]>(mLength);
 
 		for (unsigned int i = 0; i < mLength; i++)
 		{
@@ -59,7 +64,7 @@ namespace lab11
 	Storage<T>::Storage(Storage&& s)
 		: mLength(s.mLength)
 	{
-		mArray = s.mArray;
+		mArray = std::move(s.mArray);
 	}
 
 	template<typename T>
@@ -83,13 +88,12 @@ namespace lab11
 	{
 		if (this != &s)
 		{
-			delete[] mArray;
+			delete mArray;
 
 			mLength = s.mLength;
-			mArray = s.mArray;
+			mArray = std::move(s.mArray);
 
 			s.mLength = 0;
-			s.mArray = nullptr;
 		}
 
 		return *this;
@@ -109,7 +113,9 @@ namespace lab11
 	template<typename T>
 	const std::unique_ptr<T[]>& Storage<T>::GetData() const
 	{
-		std::unique_ptr<T[]> temp = std::make_unique<T[]>(std::move(mArray));
+		std::unique_ptr<T[]> temp = std::make_unique<T[]>(mLength);
+		temp(mArray.get());
+
 		return std::move(temp);
 	}
 

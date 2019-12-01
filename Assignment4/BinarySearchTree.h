@@ -224,11 +224,29 @@ namespace assignment4
 
 					if (ttemp != ttemp2)
 					{
-						temp->Left = ttemp->Left;
-						temp->Right = ttemp->Right;
-						ttemp->Left->Parent = temp;
-						ttemp->Right->Parent = temp;
-						ttemp2->Left = nullptr;
+						if (temp->Right == nullptr)
+						{
+							temp->Left = ttemp->Left;
+							temp->Right = ttemp->Right;
+							ttemp->Left->Parent = temp;
+							ttemp->Right->Parent = temp;
+							//ttemp2->Left = nullptr;
+						}
+						else
+						{
+							auto r = temp->Right;
+							
+							while (r->Right != nullptr)
+							{
+								r = r->Right;
+							}
+
+							temp->Left = ttemp->Left;
+							ttemp->Left->Parent = temp;
+							r->Right = ttemp2;
+							ttemp2->Parent = r;
+							ttemp->Right = nullptr;
+						}
 					}
 					else
 					{

@@ -21,7 +21,6 @@ namespace lab11
 		
 	private:
 		std::unique_ptr<T[]> mArray;
-		//T* mArray2;
 		unsigned int mLength;
 	};
 
@@ -30,13 +29,11 @@ namespace lab11
 		: mLength(length)
 	{
 		mArray = std::make_unique<T[]>(mLength);
-	//	mArray2 = new T[mLength];
+
 		for (unsigned int i = 0; i < mLength; i++)
 		{
 			mArray[i] = {};
-		//	mArray2[i] = 0;
 		}
-	//	std::cout << mArray[1];
 	}
 
 	template<typename T>
@@ -44,11 +41,10 @@ namespace lab11
 		: mLength(length)
 	{
 		mArray = std::make_unique<T[]>(mLength);
-	//	mArray2 = new T[mLength];
+
 		for (unsigned int i = 0; i < mLength; i++)
 		{
 			mArray[i] = initialValue;
-		//	mArray2[i] = 0;
 		}
 	}
 
@@ -111,8 +107,11 @@ namespace lab11
 		{
 			return false;
 		}
-		
-		mArray[index] = data;
+		else
+		{
+			mArray[index] = data;
+			return true;
+		}
 	}
 
 	template<typename T>

@@ -12,26 +12,11 @@ void Test_Traverse();
 
 int main()
 {
-	//Test_Insert_GetRoot();
-	//Test_Search();
-	//Test_Delete();
-	//Test_Traverse();
+	Test_Insert_GetRoot();
+	Test_Search();
+	Test_Delete();
+	Test_Traverse();
 
-	BinarySearchTree<int> tree;
-	int arr[10] = { 10, 8, 30 };
-
-	//tree.Insert(std::make_unique<int>(arr[0])); 
-	//tree.Insert(std::make_unique<int>(arr[1]));
-	//tree.Insert(std::make_unique<int>(arr[2]));
-	//assert(tree.Delete(10)); 	// 존재하지 않는 노드 삭제
-	//assert(tree.Delete(8));	// Right 노드 삭제
-	//assert(tree.Delete(30));	// Right 노드 삭제
-	//std::shared_ptr<TreeNode<int>> test0 = tree.GetRootNode().lock();
-	////std::cout << *tree.GetRootNode().lock()->Data << std::endl;
-	////std::cout << *tree.GetRootNode().lock()->Left->Data << std::endl;
-	//std::vector<int> v1 = tree.TraverseInOrder(tree.GetRootNode().lock());
-
-	//std::cout << v1.size() << std::endl;
 
 	return 0;
 }

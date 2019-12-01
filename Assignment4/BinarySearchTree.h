@@ -59,7 +59,7 @@ namespace assignment4
 				}
 			}
 
-			if (*(temp->Data) != *data)
+			if (temp == nullptr)
 			{
 				temp = std::make_shared<TreeNode<T>>(before, std::move(data));
 				if (bCheck)
@@ -77,8 +77,7 @@ namespace assignment4
 	template<typename T>
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
-		std::shared_ptr<TreeNode<T>> n = mRoot;
-		return n;
+		return mRoot;
 	}
 
 	template<typename T>

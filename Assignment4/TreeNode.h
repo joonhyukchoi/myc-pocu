@@ -20,8 +20,6 @@ namespace assignment4
 	template<typename T>
 	TreeNode<T>::TreeNode(std::unique_ptr<T> data)
 		: Data(std::move(data))
-		, Left(nullptr)
-		, Right(nullptr)
 	{
 	}
 
@@ -29,8 +27,6 @@ namespace assignment4
 	TreeNode<T>::TreeNode(std::shared_ptr<TreeNode<T>> parent, std::unique_ptr<T> data)
 		: Data(std::move(data))
 		, Parent(parent)
-		, Left(nullptr)
-		, Right(nullptr)
 	{
 	}
 }

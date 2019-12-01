@@ -73,7 +73,9 @@ namespace lab11
 	{
 		if (this != &s)
 		{
+			mArray.reset();
 			mLength = s.mLength;
+			mArray = std::make_unique<T[]>(mLength);
 
 			for (unsigned int i = 0; i < mLength; i++)
 			{

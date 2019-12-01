@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <iostream>
 
 namespace assignment4
 {
@@ -69,7 +70,7 @@ namespace assignment4
 	template<typename T>
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
-		std::weak_ptr<TreeNode<T>> n = mRoot;
+		std::shared_ptr<TreeNode<T>> n = mRoot;
 		return n;
 	}
 
@@ -79,13 +80,9 @@ namespace assignment4
 		auto temp = mRoot;
 		std::shared_ptr<TreeNode<T>> before = nullptr;
 
-		while (true)
+		while (temp != nullptr)
 		{
-			if (temp == nullptr)
-			{
-				break;
-			}
-			else if (*(temp->Data) == data)
+			if (*(temp->Data) == data)
 			{
 				return true;
 			}
@@ -154,15 +151,17 @@ namespace assignment4
 
 		if (*(mRoot->Data) == data && temp->Right == nullptr)
 		{
+			before = temp->Left;
+			mRoot.reset();
 			mRoot = temp->Left;
-			temp->Left = nullptr;
 			return true;
 		}
 
 		if (*(mRoot->Data) == data && temp->Left == nullptr)
 		{
+			before = temp->Right;
+			mRoot.reset();
 			mRoot = temp->Right;
-			temp->Right = nullptr;
 			return true;
 		}
 
@@ -224,6 +223,7 @@ namespace assignment4
 
 					if (ttemp != ttemp2)
 					{
+						std::cout << "asdasdsdf";
 						if (temp->Right == nullptr)
 						{
 							temp->Left = ttemp->Left;
@@ -252,9 +252,10 @@ namespace assignment4
 					{
 						temp->Left = ttemp->Left;
 						ttemp->Left->Parent = temp;
-
-						if (mRoot->Data == ttemp->Data)
+						std::cout << "asdasdsdf";
+						if (mRoot == ttemp)
 						{
+							std::cout << "xxx";
 							mRoot = temp;
 						}
 						else
@@ -314,7 +315,6 @@ namespace assignment4
 	std::vector<T> BinarySearchTree<T>::TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode)
 	{
 		std::vector<T> v;
-
 		v = Recurse(startNode, 0);
 
 		return v;
@@ -329,12 +329,13 @@ namespace assignment4
 		{
 			v.clear();
 		}
-
+	
 		if (node == nullptr)
 		{
 			return v;
 		}
-	
+
+		std::cout << *node->Data;
 		Recurse(node->Left, 1);
 		v.push_back(*(node->Data));
 		Recurse(node->Right, 1);

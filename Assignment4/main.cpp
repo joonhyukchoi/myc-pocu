@@ -1,8 +1,6 @@
 #include <cassert>
 #include "TreeNode.h"
 #include "BinarySearchTree.h"
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
 
 using namespace assignment4;
@@ -11,10 +9,6 @@ void Test_Insert_GetRoot();
 void Test_Search();
 void Test_Delete();
 void Test_Traverse();
-void TestCaseFromSlackOnlyLeftRight();
-void TestCaseFromSlackOnlyRightLeft();
-void TestCaseFromSlackLeftRightWithRightChild();
-void TestCaseRandomNode();
 
 int main()
 {
@@ -22,8 +16,22 @@ int main()
 	//Test_Search();
 	//Test_Delete();
 	//Test_Traverse();
-	TestCaseFromSlackOnlyLeftRight();
-	TestCaseFromSlackLeftRightWithRightChild();
+
+	BinarySearchTree<int> tree;
+	int arr[10] = { 10, 8, 30 };
+
+	tree.Insert(std::make_unique<int>(arr[0])); 
+	tree.Insert(std::make_unique<int>(arr[1]));
+	tree.Insert(std::make_unique<int>(arr[2]));
+	assert(tree.Delete(10)); 	// 존재하지 않는 노드 삭제
+	//assert(tree.Delete(8));	// Right 노드 삭제
+	//assert(tree.Delete(30));	// Right 노드 삭제
+	std::shared_ptr<TreeNode<int>> test0 = tree.GetRootNode().lock();
+	std::cout << *tree.GetRootNode().lock()->Data << std::endl;
+	//std::cout << *tree.GetRootNode().lock()->Left->Data << std::endl;
+	std::vector<int> v1 = tree.TraverseInOrder(tree.GetRootNode().lock());
+
+	//std::cout << v1.size() << std::endl;
 
 	return 0;
 }
@@ -51,13 +59,6 @@ void Test_Insert_GetRoot()
 	assert(*test1->Data.get() == 5);
 	assert(*test1->Parent.lock()->Data.get() == 10);
 	std::shared_ptr<TreeNode<int>> test2 = test1->Left;
-	std::cout << *test2->Data.get();
-
-	std::vector<int> v1 = tree.TraverseInOrder(tree.GetRootNode().lock());
-	for (int i = 0; i < v1.size(); i++)
-	{
-		std::cout << v1[i] << std::endl;
-	}
 	assert(*test2->Data.get() == 4);
 	assert(*test2->Parent.lock()->Data.get() == 5);
 	std::shared_ptr<TreeNode<int>> test3 = test1->Right;
@@ -123,7 +124,7 @@ void Test_Delete()
 		tree.Insert(std::make_unique<int>(arr[i]));
 	}
 
-		//End
+	//	End
 	assert(!tree.Delete(9)); 	// 존재하지 않는 노드 삭제
 	assert(tree.Delete(20));	// Right 노드 삭제
 	assert(!tree.Search(20));	// 삭제 확인
@@ -131,7 +132,7 @@ void Test_Delete()
 	assert(!tree.Search(12));	// 삭제 확인
 	assert(!tree.Delete(11));	// 존재하지 않는 노드 삭제
 
-	////	Middle
+	//	Middle
 	assert(tree.Delete(19));	// Left만 있는 노드 삭제
 	assert(!tree.Search(19));	// 삭제 확인
 	assert(tree.Search(17));
@@ -225,388 +226,19 @@ void Test_Traverse()
 	// 노드 삭제
 	for (size_t i = 0; i < 8; i++)
 	{
-		std::cout << tree.Delete(arr[i]) << " start" << std::endl;
+		tree.Delete(arr[i]);
 	}
 
 	// 7만 남기고 모두 삭제된 트리
 	std::vector<int> v7 = tree.TraverseInOrder(tree.GetRootNode().lock());
-	std::cout << "size" << v7.size() << std::endl;
-	for (int i = 0; i < v7.size(); i++)
-	{
-		std::cout << v7[i] << std::endl;
-		std::cout << "root" << *tree.GetRootNode().lock()->Data << std::endl;
-	}
 	assert(v7.size() == 1);
 	assert(v7[0] == arr[8]);
 
-	//// 노드가 모두 삭제된 트리
+	// 노드가 모두 삭제된 트리
 	tree.Delete(arr[8]);
 	std::vector<int> v8 = tree.TraverseInOrder(tree.GetRootNode().lock());
 	assert(v8.size() == 0);
 	assert(v8.empty());
 
 	return;
-}
-
-void TestCaseFromSlackOnlyLeftRight()
-{
-	BinarySearchTree<int> tree1;
-	tree1.Insert(std::make_unique<int>(8));
-	tree1.Insert(std::make_unique<int>(5));
-	tree1.Insert(std::make_unique<int>(30));
-	tree1.Insert(std::make_unique<int>(20));
-	tree1.Insert(std::make_unique<int>(45));
-	tree1.Insert(std::make_unique<int>(11));
-	tree1.Insert(std::make_unique<int>(25));
-	tree1.Insert(std::make_unique<int>(26));
-	tree1.Insert(std::make_unique<int>(40));
-	tree1.Insert(std::make_unique<int>(48));
-	tree1.Insert(std::make_unique<int>(24));
-	tree1.Insert(std::make_unique<int>(41));
-	bool bDeleted1 = tree1.Delete(30);
-	assert(bDeleted1);
-
-	BinarySearchTree<int> tree2;
-	tree2.Insert(std::make_unique<int>(8));
-	tree2.Insert(std::make_unique<int>(5));
-	tree2.Insert(std::make_unique<int>(20));
-	tree2.Insert(std::make_unique<int>(45));
-	tree2.Insert(std::make_unique<int>(11));
-	tree2.Insert(std::make_unique<int>(25));
-	tree2.Insert(std::make_unique<int>(26));
-	tree2.Insert(std::make_unique<int>(40));
-	tree2.Insert(std::make_unique<int>(48));
-	tree2.Insert(std::make_unique<int>(24));
-	tree2.Insert(std::make_unique<int>(41));
-	
-	std::cout << *tree1.GetRootNode().lock()->Data << std::endl;
-	std::cout << *tree1.GetRootNode().lock()->Left->Data << std::endl;
-	std::cout << *tree1.GetRootNode().lock()->Right->Data << std::endl;
-
-	std::vector<int> v1 = tree1.TraverseInOrder(tree1.GetRootNode().lock());
-	std::vector<int> v2 = tree2.TraverseInOrder(tree2.GetRootNode().lock());
-	//for (int i = 0; i < v1.size(); i++)
-	//{
-	//	std::cout << v1[i] << std::endl;
-	//}
-	//std::cout << v1.size() << std::endl;
-
-
-	assert(v1.size() == 11);
-	assert(v2.size() == 11);
-	assert(v1[0] == v2[0]);
-	assert(v1[1] == v2[1]);
-	assert(v1[2] == v2[2]);
-	assert(v1[3] == v2[3]);
-	assert(v1[4] == v2[4]);
-	assert(v1[5] == v2[5]);
-	assert(v1[6] == v2[6]);
-	assert(v1[7] == v2[7]);
-	assert(v1[8] == v2[8]);
-	assert(v1[9] == v2[9]);
-	assert(v1[10] == v2[10]);
-
-	//// 트리 모양이 같은 형태인지 일일이 검토
-	//// 8
-	//assert(tree1.GetRootNode().lock() != nullptr);
-	//assert(tree2.GetRootNode().lock() != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Data == *tree2.GetRootNode().lock()->Data);
-	//// 5
-	//assert(tree1.GetRootNode().lock()->Left != nullptr);
-	//assert(tree2.GetRootNode().lock()->Left != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Left->Data == *tree2.GetRootNode().lock()->Left->Data);
-	//// 20
-	//assert(tree1.GetRootNode().lock()->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Data == *tree2.GetRootNode().lock()->Right->Data);
-	//// 11
-	//assert(tree1.GetRootNode().lock()->Right->Left != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Left != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Left->Data);
-	//// 45
-	//assert(tree1.GetRootNode().lock()->Right->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Data);
-	//// 25
-	//assert(tree1.GetRootNode().lock()->Right->Right->Left != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Left != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Data);
-	//// 24
-	//assert(tree1.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Left->Data);
-	//// 26
-	//assert(tree1.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Data);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Data == 26);
-	//// 48
-	//assert(tree1.GetRootNode().lock()->Right->Right->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Right->Data);
-	//// 40
-	//assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Right->Data);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Data == 40);
-	//// 41
-	//assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Right != nullptr);
-	//assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Right->Right != nullptr);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Right->Right->Data);
-	//assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Right->Data == 41);
-}
-
-void TestCaseFromSlackOnlyRightLeft()
-{
-	BinarySearchTree<int> tree1;
-	tree1.Insert(std::make_unique<int>(8));
-	tree1.Insert(std::make_unique<int>(5));
-	tree1.Insert(std::make_unique<int>(30));
-	tree1.Insert(std::make_unique<int>(20));
-	tree1.Insert(std::make_unique<int>(45));
-	tree1.Insert(std::make_unique<int>(11));
-	tree1.Insert(std::make_unique<int>(25));
-	tree1.Insert(std::make_unique<int>(40));
-	tree1.Insert(std::make_unique<int>(48));
-	tree1.Insert(std::make_unique<int>(24));
-	tree1.Insert(std::make_unique<int>(39));
-	tree1.Insert(std::make_unique<int>(41));
-	bool bDeleted1 = tree1.Delete(30);
-	assert(bDeleted1);
-
-	BinarySearchTree<int> tree2;
-	tree2.Insert(std::make_unique<int>(8));
-	tree2.Insert(std::make_unique<int>(5));
-	tree2.Insert(std::make_unique<int>(20));
-	tree2.Insert(std::make_unique<int>(45));
-	tree2.Insert(std::make_unique<int>(11));
-	tree2.Insert(std::make_unique<int>(25));
-	tree2.Insert(std::make_unique<int>(40));
-	tree2.Insert(std::make_unique<int>(48));
-	tree2.Insert(std::make_unique<int>(24));
-	tree2.Insert(std::make_unique<int>(39));
-	tree2.Insert(std::make_unique<int>(41));
-
-	std::vector<int> v1 = tree1.TraverseInOrder(tree1.GetRootNode().lock());
-	std::vector<int> v2 = tree2.TraverseInOrder(tree2.GetRootNode().lock());
-
-	assert(v1.size() == 11);
-	assert(v2.size() == 11);
-	assert(v1[0] == v2[0]);
-	assert(v1[1] == v2[1]);
-	assert(v1[2] == v2[2]);
-	assert(v1[3] == v2[3]);
-	assert(v1[4] == v2[4]);
-	assert(v1[5] == v2[5]);
-	assert(v1[6] == v2[6]);
-	assert(v1[7] == v2[7]);
-	assert(v1[8] == v2[8]);
-	assert(v1[9] == v2[9]);
-	assert(v1[10] == v2[10]);
-
-	// 트리 모양이 같은 형태인지 일일이 검토
-	// 8
-	assert(tree1.GetRootNode().lock() != nullptr);
-	assert(tree2.GetRootNode().lock() != nullptr);
-	assert(*tree1.GetRootNode().lock()->Data == *tree2.GetRootNode().lock()->Data);
-	// 5
-	assert(tree1.GetRootNode().lock()->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Left->Data == *tree2.GetRootNode().lock()->Left->Data);
-	// 20
-	assert(tree1.GetRootNode().lock()->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Data == *tree2.GetRootNode().lock()->Right->Data);
-	// 11
-	assert(tree1.GetRootNode().lock()->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Left->Data);
-	// 45
-	assert(tree1.GetRootNode().lock()->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Data);
-	// 25
-	assert(tree1.GetRootNode().lock()->Right->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Data == 25);
-	// 24
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Left->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Left->Data == 24);
-	// 40
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Data);
-	// 48
-	assert(tree1.GetRootNode().lock()->Right->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Right->Data);
-	// 41
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Right->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Data == 41);
-	// 39
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Data == 39);
-}
-
-void TestCaseFromSlackLeftRightWithRightChild()
-{
-	BinarySearchTree<int> tree1;
-	tree1.Insert(std::make_unique<int>(8));
-	tree1.Insert(std::make_unique<int>(5));
-	tree1.Insert(std::make_unique<int>(30));
-	tree1.Insert(std::make_unique<int>(20));
-	tree1.Insert(std::make_unique<int>(45));
-	tree1.Insert(std::make_unique<int>(11));
-	tree1.Insert(std::make_unique<int>(25));
-	tree1.Insert(std::make_unique<int>(40));
-	tree1.Insert(std::make_unique<int>(48));
-	tree1.Insert(std::make_unique<int>(24));
-	tree1.Insert(std::make_unique<int>(26));
-	tree1.Insert(std::make_unique<int>(27));
-	tree1.Insert(std::make_unique<int>(39));
-	tree1.Insert(std::make_unique<int>(41));
-	bool bDeleted1 = tree1.Delete(30);
-	assert(bDeleted1);
-
-	BinarySearchTree<int> tree2;
-	tree2.Insert(std::make_unique<int>(8));
-	tree2.Insert(std::make_unique<int>(5));
-	tree2.Insert(std::make_unique<int>(20));
-	tree2.Insert(std::make_unique<int>(45));
-	tree2.Insert(std::make_unique<int>(11));
-	tree2.Insert(std::make_unique<int>(25));
-	tree2.Insert(std::make_unique<int>(40));
-	tree2.Insert(std::make_unique<int>(48));
-	tree2.Insert(std::make_unique<int>(24));
-	tree2.Insert(std::make_unique<int>(26));
-	tree2.Insert(std::make_unique<int>(27));
-	tree2.Insert(std::make_unique<int>(39));
-	tree2.Insert(std::make_unique<int>(41));
-
-	std::vector<int> v1 = tree1.TraverseInOrder(tree1.GetRootNode().lock());
-	std::vector<int> v2 = tree2.TraverseInOrder(tree2.GetRootNode().lock());
-
-	assert(v1.size() == 13);
-	assert(v2.size() == 13);
-	assert(v1[0] == v2[0]);
-	assert(v1[1] == v2[1]);
-	assert(v1[2] == v2[2]);
-	assert(v1[3] == v2[3]);
-	assert(v1[4] == v2[4]);
-	assert(v1[5] == v2[5]);
-	assert(v1[6] == v2[6]);
-	assert(v1[7] == v2[7]);
-	assert(v1[8] == v2[8]);
-	assert(v1[9] == v2[9]);
-	assert(v1[10] == v2[10]);
-	assert(v1[11] == v2[11]);
-	assert(v1[12] == v2[12]);
-
-	// 트리 모양이 같은 형태인지 일일이 검토
-	// 8
-	assert(tree1.GetRootNode().lock() != nullptr);
-	assert(tree2.GetRootNode().lock() != nullptr);
-	assert(*tree1.GetRootNode().lock()->Data == *tree2.GetRootNode().lock()->Data);
-	// 5
-	assert(tree1.GetRootNode().lock()->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Left->Data == *tree2.GetRootNode().lock()->Left->Data);
-	// 20
-	assert(tree1.GetRootNode().lock()->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Data == *tree2.GetRootNode().lock()->Right->Data);
-	// 11
-	assert(tree1.GetRootNode().lock()->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Left->Data);
-	// 45
-	assert(tree1.GetRootNode().lock()->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Data);
-	// 25
-	assert(tree1.GetRootNode().lock()->Right->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Data);
-	// 24
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Left->Data);
-	// 40
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Data);
-	// 48
-	assert(tree1.GetRootNode().lock()->Right->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Right->Data);
-	// 26
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Left != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Left != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Data);
-	// 41
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Right->Data);
-	// 27
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Data == 27);
-	// 39
-	assert(tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Right != nullptr);
-	assert(tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Right != nullptr);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Right->Data == *tree2.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Right->Data);
-	assert(*tree1.GetRootNode().lock()->Right->Right->Left->Right->Left->Right->Right->Data == 39);
-}
-
-
-void TestCaseRandomNode()
-{
-	BinarySearchTree<int> randomTree1;
-	BinarySearchTree<int> randomTree2;
-	std::vector<int> randomTreeTraverse1;
-	std::vector<int> randomTreeTraverse2;
-
-	unsigned int randomValue = 0;
-
-	for (unsigned int loopIndex = 0; loopIndex < 100; loopIndex++)
-	{
-		srand((unsigned int)time(NULL));
-
-		for (unsigned int index = 0; index < 30; index++)
-		{
-			randomValue = rand() % 100;
-			randomTree1.Insert(std::make_unique<int>(randomValue));
-			randomTree2.Insert(std::make_unique<int>(randomValue));
-		}
-
-		srand((unsigned int)time(NULL));
-
-		for (unsigned int index = 0; index < 20; index++)
-		{
-			randomValue = rand() % 100;
-			assert(randomTree1.Search(randomValue) == randomTree2.Search(randomValue));
-			assert(randomTree1.Delete(randomValue) == randomTree2.Delete(randomValue));
-			assert(randomTree1.Search(randomValue) == randomTree2.Search(randomValue));
-		}
-
-		randomTreeTraverse1 = randomTree1.TraverseInOrder(randomTree1.GetRootNode().lock());
-		randomTreeTraverse2 = randomTree2.TraverseInOrder(randomTree2.GetRootNode().lock());
-
-		assert(randomTreeTraverse1.size() == randomTreeTraverse2.size());
-
-		while (randomTreeTraverse1.size() != 0)
-		{
-			assert(randomTreeTraverse1.back() == randomTreeTraverse2.back());
-			randomTreeTraverse1.pop_back();
-			randomTreeTraverse2.pop_back();
-		}
-	}
 }

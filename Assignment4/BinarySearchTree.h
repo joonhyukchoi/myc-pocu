@@ -90,42 +90,12 @@ namespace assignment4
 			{
 				before = temp;
 				temp = temp->Right;
-				//std::cout << temp << "  right  " << before << std::endl;
-				//std::cout << (temp != nullptr) << "  right2  " << std::endl;
 			}
 			else if (*(temp->Data) > data)
 			{
 				before = temp;
 				temp = temp->Left;
-				//std::cout << temp << "  left  " << before << std::endl;
-				//std::cout << (temp != nullptr) << "  left2  " << std::endl;
 			}
-			//왜 이렇게 하면 안될까?
-			/*if (temp == nullptr)
-			{
-				break;
-			}
-
-			if (*(temp->Data) == data)
-			{
-				return true;
-			}
-
-			if (*(temp->Data) < data)
-			{
-				before = temp;
-				temp = temp->Right;
-				std::cout << temp << "  right  " << before << std::endl;
-				std::cout << (temp != nullptr) << "  right2  " << std::endl;
-			}
-
-			if (*(temp->Data) > data)
-			{
-				before = temp;
-				temp = temp->Left;
-				std::cout << temp << "  left  " << before << std::endl;
-				std::cout << (temp != nullptr) << "  left2  " << std::endl;
-			}*/
 		}
 
 		return false;
@@ -134,179 +104,179 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Delete(const T& data)
 	{
-		if (!Search(data))
-		{
-			return false;
-		}
+		//if (!Search(data))
+		//{
+		//	return false;
+		//}
 
-		auto temp = mRoot;
-		bool bCheck = false;
-		std::shared_ptr<TreeNode<T>> before = mRoot;
+		//auto temp = mRoot;
+		//bool bCheck = false;
+		//std::shared_ptr<TreeNode<T>> before = mRoot;
 
-		if (*(mRoot->Data) == data && temp->Left == nullptr && temp->Right == nullptr)
-		{
-			mRoot = nullptr;
-			return true;
-		}
+		//if (*(mRoot->Data) == data && temp->Left == nullptr && temp->Right == nullptr)
+		//{
+		//	mRoot = nullptr;
+		//	return true;
+		//}
 
-		if (*(mRoot->Data) == data && temp->Right == nullptr)
-		{
-			before = temp->Left;
-			mRoot.reset();
-			mRoot = temp->Left;
-			return true;
-		}
+		//if (*(mRoot->Data) == data && temp->Right == nullptr)
+		//{
+		//	before = temp->Left;
+		//	mRoot.reset();
+		//	mRoot = temp->Left;
+		//	return true;
+		//}
 
-		if (*(mRoot->Data) == data && temp->Left == nullptr)
-		{
-			before = temp->Right;
-			mRoot.reset();
-			mRoot = temp->Right;
-			return true;
-		}
+		//if (*(mRoot->Data) == data && temp->Left == nullptr)
+		//{
+		//	before = temp->Right;
+		//	mRoot.reset();
+		//	mRoot = temp->Right;
+		//	return true;
+		//}
 
-		while (temp != nullptr)
-		{
-			if (*(temp->Data) == data)
-			{
-				if (temp->Left == nullptr && temp->Right == nullptr)
-				{
-					if (bCheck)
-					{
-						before->Left = nullptr;
-					}
-					else
-					{
-						before->Right = nullptr;
-					}
-				}
-				else if (temp->Left == nullptr || temp->Right == nullptr)
-				{
-					if (bCheck)
-					{
-						if (temp->Left == nullptr)
-						{
-							before->Left = temp->Right;
-							temp->Right->Parent = before;
-						}
-						else
-						{
-							before->Left = temp->Left;
-							temp->Left->Parent = before;
-						}
-					}
-					else
-					{
-						if (temp->Left == nullptr)
-						{
-							before->Right = temp->Right;
-							temp->Right->Parent = before;
-						}
-						else
-						{
-							before->Right = temp->Left;
-							temp->Left->Parent = before;
-						}
-					}
-				}
-				else
-				{
-					auto ttemp = temp;
-					auto ttemp2 = temp;
-					temp = temp->Right;
+		//while (temp != nullptr)
+		//{
+		//	if (*(temp->Data) == data)
+		//	{
+		//		if (temp->Left == nullptr && temp->Right == nullptr)
+		//		{
+		//			if (bCheck)
+		//			{
+		//				before->Left = nullptr;
+		//			}
+		//			else
+		//			{
+		//				before->Right = nullptr;
+		//			}
+		//		}
+		//		else if (temp->Left == nullptr || temp->Right == nullptr)
+		//		{
+		//			if (bCheck)
+		//			{
+		//				if (temp->Left == nullptr)
+		//				{
+		//					before->Left = temp->Right;
+		//					temp->Right->Parent = before;
+		//				}
+		//				else
+		//				{
+		//					before->Left = temp->Left;
+		//					temp->Left->Parent = before;
+		//				}
+		//			}
+		//			else
+		//			{
+		//				if (temp->Left == nullptr)
+		//				{
+		//					before->Right = temp->Right;
+		//					temp->Right->Parent = before;
+		//				}
+		//				else
+		//				{
+		//					before->Right = temp->Left;
+		//					temp->Left->Parent = before;
+		//				}
+		//			}
+		//		}
+		//		else
+		//		{
+		//			auto ttemp = temp;
+		//			auto ttemp2 = temp;
+		//			temp = temp->Right;
 
-					while (temp->Left != nullptr)
-					{
-						ttemp2 = temp;
-						temp = temp->Left;
-					}
+		//			while (temp->Left != nullptr)
+		//			{
+		//				ttemp2 = temp;
+		//				temp = temp->Left;
+		//			}
 
-					if (ttemp != ttemp2)
-					{
-						//std::cout << "asdasdsdf";
-						if (temp->Right == nullptr)
-						{
-							temp->Left = ttemp->Left;
-							temp->Right = ttemp->Right;
-							ttemp->Left->Parent = temp;
-							ttemp->Right->Parent = temp;
-							//ttemp2->Left = nullptr;
-						}
-						else
-						{
-							auto r = temp->Right;
-							
-							while (r->Right != nullptr)
-							{
-								r = r->Right;
-							}
+		//			if (ttemp != ttemp2)
+		//			{
+		//				//std::cout << "asdasdsdf";
+		//				if (temp->Right == nullptr)
+		//				{
+		//					temp->Left = ttemp->Left;
+		//					temp->Right = ttemp->Right;
+		//					ttemp->Left->Parent = temp;
+		//					ttemp->Right->Parent = temp;
+		//					//ttemp2->Left = nullptr;
+		//				}
+		//				else
+		//				{
+		//					auto r = temp->Right;
+		//					
+		//					while (r->Right != nullptr)
+		//					{
+		//						r = r->Right;
+		//					}
 
-							temp->Left = ttemp->Left;
-							ttemp->Left->Parent = temp;
-							r->Right = ttemp2;
-							ttemp2->Parent = r;
-							ttemp->Right = nullptr;
-						}
-					}
-					else
-					{
-						temp->Left = ttemp->Left;
-						ttemp->Left->Parent = temp;
-						//std::cout << "asdasdsdf";
-						if (mRoot == ttemp)
-						{
-							//std::cout << "xxx";
-							mRoot = temp;
-						}
-						else
-						{
-							if (bCheck)
-							{
-								before->Left = nullptr;
-							}
-							else
-							{
-								before->Right = nullptr;
-							}
-						}
-					}
+		//					temp->Left = ttemp->Left;
+		//					ttemp->Left->Parent = temp;
+		//					r->Right = ttemp2;
+		//					ttemp2->Parent = r;
+		//					ttemp->Right = nullptr;
+		//				}
+		//			}
+		//			else
+		//			{
+		//				temp->Left = ttemp->Left;
+		//				ttemp->Left->Parent = temp;
+		//				//std::cout << "asdasdsdf";
+		//				if (mRoot == ttemp)
+		//				{
+		//					//std::cout << "xxx";
+		//					mRoot = temp;
+		//				}
+		//				else
+		//				{
+		//					if (bCheck)
+		//					{
+		//						before->Left = nullptr;
+		//					}
+		//					else
+		//					{
+		//						before->Right = nullptr;
+		//					}
+		//				}
+		//			}
 
-					if (before != ttemp)
-					{
-						if (bCheck)
-						{
-							before->Left = temp;
-							temp->Parent = before;
-						}
-						else
-						{
-							before->Right = temp;
-							temp->Parent = before;
-						}
-					}
-					else
-					{
-						mRoot = temp;
-					}
+		//			if (before != ttemp)
+		//			{
+		//				if (bCheck)
+		//				{
+		//					before->Left = temp;
+		//					temp->Parent = before;
+		//				}
+		//				else
+		//				{
+		//					before->Right = temp;
+		//					temp->Parent = before;
+		//				}
+		//			}
+		//			else
+		//			{
+		//				mRoot = temp;
+		//			}
 
-					ttemp2->Left = nullptr;
-				}
+		//			ttemp2->Left = nullptr;
+		//		}
 
-				return true;
-			}
-			else if (*(temp->Data) < data)
-			{
-				before = temp;
-				temp = temp->Right;
-				bCheck = false;
-			}
-			else if (*(temp->Data) > data)
-			{
-				before = temp;
-				temp = temp->Left;
-				bCheck = true;
-			}
-		}
+		//		return true;
+		//	}
+		//	else if (*(temp->Data) < data)
+		//	{
+		//		before = temp;
+		//		temp = temp->Right;
+		//		bCheck = false;
+		//	}
+		//	else if (*(temp->Data) > data)
+		//	{
+		//		before = temp;
+		//		temp = temp->Left;
+		//		bCheck = true;
+		//	}
+		//}
 
 		return false;
 	}
@@ -325,20 +295,20 @@ namespace assignment4
 	{
 		static std::vector<T> v;
 
-		//if (i == 0)
-		//{
-		//	v.clear();
-		//}
+		if (i == 0)
+		{
+			v.clear();
+		}
 	
-		//if (node == nullptr)
-		//{
-		//	return v;
-		//}
+		if (node == nullptr)
+		{
+			return v;
+		}
 
-		////std::cout << *node->Data;
-		//Recurse(node->Left, 1);
-		//v.push_back(*(node->Data));
-		//Recurse(node->Right, 1);
+		//std::cout << *node->Data;
+		Recurse(node->Left, 1);
+		v.push_back(*(node->Data));
+		Recurse(node->Right, 1);
 
 		return v;
 	}

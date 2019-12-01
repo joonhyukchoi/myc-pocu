@@ -1,5 +1,5 @@
 #pragma once
-
+//#include <iostream>
 #include <memory>
 
 namespace lab11
@@ -21,6 +21,7 @@ namespace lab11
 		
 	private:
 		std::unique_ptr<T[]> mArray;
+		//T* mArray2;
 		unsigned int mLength;
 	};
 
@@ -29,11 +30,13 @@ namespace lab11
 		: mLength(length)
 	{
 		mArray = std::make_unique<T[]>(mLength);
-
+	//	mArray2 = new T[mLength];
 		for (unsigned int i = 0; i < mLength; i++)
 		{
 			mArray[i] = 0;
+		//	mArray2[i] = 0;
 		}
+	//	std::cout << mArray[1];
 	}
 
 	template<typename T>
@@ -41,10 +44,11 @@ namespace lab11
 		: mLength(length)
 	{
 		mArray = std::make_unique<T[]>(mLength);
-		
+	//	mArray2 = new T[mLength];
 		for (unsigned int i = 0; i < mLength; i++)
 		{
 			mArray[i] = initialValue;
+		//	mArray2[i] = 0;
 		}
 	}
 
@@ -65,6 +69,7 @@ namespace lab11
 		: mLength(s.mLength)
 	{
 		mArray = std::move(s.mArray);
+		s.mLength = 0;
 	}
 
 	template<typename T>
@@ -113,10 +118,7 @@ namespace lab11
 	template<typename T>
 	const std::unique_ptr<T[]>& Storage<T>::GetData() const
 	{
-		std::unique_ptr<T[]> temp = std::make_unique<T[]>(mLength);
-		temp(mArray.get());
-
-		return std::move(temp);
+		return std::move(mArray);
 	}
 
 	template<typename T>

@@ -1,5 +1,5 @@
 #include <cassert>
-
+#include <iostream>
 #include "Storage.h"
 
 using namespace lab11;

@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <vector>
-#include <iostream>
+//#include <iostream>
 
 namespace assignment4
 {
@@ -223,7 +223,7 @@ namespace assignment4
 
 					if (ttemp != ttemp2)
 					{
-						std::cout << "asdasdsdf";
+						//std::cout << "asdasdsdf";
 						if (temp->Right == nullptr)
 						{
 							temp->Left = ttemp->Left;
@@ -252,10 +252,10 @@ namespace assignment4
 					{
 						temp->Left = ttemp->Left;
 						ttemp->Left->Parent = temp;
-						std::cout << "asdasdsdf";
+						//std::cout << "asdasdsdf";
 						if (mRoot == ttemp)
 						{
-							std::cout << "xxx";
+							//std::cout << "xxx";
 							mRoot = temp;
 						}
 						else
@@ -335,7 +335,7 @@ namespace assignment4
 			return v;
 		}
 
-		std::cout << *node->Data;
+		//std::cout << *node->Data;
 		Recurse(node->Left, 1);
 		v.push_back(*(node->Data));
 		Recurse(node->Right, 1);

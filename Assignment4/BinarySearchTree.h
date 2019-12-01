@@ -16,7 +16,7 @@ namespace assignment4
 		bool Search(const T& data);
 		bool Delete(const T& data);
 		const std::weak_ptr<TreeNode<T>> GetRootNode() const;
-		static std::vector<T> Recursion(const std::shared_ptr<TreeNode<T>> node, unsigned int i);
+		static std::vector<T> Recurse(const std::shared_ptr<TreeNode<T>> node, unsigned int i);
 
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
 
@@ -44,6 +44,7 @@ namespace assignment4
 				{
 					before = temp;
 					temp = temp->Right;
+					bCheck = false;
 				}
 				else if (*(temp->Data) > *data)
 				{
@@ -58,7 +59,6 @@ namespace assignment4
 			{
 				before->Left = temp;
 			}
-
 			else
 			{
 				before->Right = temp;
@@ -137,6 +137,11 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Delete(const T& data)
 	{
+		if (!Search(data))
+		{
+			return false;
+		}
+
 		auto temp = mRoot;
 		bool bCheck = false;
 		std::shared_ptr<TreeNode<T>> before = mRoot;
@@ -144,6 +149,20 @@ namespace assignment4
 		if (*(mRoot->Data) == data && temp->Left == nullptr && temp->Right == nullptr)
 		{
 			mRoot = nullptr;
+			return true;
+		}
+
+		if (*(mRoot->Data) == data && temp->Right == nullptr)
+		{
+			mRoot = temp->Left;
+			temp->Left = nullptr;
+			return true;
+		}
+
+		if (*(mRoot->Data) == data && temp->Left == nullptr)
+		{
+			mRoot = temp->Right;
+			temp->Right = nullptr;
 			return true;
 		}
 
@@ -215,13 +234,21 @@ namespace assignment4
 					{
 						temp->Left = ttemp->Left;
 						ttemp->Left->Parent = temp;
-						if (bCheck)
+
+						if (mRoot->Data == ttemp->Data)
 						{
-							before->Left = nullptr;
+							mRoot = temp;
 						}
 						else
 						{
-							before->Right = nullptr;
+							if (bCheck)
+							{
+								before->Left = nullptr;
+							}
+							else
+							{
+								before->Right = nullptr;
+							}
 						}
 					}
 
@@ -252,6 +279,7 @@ namespace assignment4
 			{
 				before = temp;
 				temp = temp->Right;
+				bCheck = false;
 			}
 			else if (*(temp->Data) > data)
 			{
@@ -269,13 +297,13 @@ namespace assignment4
 	{
 		std::vector<T> v;
 
-		v = Recursion(startNode, 0);
+		v = Recurse(startNode, 0);
 
 		return v;
 	}
 
 	template<typename T>
-	std::vector<T> BinarySearchTree<T>::Recursion(const std::shared_ptr<TreeNode<T>> node, unsigned int i)
+	std::vector<T> BinarySearchTree<T>::Recurse(const std::shared_ptr<TreeNode<T>> node, unsigned int i)
 	{
 		static std::vector<T> v;
 
@@ -289,9 +317,9 @@ namespace assignment4
 			return v;
 		}
 	
-		Recursion(node->Left, 1);
+		Recurse(node->Left, 1);
 		v.push_back(*(node->Data));
-		Recursion(node->Right, 1);
+		Recurse(node->Right, 1);
 
 		return v;
 	}

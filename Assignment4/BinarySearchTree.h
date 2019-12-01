@@ -325,20 +325,20 @@ namespace assignment4
 	{
 		static std::vector<T> v;
 
-		if (i == 0)
-		{
-			v.clear();
-		}
+		//if (i == 0)
+		//{
+		//	v.clear();
+		//}
 	
-		if (node == nullptr)
-		{
-			return v;
-		}
+		//if (node == nullptr)
+		//{
+		//	return v;
+		//}
 
-		//std::cout << *node->Data;
-		Recurse(node->Left, 1);
-		v.push_back(*(node->Data));
-		Recurse(node->Right, 1);
+		////std::cout << *node->Data;
+		//Recurse(node->Left, 1);
+		//v.push_back(*(node->Data));
+		//Recurse(node->Right, 1);
 
 		return v;
 	}
